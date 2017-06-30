@@ -1,0 +1,338 @@
+{
+  "data": [{
+    "name": "AZ-aviatrix-us-central",
+    "region_name": "Central US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-central-us/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-central",
+    "dns_name": "",
+    "public_ip": "52.173.192.127",
+    "cloud_info": {
+      "region": "Central US",
+      "availability_zone": ""
+    },
+    "url": "http://52.173.192.127/",
+    "lat": 38.548938,
+    "lng": -89.127014
+  },
+  {
+    "name": "aviatrix-us-east",
+    "region_name": "East US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/AZ-aviatrix-us-east/providers/Microsoft.Compute/virtualMachines/aviatrix-us-east",
+    "dns_name": "",
+    "public_ip": "40.71.213.231",
+    "cloud_info": {
+      "region": "East US",
+      "availability_zone": ""
+    },
+    "url": "http://40.71.213.231/",
+    "lat": 37.926868,
+    "lng": -78.024902
+  }, 
+  {
+    "name": "AZ-aviatrix-us-east-2",
+    "region_name": "East US 2",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-east-2/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-east-2",
+    "dns_name": "",
+    "public_ip": "52.225.131.75",
+    "cloud_info": {
+      "region": "East US 2",
+      "availability_zone": ""
+    },
+    "url": "http://52.225.131.75/",
+    "lat": 40.73,
+    "lng": -73.935242
+  },
+  {
+    "name": "AZ-aviatrix-japan-east",
+    "region_name": "Japan East",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-japan-east/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-japan-east",
+    "dns_name": "",
+    "public_ip": "52.243.35.68",
+    "cloud_info": {
+      "region": "Japan East",
+      "availability_zone": ""
+    },
+    "url": "http://52.243.35.68/",
+    "lat": 43.06417,
+    "lng": 141.34695
+  },
+  {
+    "name": "AZ-aviatrix-korea-central",
+    "region_name": "Korea Central",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-korea-central/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-korea-central",
+    "dns_name": "",
+    "public_ip": "52.231.27.69",
+    "cloud_info": {
+      "region": "Korea Central",
+      "availability_zone": ""
+    },
+    "url": "http://52.231.27.69/",
+    "lat": 37.5665,
+    "lng": 126.9780
+  },
+  {
+    "name": "AZ-aviatrix-australia-east",
+    "region_name": "Australia East",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-australia-east/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-australia-east",
+    "dns_name": "",
+    "public_ip": "13.73.200.237",
+    "cloud_info": {
+      "region": "Australia East",
+      "availability_zone": ""
+    },
+    "url": "http://13.73.200.237/",
+    "lat": -27.470125,
+    "lng": 153.021072
+  },
+  {
+    "name": "AZ-aviatrix-brazil-south",
+    "region_name": "Brazil South",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-brazil-south/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-brazil-south",
+    "dns_name": "",
+    "public_ip": "191.232.178.102",
+    "cloud_info": {
+      "region": "Brazil South",
+      "availability_zone": ""
+    },
+    "url": "http://191.232.178.102/",
+    "lat": -15.77972,
+    "lng": -47.92972
+  },
+  {
+    "name": "AZ-aviatrix-canada-central",
+    "region_name": "Canada Central",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-canada-central/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-canada-central",
+    "dns_name": "",
+    "public_ip": "52.237.38.162",
+    "cloud_info": {
+      "region": "Canada Central",
+      "availability_zone": ""
+    },
+    "url": "http://52.237.38.162/",
+    "lat": 55.5333312,
+    "lng": -106.583331
+  },
+  {
+    "name": "AZ-aviatrix-us-west",
+    "region_name": "West US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-west/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-west",
+    "dns_name": "",
+    "public_ip": "13.88.13.219",
+    "cloud_info": {
+      "region": "West US",
+      "availability_zone": ""
+    },
+    "url": "http://13.88.13.219/",
+    "lat": 36.778259,
+    "lng": -119.417931
+  },
+  {
+    "name": "AZ-aviatrix-us-west-2",
+    "region_name": "West US 2",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-west-2/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-west-2",
+    "dns_name": "",
+    "public_ip": "52.191.138.114",
+    "cloud_info": {
+      "region": "West US 2",
+      "availability_zone": ""
+    },
+    "url": "http://52.191.138.114/",
+    "lat": 37.773972,
+    "lng": -122.431297
+  },
+  {
+    "name": "AZ-aviatrix-australia-southeast",
+    "region_name": "Australia Southeast",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-australia-southeast/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-australia-southeast",
+    "dns_name": "",
+    "public_ip": "52.255.56.144",
+    "cloud_info": {
+      "region": "Australia Southeast",
+      "availability_zone": ""
+    },
+    "url": "http://52.255.56.144/",
+    "lat": -37.020100,
+    "lng": 144.964600
+  },
+  {
+    "name": "AZ-aviatrix-canada-east",
+    "region_name": "Canada East",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-canada-east/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-canada-east",
+    "dns_name": "",
+    "public_ip": "52.242.16.87",
+    "cloud_info": {
+      "region": "Canada East",
+      "availability_zone": ""
+    },
+    "url": "http://52.242.16.87/",
+    "lat": 46.829853,
+    "lng": -71.254028
+  },
+  {
+    "name": "AZ-aviatrix-india-central",
+    "region_name": "Central India",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-india-central/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-india-central",
+    "dns_name": "",
+    "public_ip": "52.172.216.215",
+    "cloud_info": {
+      "region": "Central India",
+      "availability_zone": ""
+    },
+    "url": "http://52.172.216.215/",
+    "lat": 22.719568,
+    "lng": 75.857727
+  },
+  {
+    "name": "AZ-aviatrix-asia-east",
+    "region_name": "East Asia",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-asia-east/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-asia-east",
+    "dns_name": "",
+    "public_ip": "13.75.43.51",
+    "cloud_info": {
+      "region": "East Asia",
+      "availability_zone": ""
+    },
+    "url": "http://13.75.43.51/",
+    "lat": 31.267401,
+    "lng": 121.522179
+  },
+  {
+    "name": "AZ-aviatrix-korea-south",
+    "region_name": "Korea South",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-korea-south/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-korea-south",
+    "dns_name": "",
+    "public_ip": "52.231.192.10",
+    "cloud_info": {
+      "region": "Korea South",
+      "availability_zone": ""
+    },
+    "url": "http://52.231.192.10/",
+    "lat": 35.10278,
+    "lng": 129.04028
+  },
+  {
+    "name": "AZ-aviatrix-us-northcentral",
+    "region_name": "North Central US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-northcentral/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-northcentral",
+    "dns_name": "",
+    "public_ip": "52.237.134.214",
+    "cloud_info": {
+      "region": "North Central US",
+      "availability_zone": ""
+    },
+    "url": "http://52.237.134.214/",
+    "lat": 41.881832,
+    "lng": -87.623177
+  }, 
+  {
+    "name": "AZ-aviatrix-europe-north",
+    "region_name": "North Europe",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-europe-north/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-europe-north",
+    "dns_name": "",
+    "public_ip": "13.74.58.198",
+    "cloud_info": {
+      "region": "North Europe",
+      "availability_zone": ""
+    },
+    "url": "http://13.74.58.198/",
+    "lat": 53.270962,
+    "lng": -9.062691
+  }, 
+  {
+    "name": "AZ-aviatrix-us-southcentral",
+    "region_name": "South Central US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-couthcentral/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-southcentral",
+    "dns_name": "",
+    "public_ip": "13.65.98.161",
+    "cloud_info": {
+      "region": "South Central US",
+      "availability_zone": ""
+    },
+    "url": "http://13.65.98.161/",
+    "lat": 30.391830,
+    "lng": -92.329102
+  }, 
+  {
+    "name": "AZ-aviatrix-india-south",
+    "region_name": "South India",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-india-south/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-india-south",
+    "dns_name": "",
+    "public_ip": "52.172.24.100",
+    "cloud_info": {
+      "region": "South India",
+      "availability_zone": ""
+    },
+    "url": "http://52.172.24.100/",
+    "lat": 17.387140,
+    "lng": 78.491684
+  }, 
+  {
+    "name": "AZ-aviatrix-asia-southeast",
+    "region_name": "Southeast Asia",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-asia-southeast/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-asia-southeast",
+    "dns_name": "",
+    "public_ip": "52.187.11.169",
+    "cloud_info": {
+      "region": "Southeast Asia",
+      "availability_zone": ""
+    },
+    "url": "http://52.187.11.169/",
+    "lat": 3.139003,
+    "lng": 101.68685499999992
+  }, 
+  {
+    "name": "AZ-aviatrix-uk-west",
+    "region_name": "UK West",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-uk-west/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-uk-west",
+    "dns_name": "",
+    "public_ip": "51.141.40.25",
+    "cloud_info": {
+      "region": "UK West",
+      "availability_zone": ""
+    },
+    "url": "http://51.141.40.25/",
+    "lat": 50.46384,
+    "lng": -3.51434
+  },
+  {
+    "name": "AZ-aviatrix-us-westcentral",
+    "region_name": "West Central US",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-westcentral/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-westcentral",
+    "dns_name": "",
+    "public_ip": "52.161.99.22",
+    "cloud_info": {
+      "region": "West Central US",
+      "availability_zone": ""
+    },
+    "url": "http://52.161.99.22/",
+    "lat": 40.585258,
+    "lng": -105.084419
+  }, 
+  {
+    "name": "AZ-aviatrix-europe-west",
+    "region_name": "West Europe",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-europe-west/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-europe-west",
+    "dns_name": "",
+    "public_ip": "13.80.146.119",
+    "cloud_info": {
+      "region": "West Europe",
+      "availability_zone": ""
+    },
+    "url": "http://13.80.146.119/",
+    "lat": 52.379189,
+    "lng": 4.899431
+  }, 
+  {
+    "name": "AZ-aviatrix-india-west",
+    "region_name": "West India",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-india-west/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-india-west",
+    "dns_name": "",
+    "public_ip": "104.211.184.119",
+    "cloud_info": {
+      "region": "West India",
+      "availability_zone": ""
+    },
+    "url": "http://104.211.184.119/",
+    "lat": 23.033863,
+    "lng": 72.585022
+  }]
+}

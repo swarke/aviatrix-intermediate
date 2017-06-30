@@ -12,18 +12,11 @@ class Config(object):
     Contains all Application Constant
     Defaults
     """
-    DEBUG = True
-    SECRET_KEY = 'Eg=C}k!5]YG`d{*`#dDZd4=*#'
-    RESTFUL_JSON = {"cls": app.json_encoder}
-
-    db_host = 'localhost:3306'
-    db_user = 'root'
-    db_pass = 'ramesh8264'
-    SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/ftpoc'.format(db_user, db_pass, db_host)
-    SQLALCHEMY_POOL_SIZE = 10
-    SQLALCHEMY_POOL_TIMEOUT = 10
-    SQLALCHEMY_POOL_RECYCLE = 500
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    INFLUX_DB_HOST = 'localhost'
+    INFLUX_DB_PORT = '8086'
+    INFLUX_DB_USERNAME = ''
+    INFLUX_DB_PASSWORD = ''
+    INFLUX_DB_NAME = 'speedtest'
 
 
 

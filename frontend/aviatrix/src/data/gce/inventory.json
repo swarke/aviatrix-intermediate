@@ -1,0 +1,142 @@
+{
+  "data": [{
+    "name": "aviatrix-europe-west1-c",
+    "region_name": "europe-west1 (Belgium)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-central-us/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-central",
+    "dns_name": "",
+    "public_ip": "104.199.57.249",
+    "cloud_info": {
+      "region": "europe-west1-c",
+      "availability_zone": ""
+    },
+    "url": "http://104.199.57.249/",
+    "lat": 50.85045,
+    "lng": 4.34878
+  },
+  {
+    "name": "aviatrix-us-west1-a",
+    "region_name": "us-west1 (Oregon)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/AZ-aviatrix-us-east/providers/Microsoft.Compute/virtualMachines/aviatrix-us-east",
+    "dns_name": "",
+    "public_ip": "104.196.248.188",
+    "cloud_info": {
+      "region": "us-west1-a",
+      "availability_zone": ""
+    },
+    "url": "http://104.196.248.188/",
+    "lat": 32.897480,
+    "lng": -97.040443
+  }, 
+  {
+    "name": "aviatrix-us-east1-b",
+    "region_name": "us-east1 (South Carolina)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-us-east-2/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-us-east-2",
+    "dns_name": "",
+    "public_ip": "104.196.221.104",
+    "cloud_info": {
+      "region": "us-east1-b",
+      "availability_zone": ""
+    },
+    "url": "http://104.196.221.104/",
+    "lat": 32.784618,
+    "lng": -79.940918
+  },
+  {
+    "name": "aviatrix-asia-east1-a",
+    "region_name": "asia-east1 (Taiwan)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-japan-east/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-japan-east",
+    "dns_name": "",
+    "public_ip": "35.185.163.81",
+    "cloud_info": {
+      "region": "asia-east1-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.185.163.81/",
+    "lat": 25.04776,
+    "lng": 121.53185
+  },
+  {
+    "name": "aviatrix-asia-southeast1-a",
+    "region_name": "asia-southeast1 (Singapore)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-korea-central/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-korea-central",
+    "dns_name": "",
+    "public_ip": "35.186.153.28",
+    "cloud_info": {
+      "region": "asia-southeast1-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.186.153.28/",
+    "lat": 1.28967,
+    "lng": 103.85007
+  },
+  {
+    "name": "aviatrix-asia-northeast1-a",
+    "region_name": "asia-northeast1 (Tokyo)",
+    "id": "/subscriptions/c0e9a5e9-b9e8-478d-8369-c8879c7e5a64/resourceGroups/aviatrix-korea-central/providers/Microsoft.Compute/virtualMachines/AZ-aviatrix-korea-central",
+    "dns_name": "",
+    "public_ip": "104.198.90.183",
+    "cloud_info": {
+      "region": "asia-northeast1-a",
+      "availability_zone": ""
+    },
+    "url": "http://104.198.90.183/",
+    "lat": 35.672855,
+    "lng": 139.817413
+  },
+  {
+    "name": "aviatrix-us-central1-a",
+    "region_name": "us-central1 (Iowa)",
+    "id": "",
+    "dns_name": "",
+    "public_ip": "35.188.29.104",
+    "cloud_info": {
+      "region": "us-central1-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.188.29.104/",
+    "lat": 42.032974,
+    "lng": -93.581543
+  },
+  {
+    "name": "aviatrix-us-east4-a",
+    "region_name": "us-east4 (Northern Virginia)",
+    "id": "",
+    "dns_name": "",
+    "public_ip": "35.186.185.66",
+    "cloud_info": {
+      "region": "us-east4-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.186.185.66/",
+    "lat": 37.223232,
+    "lng": -81.449872
+  },
+  {
+    "name": "aviatrix-europe-west2-a",
+    "region_name": "europe-west2 (London)",
+    "id": "",
+    "dns_name": "",
+    "public_ip": "35.189.68.226",
+    "cloud_info": {
+      "region": "europe-west2-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.189.68.226/",
+    "lat": 51.508530,
+    "lng": -0.076132
+  },
+  {
+    "name": "aviatrix-australia-southeast1-a",
+    "region_name": "australia-southeast1 (Sydney)",
+    "id": "",
+    "dns_name": "",
+    "public_ip": "35.189.12.207",
+    "cloud_info": {
+      "region": "australia-southeast1-a",
+      "availability_zone": ""
+    },
+    "url": "http://35.189.12.207/",
+    "lat": -33.865143,
+    "lng": 151.209900
+  }]
+}
