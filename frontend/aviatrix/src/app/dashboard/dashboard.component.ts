@@ -57,7 +57,8 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
   selectedTabIndex: any;
 
   dashboardModel: DashboardModel;
-  speedtestModel: SpeedtestModel
+  speedtestModel: SpeedtestModel;
+  currentSourceRegion: any;
   pingStartTime: any =  null;
 
   TEST_MINUTES: number = 35;
@@ -178,14 +179,33 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     }
   }
   changeMDTab(selectedTab: any) {
-    this.changeTab(selectedTab.index);
-    console.log('gggg: ', this.speedtestModel.destinationCloudRegions);
+      this.changeTab(selectedTab.index);
+  }
+
+  validate() {
+    if(this.selectedTabIndex == 0) {
+      let val = this.validationSourceTab();
+      return val;
+    } else if(this.selectedTabIndex == 1) {
+      return this.validationDestnationTab();
+    } else {
+      return true;
+    }
   }
 
   validationSourceTab() {
     if(this.speedtestModel.sourceCloudProvider && this.speedtestModel.sourceCloudRegion) {
       return true;
     }
+    this.selectedTabIndex = 0;
+    return false;
+  }
+
+  validationDestnationTab() {
+    if(this.speedtestModel.destinationRegions.length) {
+      return true;
+    }
+    this.selectedTabIndex = 1;
     return false;
   }
 
@@ -247,7 +267,9 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
 
   changeSourceRegion() {
     // console.log('provider: ', this.sourceCloudProvider);
-    // console.log('regions: ', this.sourceCloudRegion);
+    console.log('regions: ', this.speedtestModel.sourceCloudRegion);
+    this.getCurrentSourceRegion();
+    this.generateAmMap();
   }
 
   isRegionsSelected(region: any) {
@@ -257,44 +279,75 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
         for (let step = 0; step < this.speedtestModel.destinationRegions.length; step++) {
           if(region.cloud_info.region === this.speedtestModel.destinationRegions[step]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationRegions[step]['public_ip']) {
             this.speedtestModel.destinationRegions.splice(step, 1);
+            break;
           }
         }
+        region.isSelected = false;
         return true;
       }
     }
     return false
   }
 
+  removeRegionFromDestination(region: any, cloudProvider: any) {
+    // "dashboardModel.azureRegions"
+    for (let index = 0; index < this.speedtestModel.destinationCloudRegions[cloudProvider].length; index++) {
+      if(region.cloud_info.region === this.speedtestModel.destinationCloudRegions[cloudProvider][index]['cloud_info']['region'] && region.public_ip == this.speedtestModel.destinationCloudRegions[cloudProvider][index]['public_ip']) {
+        this.speedtestModel.destinationCloudRegions[cloudProvider].splice(index, 1);
+        for(let step = 0; step < this.speedtestModel.destinationRegions.length; step++) {
+          if(region.cloud_info.region === this.speedtestModel.destinationRegions[step]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationRegions[step]['public_ip']) {
+            this.speedtestModel.destinationRegions.splice(step, 1);
+            break;
+          }
+        }
+        if(cloudProvider =='aws') {
+          for (let i=0 ; i < this.dashboardModel.awsRegions.length; i++) {
+            if(region.cloud_info.region == this.dashboardModel.awsRegions[i]['cloud_info']['region']) {
+              this.dashboardModel.awsRegions[i].isSelected = false;
+              break;
+            }
+          }
+        }else if(cloudProvider =='azure') {
+          for (let i=0 ; i < this.dashboardModel.azureRegions.length; i++) {
+            if(region.cloud_info.region == this.dashboardModel.azureRegions[i]['cloud_info']['region']) {
+              this.dashboardModel.azureRegions[i].isSelected = false;
+              break;
+            }
+          }
+        } else if(cloudProvider =='gce') {
+          for (let i=0 ; i < this.dashboardModel.gceRegions.length; i++) {
+            if(region.cloud_info.region == this.dashboardModel.gceRegions[i]['cloud_info']['region']) {
+              this.dashboardModel.gceRegions[i].isSelected = false;
+              break;
+            }
+          }
+        }
+        break;
+      }
+    }
+  }
+
   changeRegionState(region: any) {
     
     if(!this.isRegionsSelected(region)) {
+      region.isSelected = true;
       this.speedtestModel.destinationRegions.push(region);
       this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
     } 
-    console.log('regions: ', this.selectedDestinationCloudRegions);
+    this.generateAmMap();
+    console.log('regions: ', region);
   }
 
 
-  getCurrentGeoLocation() {
-     let current = this;
-      this.getGeolocation().subscribe((geoLocation:   any) => {
-      current.geoLocation = JSON.parse(geoLocation._body);
-       let locs: any[] = current.geoLocation.loc.split(',');
-       current.lat = parseFloat(locs[0]);
-       current.lng = parseFloat(locs[1]);
-       current.locations.push({
-                              lat: parseFloat(locs[0]),
-                              lng: parseFloat(locs[1]),
-                              label: 'User location : ' + current.geoLocation.city,
-                              draggable: false
-                            });
-
-       for(let index = 0; index < this.inventory.data.length; index++) {
-         let obj = this.inventory.data[index];
-         current.locations.push(obj);
-       }
-       
-    })
+  getCurrentSourceRegion() {
+    for(let index = 0; index < this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider].length; index++) {
+      if(this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider][index]['cloud_info']['region'] == this.speedtestModel.sourceCloudRegion) {
+        this.currentSourceRegion = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider][index];
+        break;
+      } 
+    }
+    console.log('current location: ', this.currentSourceRegion);
+     
   }
 
   getGeolocation() {
@@ -388,6 +441,8 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
    */
 
   startTest() {
+    let lll = this.dashboardService.getLatencyAndBandwidth(this.speedtestModel);
+    console.log('result: ', lll);
   }
 
   setDataPoint(data, obj) {
@@ -439,12 +494,12 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
          obj.isOpen = false;
          obj.iconUrl= this.getCloudPinPath(key);
          obj.color = this.chartColors[index];
+         obj.isSelected = false;
          this.dashboardModel.locations[key].push(obj);
         }
         // let totalRegions = this.locations.length * 12;
         // this.progressFactor = 100/totalRegions;
-        // this.generateMap();
-        this.generateAmMap();
+        // this.generateAmMap();
       },
         (error: any) => this.handleError(error)
       );
@@ -612,75 +667,6 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     }
   }
 
-  generateMap() {
-    let self = this;
-    var map = L.map('map', { zoomControl:false }).setView([self.userLocation.latitude, self.userLocation.longitude], 1);
-    map.options.minZoom = 1;
-
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-    }).addTo(map);
-
-    var userIcon = L.icon({
-        iconUrl: self.userLocation.iconUrl,
-        iconSize: [22, 39],
-    });
-
-    var userMarker = L.marker([self.userLocation.latitude, self.userLocation.longitude], {'icon': userIcon});
-
-    userMarker.addTo(map);
-
-    var userPopup = null;
-    
-    userMarker.on('mouseover', function (e) {
-      userPopup = L.popup()
-           .setLatLng([self.userLocation.latitude, self.userLocation.longitude])
-           .setContent(self.userLocation.address ? self.userLocation.address : "NA")
-            .openOn(map);
-    });
-
-    userMarker.on('mouseout', function (e) {
-      if(userPopup) {
-          map.closePopup(userPopup);
-        }
-    });
-
-    for(let index = 0; index < this.locations.length; index++ ) {
-      let object = this.locations[index];
-
-      var markerIcon = L.icon({
-        iconUrl: object.iconUrl,
-        iconSize: [22, 39],
-      });
-
-      var marker = L.marker([object.lat, object.lng], {'icon': markerIcon});
-
-      marker.addTo(map);
-      var layerPopup = null;
-      marker.on('mouseover', function (e) {
-        var content = self.updateMarkerLabel(object);
-        self.updateChartOnMarker(object, true);
-        layerPopup = L.popup()
-           .setLatLng([object.lat, object.lng])
-           .setContent(content)
-            .openOn(map);
-
-      });
-      marker.on('mouseout', function (e) {
-        if(layerPopup) {
-          self.updateChartOnMarker(object, false);
-          map.closePopup(layerPopup);
-        }
-      });
-
-      var polyline = L.polyline([[self.userLocation.latitude, self.userLocation.longitude], [object.lat, object.lng]], {color: object.color, weight: 1}).addTo(map);
-      polyline.addTo(map);
-
-
-      // L.Polyline.Arc([self.userLocation.latitude, self.userLocation.longitude], [object.lat, object.lng], {color: object.color,  weight: 1,
-      // vertices: 50}).addTo(map);
-    }
-  }
-
   generateAmMap() {
     let self = this;
 
@@ -688,34 +674,33 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     var images = [];
     var planeSVG = "m2,106h28l24,30h72l-44,-133h35l80,132h98c21,0 21,34 0,34l-98,0 -80,134h-35l43,-133h-71l-24,30h-28l15,-47";
 
-
-    if(self.userLocation.latitude && self.userLocation.longitude) {
+    if(self.currentSourceRegion.lat && self.currentSourceRegion.lng) {
       var userImg= {
-            "id": "user",
-            "imageURL": self.userLocation.iconUrl,
+            "id": "source_location",
+            "imageURL": self.currentSourceRegion.iconUrl,
             "width": 22,
-            "height": 22,
+            "height": 39,
             "title": function() {
-             return self.userLocation.address ? '<b>You are here</b><br>' + self.userLocation.address : "NA";
+             return self.currentSourceRegion.lat ? '<b>Source Cloud Region</b><br>' + self.currentSourceRegion.label : "NA";
            },
 
-            "latitude": self.userLocation.latitude,
-            "longitude": self.userLocation.longitude,
+            "latitude": self.currentSourceRegion.lat,
+            "longitude": self.currentSourceRegion.lng,
             "scale": 1
       }
 
       images.push(userImg);
     }
 
-    for(let index = 0; index < this.locations.length; index++) {
-      let object = this.locations[index];
+    for(let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
+      let object = this.speedtestModel.destinationRegions[index];
 
-      if(self.userLocation.latitude && self.userLocation.longitude) {
+      if(self.currentSourceRegion.lat && self.currentSourceRegion.lng) {
       // Creating lines
         var line = {
             "id": "line" + index,
-            "latitudes": [ self.userLocation.latitude, object.lat ],
-            "longitudes": [ self.userLocation.longitude, object.lng ],
+            "latitudes": [ self.currentSourceRegion.lat, object.lat ],
+            "longitudes": [ self.currentSourceRegion.lng, object.lng ],
             "color": object.color,
             "arc": -0.85,
             "thickness" : 2
@@ -823,8 +808,8 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
   }
 
   getRegionForImage(regionId) {
-    for(let index = 0; index < this.locations.length; index++) {
-      let location = this.locations[index];
+    for(let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
+      let location = this.speedtestModel.destinationRegions[index];
       if(location.cloud_info.region === regionId) {
         return location;
       }

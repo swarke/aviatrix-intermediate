@@ -50,6 +50,8 @@ export class ApiService {
           .catch((errorObj: any) => this.handleError(errorObj));
 
       case APIMethod.POST:
+      console.log('API: ', apiRequest);
+      console.log('header: ',APIMethod['POST']);
         return this.apiExecuter.post(apiRequest.endpoint, apiRequest.getBody
           (), { headers: this.headers })
           .map(res => this.handleResponse(res))

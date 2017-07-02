@@ -12,6 +12,8 @@ INFLUX_DB_PORT = '8086'
 INFLUX_DB_USERNAME = ''
 INFLUX_DB_PASSWORD = ''
 INFLUX_DB_NAME = 'speedtest'
+SAVE_INFLUX_URL = 'http://%s:%s/write?db=%s' % (INFLUX_DB_HOST, INFLUX_DB_PORT, INFLUX_DB_NAME)
+GET_INFLUX_URL = 'http://%s:%s/query?db=%s&q=' % (INFLUX_DB_HOST, INFLUX_DB_PORT, INFLUX_DB_NAME)
 
 class Cloud(Enum):
     aws=1

@@ -12,11 +12,7 @@
                 <div class="card-header">   
                     <div class="row">
                         <div class="col-md-6">
-                            <h6 class="card-title card-title-margin">{{leftPanelHeader}}</h6>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-stop" (click)="stopTest();" [disabled]="!disabledStart" *ngIf="disabledStart"> <i class="fa fa-stop" aria-hidden="true"></i>&nbsp;&nbsp;{{properties.STOP}}</button>
-                            <button class="btn btn-start" (click)="startTest();" [disabled]="disabledStart" *ngIf="!disabledStart"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;&nbsp;{{properties.START}}</button>
+                            <h6 class="card-title card-title-margin">Cloud Regions</h6>
                         </div>
                     </div>
                 </div>
@@ -78,8 +74,8 @@
                             <option *ngFor="let region of sourceCloudRegions" [value]="region.cloud_info.region">{{ region.label }}</option>
                         </select>
                     </div>
-                    <div class="row" *ngIf="destinationTab" style="overflow-y: auto; height: 213px">
-                        <div class="col-md-2" style="padding-left: 15px;">
+                    <div class="row" *ngIf="destinationTab" style="overflow-y: auto; height: 213px; margin-top: 10px">
+                        <div class="col-md-3" style="padding-left: 15px;">
                             <div class="row">
                                 <button class="pull-left" style="padding: 10px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'azure'">| Azure</button>
                                 <button class="pull-left" style="padding: 10px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('azure')" *ngIf="destinationCloudProvider != 'azure'">Azure</button> 
@@ -93,38 +89,32 @@
                                 <button class="pull-left" style="padding: 0px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('gce')" *ngIf="destinationCloudProvider != 'gce'">GCE</button> 
                             </div>
                         </div>
-                        <div class="col-md-9 form-group" *ngIf="destinationCloudProvider == 'azure'">
-                            <div class="form-group">
-                                <div *ngFor="let option of dashboardModel.azureRegions">
-                                    <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion">
-                                        <input type="checkbox" name="options" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>
-                                        {{option.label}}
-                                    </label>
-                                </div>
+                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'azure'">
+                            <div class="col-md-6" *ngFor="let option of dashboardModel.azureRegions">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    <input type="checkbox" name="options" [checked]="option.isSelected" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>{{option.label}}
+                                </label>
+                                <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group" *ngIf="destinationCloudProvider == 'aws'">
-                            <div class="form-group">
-                                <div *ngFor="let option of dashboardModel.awsRegions">
-                                    <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion">
-                                        <input type="checkbox" name="options" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>
-                                        {{option.label}}
-                                    </label>
-                                </div>
+                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'aws'">
+                            <div class="col-md-6" *ngFor="let option of dashboardModel.awsRegions">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    <input type="checkbox" name="options" [checked]="option.isSelected" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>{{option.label}}</label>
+                                <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group" *ngIf="destinationCloudProvider == 'gce'">
-                            <div class="form-group">
-                                <div *ngFor="let option of dashboardModel.gceRegions">
-                                    <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion">
-                                        <input type="checkbox" name="options" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>
+                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'gce'">
+                            <div class="col-md-6" *ngFor="let option of dashboardModel.gceRegions">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    <input type="checkbox" name="options" [checked]="option.isSelected" value="{{option.cloud_info.region}}" (click)="changeRegionState(option)"/>
                                         {{option.label}}
-                                    </label>
-                                </div>
+                                </label>
+                                <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
                             </div>
                         </div>
                     </div>
-                    <div align="center" *ngIf="testTab" style="overflow-y: auto; height: 213px">
+                    <div align="center" *ngIf="testTab">
                         <table class="table table-striped" style="margin-top: 10px; margin-bottom: -10px;">
                             <thead>
                                 <tr>
@@ -151,7 +141,7 @@
                                         <th>Azure Provider</th> 
                                     </tr>
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.azure">
-                                        <td style="width:35%">{{region.region_name}}</td>
+                                        <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'azure');">{{region.region_name}}</td>
                                         
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
@@ -165,7 +155,7 @@
                                         <th>AWS Provider</th>
                                     </tr>
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.aws">
-                                        <td style="width:35%">{{region.region_name}}</td>
+                                        <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'aws');">{{region.region_name}}</td>
                                         
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
@@ -179,7 +169,7 @@
                                         <th>GCE Provider</th>
                                     </tr>
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.gce">
-                                        <td style="width:35%">{{region.region_name}}</td>
+                                        <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'gce');">{{region.region_name}}</td>
                                         
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
@@ -201,8 +191,8 @@
                 <div>
                     <button class="pull-left" style="padding: 0; border: none; background: none; color: blue;" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
                     <button class="pull-left" style="padding: 0; border: none; background: none;" [disabled]="sourceTab" *ngIf="sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
-                    <button class="pull-right" style="padding: 0; border: none; background: none; color: blue;" (click)="nextTab();" *ngIf="!testTab">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button> 
-                    <button class="pull-right" style="padding: 0; border: none; background: none; color: blue;" *ngIf="testTab">Run Test <i aria-hidden="true" class="fa fa-play"></i></button> 
+                    <button class="{{validate() ? 'next_btn pull-right':'next_btn_disabled pull-right'}}"  (click)="nextTab();" [disabled]="!validate()" *ngIf="!testTab">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button> 
+                    <button class="pull-right" style="padding: 0; border: none; background: none; color: blue;" *ngIf="testTab" (click)="startTest();">Run Test <i aria-hidden="true" class="fa fa-play"></i></button> 
                 </div>
                     
             </div>

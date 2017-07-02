@@ -47,6 +47,17 @@ export class DashboardModel {
 		this.gceRegions = [];
 		this.clearLocations();
 	}
+
+	getRegions(cloud: any, sourceCloudRegion: any) {
+		let regions = this.locations[cloud];
+		for (let index = 0; index < regions.length; index++) {
+			if(regions[index]['cloud_info']['region'] == sourceCloudRegion) {
+				regions.splice(index, 1);
+				break;
+			}
+		}
+		return regions;
+	}
 }
 
 export class SpeedtestModel {
@@ -79,4 +90,10 @@ export class SpeedtestModel {
 		this.destinationRegions = this.destinationRegions.concat(data);
 		this.destinationCloudRegions[key] = data;
 	}
+}
+
+export enum Cloud {
+    aws =1 ,
+    azure = 2,
+    gce = 3,
 }

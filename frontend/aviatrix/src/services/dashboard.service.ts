@@ -4,6 +4,10 @@ import { APIRequest, APIUrls } from '../models';
 import { APIMethod, ApiService } from './api.service';
 import { PropertiesService } from './properties.service';
 import { Observable } from 'rxjs/Observable';
+import { DashboardModel, SpeedtestModel, Cloud } from '../models';
+import { SERVER_URL, GET_LATENCY_BANDWIDTH_API } from 'app/app-config';
+
+
 
 declare const AWS: any;
 
@@ -33,8 +37,16 @@ export class DashboardService {
    // return this.http.post(, {});
   };
 
-  getLatencyAndBandwidth(url) {
+  getLatencyAndBandwidth(speedTest: SpeedtestModel) {
+    let url = SERVER_URL + GET_LATENCY_BANDWIDTH_API;
+    let destRegionList = [];
+    for (let index = 0; index < speedTest.destinationRegions.length; index++) {
+      destRegionList.push(speedTest.destinationRegions[index]['cloud_info']['region'])
+    }
     const apiRequest: APIRequest = new APIRequest(url, APIMethod.POST);
+    apiRequest.addProperty('cloud_id', Cloud[speedTest.sourceCloudProvider]);
+    apiRequest.addProperty('source_region', speedTest.sourceCloudRegion);
+    apiRequest.addProperty('destination_regions', destRegionList);
     return this._apiService.executeAPI(apiRequest);
   }
 
