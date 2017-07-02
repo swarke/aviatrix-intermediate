@@ -195,7 +195,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="pull-left" style="padding: 0; border: none; background: none; color: blue;" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+                    <button class="pull-left" style="padding: 0; border: none; background: none; color: #2196F3;" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
                     <button class="pull-left" style="padding: 0; border: none; background: none;" [disabled]="sourceTab" *ngIf="sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
                     <button class="{{validate() ? 'next_btn pull-right':'next_btn_disabled pull-right'}}"  (click)="nextTab();" [disabled]="!validate()" *ngIf="!testTab">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button> 
                     <button class="pull-right" style="padding: 0; border: none; background: none; color: blue;" *ngIf="testTab" (click)="startTest();">Run Test <i aria-hidden="true" class="fa fa-play"></i></button> 
