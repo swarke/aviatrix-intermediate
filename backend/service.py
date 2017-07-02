@@ -24,9 +24,7 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
                 url += " destination_region='%s'" % destination_region
             else:
                 url += " OR destination_region='%s'" % destination_region
-    print url
     responce = requests.get(url)
-    print responce.content
     if responce.status_code < 300:
         result = convert_to_speedtest_format(json.loads(responce.content)['results'][0])
         return result
@@ -46,13 +44,7 @@ def save_letency_throughput(data, influx_db_client):
         data_string = obj['measurement'] + ',source_region=' + obj['tags']['source_region'] + ',destination_region=' + \
                       obj['tags']['destination_region'] + ' latency=' + obj['fields']['latency'] + ',throughput=' + \
                       obj['fields']['throughput'] + ' ' + str(current_datetime_millis)
-        print data_string
         requests.post(SAVE_INFLUX_URL, data=data_string)
-
-    # for obj in data:
-    #     obj['time'] = current_datetime_millis
-    # resp = influx_db_client.write_points(data, time_precision='ms')
-    # print resp
 
 
 def convert_to_speedtest_format(responce):
