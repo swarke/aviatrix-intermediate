@@ -149,13 +149,10 @@
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.azure">
                                         <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'azure');">{{region.region_name}}</td>
                                         
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
+                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="region.latency">{{region.latency}}</td>
-
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && !disabledStart">{{properties.NA_TEXT}}</td>
+                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}</td>
                                         <td style="width: 35%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}</td>
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && disabledStart">{{readLatestThroughput(region)}}</td>
                                     </tr>
                                     <tr *ngIf="speedtestModel.destinationCloudRegions.aws.length > 0">
                                         <th>AWS Provider</th>
@@ -163,13 +160,11 @@
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.aws">
                                         <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'aws');">{{region.region_name}}</td>
                                         
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
+                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="region.latency">{{region.latency}}</td>
 
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && !disabledStart">{{properties.NA_TEXT}}</td>
+                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}</td>
                                         <td style="width: 35%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}</td>
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && disabledStart">{{readLatestThroughput(region)}}</td>
                                     </tr>
                                     <tr *ngIf="speedtestModel.destinationCloudRegions.gce.length > 0">
                                         <th>GCE Provider</th>
@@ -177,13 +172,10 @@
                                     <tr *ngFor="let region of speedtestModel.destinationCloudRegions.gce">
                                         <td style="width:35%"><img src="/assets/ic_remove.png" alt="Smiley face" width="17" height="17" style="margin-right: 5px;" (click)="removeRegionFromDestination(region, 'gce');">{{region.region_name}}</td>
                                         
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && !disabledStart">{{properties.NA_TEXT}}</td>
-                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency && disabledStart">{{readLatestLatency(region)}}</td>
+                                        <td style="width: 30%; padding-left: 15px" *ngIf="!region.latency">{{properties.NA_TEXT}}</td>
                                         <td style="width: 30%; padding-left: 15px" *ngIf="region.latency">{{region.latency}}</td>
-
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && !disabledStart">{{properties.NA_TEXT}}</td>
+                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}</td>
                                         <td style="width: 35%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}</td>
-                                        <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth && disabledStart">{{readLatestThroughput(region)}}</td>
                                     </tr>
                                 </tbody>
                             </table>

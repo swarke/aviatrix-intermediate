@@ -1,4 +1,4 @@
-export { DashboardModel, SpeedtestModel, Cloud } from './dashboard.model';
+export { DashboardModel, SpeedtestModel, Cloud, ChartModel } from './dashboard.model';
 export {APIRequest, APIUrls} from './apirequest.model';
 
 

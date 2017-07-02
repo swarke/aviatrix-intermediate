@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { ChartModule } from 'angular2-highcharts';
-import { DashboardModel, SpeedtestModel} from '../../models';
+import { DashboardModel, SpeedtestModel, ChartModel } from '../../models';
 import { Response, Http } from '@angular/http';
 import { DashboardService, PropertiesService } from '../../services';
 import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
@@ -58,6 +58,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
 
   dashboardModel: DashboardModel;
   speedtestModel: SpeedtestModel;
+  chartModel: ChartModel;
   currentSourceRegion: any;
   pingStartTime: any =  null;
 
@@ -132,6 +133,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
       this.bandwidthChart = null;
       this.dashboardModel = new DashboardModel();
       this.speedtestModel = new SpeedtestModel();
+      this.chartModel = new ChartModel();
   	  this.clouds = [
                 	    {value: '0', viewValue: 'All Cloud'},
                 	    {value: '1', viewValue: 'Google Cloud'},
@@ -278,8 +280,25 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
   changeSourceRegion() {
     // console.log('provider: ', this.sourceCloudProvider);
     console.log('regions: ', this.speedtestModel.sourceCloudRegion);
+    this.chartModel.clearModel();
     this.getCurrentSourceRegion();
+    this.clearGraphAndChart();
     this.generateAmMap();
+  }
+
+  clearGraphAndChart() {
+    this.speedtestModel.clearDestinationCloudRegions();
+    this.speedtestModel.destinationRegions = [];
+    for(let index = 0; index < this.dashboardModel.awsRegions.length; index++) {
+      this.dashboardModel.awsRegions[index]['isSelected'] = false;
+    }
+    for(let index = 0; index < this.dashboardModel.azureRegions.length; index++) {
+      this.dashboardModel.azureRegions[index]['isSelected'] = false;
+    }
+    for(let index = 0; index < this.dashboardModel.gceRegions.length; index++) {
+      this.dashboardModel.gceRegions[index]['isSelected'] = false;
+    }
+
   }
 
   isRegionsSelected(region: any) {
@@ -332,7 +351,9 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
             }
           }
         }
+        this.generateAmMap();
         break;
+
       }
     }
   }
@@ -420,13 +441,16 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
    * [getChartData description]
    * @param {[type]} chartData [description]
    */
-  getChartData(chartData) {
+  getChartData(cloud_region: any, valueKay: any) {
     const metricData: any = [];
-    for (let index = 0; index < chartData.length; index++) {
-      const jsonObj = chartData[index];
+    for (let index = 0; index < this.chartModel.chartData.length; index++) {
+      const jsonObj = this.chartModel.chartData[index];
+      if(jsonObj['destination_region'] != cloud_region) {
+        continue;
+      }
       // if (jsonObj.value !== null) {
         const date: Date = new Date(jsonObj.time);
-        let yVal = jsonObj.value;
+        let yVal = jsonObj[valueKay];
   
         metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
          date.getHours(), date.getMinutes(), date.getSeconds()), yVal]);
@@ -451,8 +475,34 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
    */
 
   startTest() {
-    let lll = this.dashboardService.getLatencyAndBandwidth(this.speedtestModel);
-    console.log('result: ', lll);
+    let latencySeries = [];
+    let badwidthSeries = [];
+    let chartData = this.dashboardService.getLatencyAndBandwidth(this.speedtestModel);
+    this.chartModel.chartData = chartData['data'];
+    for(let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
+      latencySeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region,'latency')));
+      badwidthSeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region,'throughput')));
+    }
+    this.updateLatencyAndBandwidthForDestinationCloud();
+    this.latencyOptions = this.getChartConfig('', this.properties.MILISECONDS, latencySeries, 'spline');
+    this.bandwidthOptions = this.getChartConfig('', this.properties.MBPS, badwidthSeries, 'spline');
+    
+  }
+
+  updateLatencyAndBandwidthForDestinationCloud() {
+
+    for (let key in this.speedtestModel.destinationCloudRegions) {
+      for(let index=0; index < this.speedtestModel.destinationCloudRegions[key].length; index++) {
+        let data = this.getAvarageLatencyAndBandwidth(this.speedtestModel.destinationCloudRegions[key][index]);
+        if(data.latency != 0.0) {
+          this.speedtestModel.destinationCloudRegions[key][index]['latency'] = data.latency;
+        }
+        if(data.bandwidth != 0.0) {
+          this.speedtestModel.destinationCloudRegions[key][index]['bandwidth'] = data.bandwidth;
+        }
+      }
+    }
+    
   }
 
   setDataPoint(data, obj) {
@@ -540,29 +590,34 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     this.disabledStart = false;
   }
 
+  getAvarageLatencyAndBandwidth(object: any) {
+    let data = {
+      "latency": 0.0,
+      "bandwidth": 0.0
+    }
+    let latency = 0.0;
+    let bandwidth = 0.0;
+    let countSeries = 0;
+    for(let index = 0; index < this.chartModel.chartData.length; index++) {
+       if(this.chartModel.chartData[index]['destination_region'] == object.cloud_info.region) {
+         countSeries++;
+         latency += this.chartModel.chartData[index]['latency'];
+         bandwidth += this.chartModel.chartData[index]['throughput'];
+       }
+    }
+
+    if(countSeries != 0) {
+      data.latency = latency/countSeries;
+      data.bandwidth = bandwidth/countSeries;
+    }
+    return data;
+  }
+
   updateMarkerLabel(marker) {
-    let latency = "";
-    let responseTime = "";
-    let bandwith = "";
-
-    if (marker.latencyCompleted && marker.latency) {
-      latency = marker.latency;
-    } else if(marker.dashboardModel && marker.dashboardModel.latency
-              && marker.dashboardModel.latency.length > 0 && marker.currentLatencyIndex > 0) {
-      latency = marker.dashboardModel.latency[marker.currentLatencyIndex - 1].value;
-    }
-
-
-    if (marker.bandwidthCompleted && marker.bandwidth) {
-      bandwith = marker.bandwidth;
-    } else if(marker.dashboardModel && marker.dashboardModel.bandwidth
-              && marker.dashboardModel.bandwidth.length > 0 && marker.currentBandwidthIndex > 0) {
-      bandwith = marker.dashboardModel.bandwidth[marker.currentBandwidthIndex - 1].value;
-    }
+    let data = this.getAvarageLatencyAndBandwidth(marker);
 
     let content = "";
-
-    if(latency == "" && bandwith == "") {
+    if(data.latency == 0.0 && data.bandwidth == 0.0) {
       content = "<strong>" + marker.region_name +"</strong>";
     } else {
       content = '<table class="table table-bordered" width="100%">' +
@@ -571,7 +626,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
                       '<tr> <th style="text-align: center">'+ "Latency <br> (msec)"+'</th> <th style="text-align: center">'+ 'Throughput <br> (mbps)' +'</th></tr>' +
                     '</thead>' +
                     '<tbody>' +
-                      '<tr><td style="text-align: center;">'+(latency == "" ? this.properties.NA_TEXT : latency) +'</td> <td style="text-align: center;">' + (bandwith == "" ? this.properties.NA_TEXT : bandwith) +'</td></tr>' +
+                      '<tr><td style="text-align: center;">'+(data.latency == 0.0 ? this.properties.NA_TEXT : data.latency) +'</td> <td style="text-align: center;">' + (data.bandwidth == 0.0 ? this.properties.NA_TEXT : data.bandwidth) +'</td></tr>' +
                     '</tbody>' +
                   '</table>';
     }

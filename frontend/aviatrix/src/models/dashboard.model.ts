@@ -92,6 +92,19 @@ export class SpeedtestModel {
 	}
 }
 
+export class ChartModel {
+
+	chartData: any[];
+	
+	constructor() {
+		this.clearModel();
+	}
+
+	clearModel() {
+		this.chartData = [];
+	}
+}
+
 export enum Cloud {
     aws =1 ,
     azure = 2,
