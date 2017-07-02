@@ -265,6 +265,16 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
   }
 
+  updateCheckbox(region: any) {
+    region.isSelected = !region.isSelected;
+    if(!this.isRegionsSelected(region)) {
+      region.isSelected = true;
+      this.speedtestModel.destinationRegions.push(region);
+      this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
+    } 
+    this.generateAmMap();
+  }
+
   changeSourceRegion() {
     // console.log('provider: ', this.sourceCloudProvider);
     console.log('regions: ', this.speedtestModel.sourceCloudRegion);
