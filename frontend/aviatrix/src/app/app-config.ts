@@ -4,7 +4,5 @@ export const AZURE_INVENTORY_PATH = <string> 'https://s3.amazonaws.com/cloudinve
 export const GCE_INVENTORY_PATH = <string> 'https://s3.amazonaws.com/cloudinventory/gce/inventory.json';
 export const SERVER_URL = <string> 'http://127.0.0.1'
 export const GET_LATENCY_BANDWIDTH_API = <string> '/api/speedtest'
-// export const CLOUD_TOOL = <string> 'AZURE';
-// export const CLOUD_TOOL = <string> 'GCE';
 
 
