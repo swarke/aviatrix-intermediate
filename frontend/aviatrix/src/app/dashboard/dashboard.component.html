@@ -1,3 +1,4 @@
+<ng2-slim-loading-bar [color]="'#e24301'"></ng2-slim-loading-bar>
 <div class="panel marquee short" id="network-white" style="margin-left: -15px; margin-right: -15px;">
         <div class="content threecolumns tight">
             <div class="column double" style="margin-left: -10px;">
@@ -45,7 +46,7 @@
         </div>
         <div class="col-md-5">
             <div class="card card-radious-none">
-                <div class="card-header" style="margin-bottom: 25px;">
+                <div class="card-header" style="margin-bottom: 25px; padding: 0.75rem 0.0rem;">
                     
                     <div class="row">
                         <div class="col-md-11" style="padding-right: 0px;">
@@ -60,8 +61,8 @@
                         <md-tab label="Destination"></md-tab>
                         <md-tab label="Test"></md-tab>
                     </md-tab-group>
-                    <div align="center" *ngIf="sourceTab" style="overflow-y: auto; height: 213px">
-                        <div style="margin-top: 15px; margin-bottom: 10px; font-weight: 500;">Select a source cloud</div>
+                    <div align="center" *ngIf="sourceTab" style="overflow-y: auto; height: 216px">
+                        <div style="margin-top: 45px; margin-bottom: 10px; font-weight: 500;">Select a source cloud</div>
                         <select class="form-control" placeholder="Source Cloud" [(ngModel)]="speedtestModel.sourceCloudProvider" (ngModelChange)="changeSourceCloudProvider()" style="margin-bottom: 15px; width: 185px;">
                             <option value="" disabled selected>Source Cloud</option>
                             <option value="azure">Azure</option>
@@ -74,7 +75,7 @@
                             <option *ngFor="let region of sourceCloudRegions" [value]="region.cloud_info.region">{{ region.label }}</option>
                         </select>
                     </div>
-                    <div class="row" *ngIf="destinationTab" style="overflow-y: auto; height: 213px; margin-top: 10px">
+                    <div class="row" *ngIf="destinationTab" style="height: 206px; margin-top: 10px">
                         <div class="col-md-3" style="padding-left: 15px;">
                             <div class="row">
                                 <button class="pull-left" style="padding: 10px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'azure'">| Azure</button>
@@ -89,7 +90,7 @@
                                 <button class="pull-left" style="padding: 0px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('gce')" *ngIf="destinationCloudProvider != 'gce'">GCE</button> 
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'azure'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'azure'">
                             <div class="col-md-6" *ngFor="let option of dashboardModel.azureRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
@@ -99,7 +100,7 @@
                                 <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'aws'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'aws'">
                             <div class="col-md-6" *ngFor="let option of dashboardModel.awsRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
@@ -108,7 +109,7 @@
                                 <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" *ngIf="destinationCloudProvider == 'gce'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'gce'">
                             <div class="col-md-6" *ngFor="let option of dashboardModel.gceRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
@@ -140,7 +141,7 @@
                                 </tr>
                             </thead>
                         </table>
-                        <div style="overflow-y: auto; height: 193px">
+                        <div style="overflow-y: auto; height: 170px">
                             <table class="table table-striped" style="margin-top: 10px;">
                                 <tbody>
                                     <tr *ngIf="speedtestModel.destinationCloudRegions.azure.length > 0">
@@ -190,7 +191,9 @@
                     <button class="pull-left" style="padding: 0; border: none; background: none; color: #2196F3;" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
                     <button class="pull-left" style="padding: 0; border: none; background: none;" [disabled]="sourceTab" *ngIf="sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
                     <button class="{{validate() ? 'next_btn pull-right':'next_btn_disabled pull-right'}}"  (click)="nextTab();" [disabled]="!validate()" *ngIf="!testTab">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button> 
-                    <button class="pull-right" style="padding: 0; border: none; background: none; color: blue;" *ngIf="testTab" (click)="startTest();">Run Test <i aria-hidden="true" class="fa fa-play"></i></button> 
+                    <button class="pull-right btn btn-start" (click)="startTest();" [disabled]="speedtestModel.destinationRegions.length < 1" *ngIf="!isTestCompleted && !disabledStart && testTab">Begin Test&nbsp;&nbsp;<i class="fa fa-play" aria-hidden="true"></i></button>
+                    <button class="btn btn-stop" (click)="stopTest();" [disabled]="speedtestModel.destinationRegions.length < 1" *ngIf="disabledStart && testTab">Stop Test&nbsp;&nbsp;<i class="fa fa-stop" aria-hidden="true"></i></button>
+                    <button class="btn btn-start" (click)="startTest();" [disabled]="speedtestModel.destinationRegions.length < 1" *ngIf="isTestCompleted && !disabledStart && testTab">Restart Test&nbsp;&nbsp;<i class="fa fa-play" aria-hidden="true"></i></button>
                 </div>
                     
             </div>
@@ -202,9 +205,9 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-9"><h6 class="card-title card-title-margin">{{properties.LATENCY_CHART_HEADER}} <span>&nbsp; <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.LATENCY_CHART_TOOLTIP}}" mdTooltipPosition="right"></i></span></h6></div>
-                        <div class="col-md-3" style="text-align: right;">
+                        <!-- <div class="col-md-3" style="text-align: right;">
                             <img class="loader-style" src="../assets/loader.gif" *ngIf="disabledStart">
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -219,9 +222,9 @@
                  <div class="card-header">
                     <div class="row">
                         <div class="col-md-9"><h6 class="card-title card-title-margin">{{properties.THROUGHPUT_CHART_HEADER}}  <span>&nbsp; <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.THROUGHPUT_PANEL_TOOLTIP}}" mdTooltipPosition="right"></i></span></h6></div>
-                        <div class="col-md-3" style="text-align: right">
+                        <!-- <div class="col-md-3" style="text-align: right">
                             <img class="loader-style" src="../assets/loader.gif" *ngIf="disabledStart">
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

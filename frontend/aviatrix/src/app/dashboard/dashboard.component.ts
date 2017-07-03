@@ -111,7 +111,16 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
       this.chartColors = ['#2196F3', '#F44336', '#FF609E', '#14936C', '#00FF4F', '#A99000',
                           '#E8C21A', '#673AB7', '#3D495A', '#536DFE', '#C3429B', '#C33A38', 
                           '#02BCA1', '#25DB67', '#6F9900', '#E69500', '#D792F1', '#83A1CD', 
-                          '#0E7BBC', '#81D4FA'];
+                          '#0E7BBC', '#81D4FA', '#EF9A9A', '#81D4FA', '#BDDB75', '#F9C18F', 
+                          '#A4BAB9', '#FF5E5A', '#2AACF4', '#8CB723', '#EFAA0F', '#5AA8A8', 
+                          '#B71C1C', '#0D47A1', '#006600', '#FF9739', '#1B778C', '#46466D', 
+                          '#E65100', '#1D5663', '#FF8ABF', '#9DEF6C', '#FF008C', '#AEC2D6',
+                          '#42E505', '#D1A579', '#C91871', '#8291D1', '#009600', '#C68979', 
+                          '#AD006B', '#2E56BC', '#A55550', '#C1DC83', '#FA43FF', '#5ECCB7', 
+                          '#B7B567', '#844840', '#CC4CB4', '#00AF91', '#A99000', '#FF8DA0', 
+                          '#9E1283', '#007F73', '#F1626E', '#FCEC98', '#E3A5F2', '#A7C9A7', 
+                          '#F7ED77', '#A5270A', '#C372D6', '#87AA77', '#FFDD00', '#D1B1AA', 
+                          '#9D25BA', '#59824A', '#E5C31C', '#8E7A76', '#810687', '#212121'];
       
       this.userLocation = {};
       this.latency = properties.NA_TEXT;
@@ -179,6 +188,8 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
         this.testTab = true;
         this.selectedTabIndex = 2;
     }
+    this.isTestCompleted = false;
+    this.disabledStart = false;
   }
   changeMDTab(selectedTab: any) {
       this.changeTab(selectedTab.index);
@@ -366,6 +377,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
       this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
     } 
     this.generateAmMap();
+
     console.log('regions: ', region);
   }
 
@@ -475,6 +487,9 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
    */
 
   startTest() {
+    this.slimLoadingBarService.start();
+    this.isTestCompleted = false;
+    this.disabledStart = true;
     let latencySeries = [];
     let badwidthSeries = [];
     let chartData = this.dashboardService.getLatencyAndBandwidth(this.speedtestModel);
@@ -486,7 +501,9 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     this.updateLatencyAndBandwidthForDestinationCloud();
     this.latencyOptions = this.getChartConfig('', this.properties.MILISECONDS, latencySeries, 'spline');
     this.bandwidthOptions = this.getChartConfig('', this.properties.MBPS, badwidthSeries, 'spline');
-    
+    this.isTestCompleted = true;
+    this.disabledStart = false;
+    this.slimLoadingBarService.complete();
   }
 
   updateLatencyAndBandwidthForDestinationCloud() {
@@ -588,6 +605,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
     this.slimLoadingBarService.progress = 0;
     this.slimLoadingBarService.complete();
     this.disabledStart = false;
+    this.isTestCompleted = true;
   }
 
   getAvarageLatencyAndBandwidth(object: any) {

@@ -49,30 +49,30 @@ export class DashboardService {
     apiRequest.addProperty('destination_regions', destRegionList);
     // return this._apiService.executeAPI(apiRequest);
     return {
-  "data": [
-    {
-      "latency": 387.135,
-      "source_region": "europe-west1-c",
-      "throughput": 11.4844712722,
-      "destination_region": "Australia-East",
-      "time": "1970-01-01T00:24:58.969212128Z"
-    },
-    {
-      "latency": 458.551,
-      "source_region": "europe-west1-c",
-      "throughput": 5.92724133445,
-      "destination_region": "Canada-East",
-      "time": "1970-01-01T00:24:58.969212128Z"
-    },
-    {
-      "latency": 369.689,
-      "source_region": "europe-west1-c",
-      "throughput": 7.11692358168,
-      "destination_region": "Australia-Southeast",
-      "time": "1970-01-01T00:24:58.969212128Z"
+    "data": [
+              {
+                "latency": 387.135,
+                "source_region": "europe-west1-c",
+                "throughput": 11.4844712722,
+                "destination_region": "Australia-East",
+                "time": "1970-01-01T00:24:58.969212128Z"
+              },
+              {
+                "latency": 458.551,
+                "source_region": "europe-west1-c",
+                "throughput": 5.92724133445,
+                "destination_region": "Canada-East",
+                "time": "1970-01-01T00:24:58.969212128Z"
+              },
+              {
+                "latency": 369.689,
+                "source_region": "europe-west1-c",
+                "throughput": 7.11692358168,
+                "destination_region": "Australia-Southeast",
+                "time": "1970-01-01T00:24:58.969212128Z"
+              }
+    ]
     }
-  ]
-}
   }
 
 }
