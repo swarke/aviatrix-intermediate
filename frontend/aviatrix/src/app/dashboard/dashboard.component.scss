@@ -231,3 +231,20 @@ a:focus, a:hover {
 	border: none; 
 	background: none; 
 }
+
+.selected-menu-tab {
+	text-align: center; 
+	font-weight: 500; 
+	color: #c65030; 
+	border-bottom: 2px solid #c65030; 
+	padding-bottom: 15px;
+	cursor: pointer;
+}
+.menu-tab {
+	text-align: center; 
+	font-weight: 500; 
+	padding-bottom: 15px;
+	cursor: pointer;
+
+}
+

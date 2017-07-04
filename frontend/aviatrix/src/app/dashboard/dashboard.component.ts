@@ -179,26 +179,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.sourceTab = true;
       this.destinationTab = false;
       this.testTab = false
-      this.selectedTabIndex = 0;
+      this.currentTabIndex = 0;
     } else if (tabIndex == 1) {
       this.sourceTab = false;
       this.destinationTab = true;
-      this.selectedTabIndex = 1;
+      this.currentTabIndex = 1;
       this.testTab = false
     } else if (tabIndex == 2) {
       this.sourceTab = false;
       this.destinationTab = false;
       this.testTab = true;
-      this.selectedTabIndex = 2;
+      this.currentTabIndex = 2;
     }
     this.isTestCompleted = false;
     this.disabledStart = false;
-  }
-  
-  changeMDTab(selectedTab: any) {
-    if(this.validate()) {
-      this.changeTab(selectedTab.index);
-    } 
   }
 
   validate() {
@@ -215,7 +209,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (this.speedtestModel.sourceCloudProvider && this.speedtestModel.sourceCloudRegion) {
       return true;
     }
-    this.selectedTabIndex = 0;
     return false;
   }
 
@@ -235,12 +228,22 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  nextTab() {
-    if (this.sourceTab) {
-      this.changeTab(1);
-    } else if (this.destinationTab) {
-      this.changeTab(2);
+  changeMenuTab(tabIndex: any) {
+    if(tabIndex < this.currentTabIndex) {
+      this.changeTab(tabIndex);
+    } else {
+      if(this.validate()) {
+        this.changeTab(tabIndex);
+      }
     }
+  }
+
+  nextTab() {
+      if (this.sourceTab) {
+      this.changeTab(1);
+      } else if (this.destinationTab) {
+        this.changeTab(2);
+      }
   }
 
   openDialog() {
