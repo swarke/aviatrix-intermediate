@@ -1,0 +1,195 @@
+/* Application comman css */
+
+body {
+    font: 14px/16px "Roboto", sans-serif !important;
+	// font-family: "Roboto", sans-serif;
+    color: #666666
+}
+.pad-left-right-none {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.pad-right-none {
+	padding-right: 0px;
+}
+
+.mrg-top-15 {
+	margin-top: 15px;
+}
+
+.mrg-bottom-15 {
+	margin-bottom: 15px;
+}
+
+.mrg-top-10 {
+	margin-top: 10px;
+}
+
+.mrg-left-15 {
+	margin-left: 15px;
+}
+
+.mrg-bottom-15 {
+	margin-bottom: 15px;
+}
+
+.highcharts-credits {
+    color: #FFFFFF !important;
+    opacity: 0;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */ }
+  100% {
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */ } 
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    /* Firefox 16+*/ }
+  100% {
+    -moz-transform: rotate(360deg);
+    /* Firefox 16+*/ } 
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */ }
+  100% {
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */ } 
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: #000000;
+    backface-visibility: hidden; 
+}
+  
+#preloader > div {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e85656;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */ 
+}
+
+#preloader > div:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #209e91;
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */ 
+}
+
+#preloader > div:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #dfb81c;
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */ 
+}
+
+h5 {
+    font-size: 18px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto", sans-serif;
+    margin-top: 0;
+}
+
+button.btn.btn-primary {
+    background: #607d8b;
+    border-color: #607d8b;
+    color: #FFFFFF;
+}
+
+.btn:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+// .btn:disabled {
+//     cursor: not-allowed;
+//     opacity: .5;
+//     -webkit-transform: scale(1.0);
+//     transform: scale(1.0);
+//     color: #DCDCDC;
+// }
+
+.table th, .table td {
+    border-top: none;
+}
+
+.gm-style-cc { display:none; }
+
+.gmnoprint a, .gmnoprint span {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+#GMapsID div div a div img{
+    display:none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.gm-style-iw + div {display: none;}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #F8F8F8;
+}
+a {
+    color: #2196F3;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}

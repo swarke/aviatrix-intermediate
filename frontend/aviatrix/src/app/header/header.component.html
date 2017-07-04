@@ -1,0 +1,59 @@
+<div id="header-desktop">
+
+<!-- Orange -->
+  <div class="panel" id="orange">
+    <div class="content">
+      <div id="logo">
+        <a href="/" id="logo-cloud-networking-tools-reverse">&nbsp;</a>
+      </div>
+
+      <div id="nav-tools">
+        &nbsp;
+      </div>
+    </div>  
+  </div>
+
+
+<!-- Dark Gray -->
+  <div id="dark-gray">
+    <div class="content">
+      <div id="tagline">
+        <span> {{properties.TOOL_TAG}}</span>
+      </div>
+
+      <div id="nav-primary">
+
+        <!-- Home -->
+        <div class="nav-container" id="nav-products">
+          <a href="/" class="primary" style="text-decoration: none;">Home</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="nav-container" id="nav-products">
+          <a href="http://www.aviatrix.com/contact/" class="primary" style="text-decoration: none;">Contact Us</a>
+        </div>
+      </div>
+    </div>
+      <div class="material-sharebuttons" style="margin-top: -7px; right: 0px; position: absolute; z-index: 900;">
+            <share-buttons 
+             [pinterest]="pintTemp"
+             [google]="googleTemp"
+             [tumblr]="tumblrTemp"
+             [whatsApp]="whatsTemp"
+             [reddit]="false"
+             [stumbleUpOn]="false"
+             [title]="properties.SHARE_POST"
+             [url]="'https://cloudnetworkingtools.com'">
+            </share-buttons>
+
+            <button type="submit" class="emailbtn">
+              <!-- <div class="sb-template"> -->
+              <a href="mailto:?subject={{ properties.SHARE_POST }}&body={{ properties.SHARE_POST + ' https://cloudnetworkingtools.com'}} ">
+                <i class="fa fa-envelope"></i>
+              </a>  
+              <!-- </div> -->
+            </button>
+      </div>
+
+  </div>
+</div>

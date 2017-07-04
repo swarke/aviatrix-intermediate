@@ -1,0 +1,844 @@
+/*
+2.0 Layout Styles
+
+2.1 Header & Page
+2.2 Cards
+2.3 Full-Width Panels
+2.4 Columns
+2.5 Indents
+2.6 Tables
+2.7 Timeline
+2.8 Dialogs
+2.9 Miscellaneous Responsive
+
+*/
+
+
+/* 2.1 Page */
+
+div.page {
+	margin: 0px auto 0px auto;
+	padding: 0px 0px 0px 0px;
+	width: 100%;
+	background: #fff;
+	position: relative;
+    z-index: 10;
+    top: 0px;
+    left: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+ 	overflow-x: hidden;
+	}
+
+@media all and (max-width: 920px) {
+div.page {
+	padding-top: 56px ;
+	}
+
+.home div.page,
+.docs div.page,
+.demo div.page,
+.sandbox div.page,
+.download div.page {
+	padding-top: 136px ;
+	}
+	}
+
+
+
+div.content {
+	margin: auto;
+	/* padding: 0px 30px 0px 30px; */
+	max-width: 1140px;
+	position: relative;
+	}
+
+
+/* 2.2 Cards */
+
+.card {
+	margin: 15px 0px 15px 0px;
+	padding: 10px 20px 10px 20px;
+	border: 1px solid rgba(0,0,0,0.06);
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0px 0px 30px rgba(0,0,0,0.05);
+	display: block;
+	}
+
+.card span.banner {
+	margin: -10px -20px 20px -20px;
+	padding: 10px 20px 0px 20px;
+	height: 160px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	display: block;
+	}
+
+.card img.logo {
+	margin: 40px 0px 20px 0px;
+	}
+	
+.card span.banner#banner-solution-1 {
+	background-image: url('/assets/marquee-network-orange.jpg');
+	background-position: 50% 100%;
+	}
+
+.card span.banner#banner-hyatt {
+	background-image: url('/assets/marquee-hyatt.jpg');
+	background-position: 50% 100%;
+	}
+
+.card span.banner#banner-robert-half {
+	background-image: url('/assets/marquee-robert-half.jpg');
+	background-position: 50% 50%;
+	}
+
+.card span.banner#banner-gree {
+	background-image: url('/assets/marquee-gree.jpg');
+	background-position: 50% 50%;
+	}
+
+
+/* 2.3 Panels */
+
+.panel {
+	position: relative;
+	overflow: auto; /* prevents margin-collapse of nested column layouts */
+	overflow-x: hidden;
+	}
+
+.panel.shadow-top {
+	margin-top: -60px;
+	padding-top: 60px;
+	background-image: url('/assets/bg-shadow-top.png');
+	background-size: 1200px 60px;
+	background-repeat: no-repeat;
+	background-position: top center;
+	}
+	
+.panel.shadow-top-reverse {
+	margin-bottom: -60px;
+	padding-bottom: 60px;
+	background-image: url('/assets/bg-shadow-bottom.png');
+	background-size: 1200px 60px;
+	background-repeat: no-repeat;
+	background-position: top center;
+	}
+	
+.panel.shadow-bottom {
+	margin-bottom: -60px;
+	padding-bottom: 60px;
+	background-image: url('/assets/bg-shadow-bottom.png');
+	background-size: 1200px 60px;
+	background-repeat: no-repeat;
+	background-position: bottom center;
+	}
+
+
+/* 2.3.1 Orange */
+
+.panel.orange {
+	background-color: #e06c03;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+
+.panel.orange h1,
+.panel.orange h2,
+.panel.orange h3,
+.panel.orange h4,
+.panel.orange h5 {
+	color: #fff;
+	}
+
+
+.panel.orange h6 {
+	color: #f9ce8a;
+	}
+
+.panel.orange hr {
+	border-top: 1px dashed #f9ce8a;
+	}
+
+.panel.orange p,
+.panel.orange li,
+.panel.orange .gray {
+	color: #f9ce8a;
+	}
+
+
+/* 2.3.2 Burnt Orange */
+
+.panel.burnt-orange {
+	background-color: #db761b;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+
+.panel.burnt-orange h1,
+.panel.burnt-orange h2,
+.panel.burnt-orange h3,
+.panel.burnt-orange h4,
+.panel.burnt-orange h5 {
+	color: #fff;
+	}
+
+
+.panel.burnt-orange h6 {
+	color: #fc876d;
+	}
+
+.panel.burnt-orange hr {
+	border-top: 1px dashed #fc876d;
+	}
+
+.panel.burnt-orange p,
+.panel.burnt-orange li,
+.panel.burnt-orange .gray {
+	color: #fc876d;
+	}
+
+
+/* 2.3.3 Rust Orange */
+
+.panel.rust-orange {
+	background-color: #c65030;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+
+.panel.rust-orange h1,
+.panel.rust-orange h2,
+.panel.rust-orange h3,
+.panel.rust-orange h4,
+.panel.rust-orange h5 {
+	color: #fff;
+	}
+
+
+.panel.rust-orange h6 {
+	color: #fc876d;
+	}
+
+.panel.rust-orange hr {
+	border-top: 1px dashed #fc876d;
+	}
+
+.panel.rust-orange p,
+.panel.rust-orange li,
+.panel.rust-orange .gray {
+	color: #ffa788;
+	}
+
+
+
+/* 2.3.4 Gray */
+
+.panel.gray {
+	background-color: #545454;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+.panel.gray h1,
+.panel.gray h2,
+.panel.gray h3,
+.panel.gray h4 {
+	color: #fff;
+	}
+
+.panel.gray h5 {
+	color: #eee;
+	}
+
+.panel.gray h6 {
+	color: #999;
+	}
+
+.panel.gray hr {
+	border-top: 1px dashed #999;
+	}
+
+.panel.gray p,
+.panel.gray li,
+.panel.gray .gray {
+	color: #bfbfbf;
+	}
+
+
+/* 2.3.5 Dark Gray */
+
+.panel.dark-gray {
+	background-color: #404040;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+.panel.dark-gray h1,
+.panel.dark-gray h2,
+.panel.dark-gray h3,
+.panel.dark-gray h4 {
+	color: #fff;
+	}
+
+.panel.dark-gray h5 {
+	color: #eee;
+	}
+
+.panel.dark-gray h6 {
+	color: #ccc;
+	}
+
+.panel.dark-gray hr {
+	border-top: 1px dashed #999;
+	}
+
+.panel.dark-gray p,
+.panel.dark-gray li,
+.panel.dark-gray .gray {
+	color: #bfbfbf;
+	}
+
+
+/* 2.3.5 Medium Gray */
+
+.panel.medium-gray {
+	background-color: #ddd;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+.panel.medium-gray h1,
+.panel.medium-gray h2,
+.panel.medium-gray h3,
+.panel.medium-gray h4 {
+	color: #333;
+	}
+
+.panel.medium-gray h5 {
+	color: #555;
+	}
+
+.panel.medium-gray h6 {
+	color: #666;
+	}
+
+.panel.medium-gray hr {
+	border-top: 1px dashed #999;
+	}
+
+.panel.medium-gray p,
+.panel.medium-gray li,
+.panel.medium-gray .gray {
+	color: #666;
+	}
+
+
+/* 2.3.6 Mid Gray */
+
+.panel.mid-gray {
+	background-color: #888;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+.panel.mid-gray h1,
+.panel.mid-gray h2,
+.panel.mid-gray h3,
+.panel.mid-gray h4 {
+	color: #fff;
+	}
+
+.panel.mid-gray h5,
+.panel.mid-gray h5 a {
+	color: #fff;
+	}
+
+.panel.mid-gray h6 {
+	color: #ccc;
+	}
+
+.panel.mid-gray hr {
+	border-top: 1px dashed #999;
+	}
+
+.panel.mid-gray p,
+.panel.mid-gray li,
+.panel.mid-gray .gray {
+	color: #ccc;
+	}
+
+/* 2.3.7 Light Gray */
+
+.panel.light-gray {
+	background-color: #f7f7f7;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+
+/* 2.3.7 White */
+
+.panel.white {
+	background-color: #fff;
+	transition-property: all;
+	transition-duration: .2s;
+	transition-timing-function: ease;
+	}
+
+.panel.white h1,
+.panel.white h2,
+.panel.white h3,
+.panel.white h4,
+.panel.white h5 {
+	color: #000;
+	}
+
+.panel.white h6 {
+	color: #05526d;
+	}
+
+.panel.white p {
+	color: #666;
+	}
+
+
+/* 2.3 Columns */
+
+div.onecolumn,
+div.twocolumns,
+div.threecolumns,
+div.fourcolumns,
+div.fivecolumns,
+div.sixcolumns {
+	margin: 70px auto 70px auto;
+	}
+
+div.onecolumn:after,
+div.twocolumns:after,
+div.threecolumns:after,
+div.fourcolumns:after,
+div.fivecolumns:after,
+div.sixcolumns:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+
+div.onecolumn.loose,
+div.twocolumns.loose,
+div.threecolumns.loose,
+div.fourcolumns.loose,
+div.fivecolumns.loose,
+div.sixcolumns.loose {
+	padding-bottom: 50px;
+	}
+
+ 
+div.onecolumn.tight,
+div.twocolumns.tight,
+div.threecolumns.tight,
+div.fourcolumns.tight,
+div.fivecolumns.tight,
+div.sixcolumns.tight {
+	margin: 50px auto 50px auto;
+	}
+
+div.onecolumn.tighter,
+div.twocolumns.tighter,
+div.threecolumns.tighter,
+div.fourcolumns.tighter,
+div.fivecolumns.tighter,
+div.sixcolumns.tighter {
+	margin: 30px auto 30px auto;
+	}
+
+div.onecolumn.extra-tight,
+div.twocolumns.extra-tight,
+div.threecolumns.extra-tight,
+div.fourcolumns.extra-tight,
+div.fivecolumns.extra-tight,
+div.sixcolumns.extra-tight {
+	margin: 10px auto 10px auto;
+	}
+
+div.column {
+	margin: 0px 1.5% 0px 1.5%;
+	float: left;
+	}
+
+
+/* 2.3.1 One Column */
+
+div.onecolumn div.column {
+	width: 97%;
+	float: none;
+	}
+
+
+/* 2.3.2 Two Columns */
+div.twocolumns div.column {
+	width: 47%;
+	}
+
+div.twocolumns div.column.double {
+	width: 97%;
+	float: none;
+	}
+
+div.twocolumns div.column.narrow {
+	margin: 0px 7.5% 0px 7.5%;
+	width: 35%;
+	}
+div.twocolumns div.column.narrow-left {
+	margin: 0px 2.5% 0px 12.5%;
+	width: 35%;
+	}
+
+div.twocolumns div.column.narrow-right {
+	margin: 0px 12.5% 0px 2.5%;
+	width: 35%;
+	}
+
+
+/* 2.3.3 Three Columns */
+
+div.threecolumns div.column {
+	width: 30.3333%;
+	}
+
+div.threecolumns div.column.double {
+	width: 63.6666%;
+	}
+
+div.threecolumns div.column.triple {
+	width: 97%;
+	float: none;
+	}
+
+
+/* 2.3.4 Four Columns */
+
+div.fourcolumns div.column {
+	width: 22%;
+	}
+
+div.fourcolumns div.column.double {
+	width: 47%;
+	}
+
+div.fourcolumns div.column.triple {
+	width: 72%;
+	}
+
+div.fourcolumns div.column.quadruple {
+	width: 97%;
+	float: none;
+	}
+
+
+/* 2.3.5 Five Columns */
+
+div.fivecolumns div.column {
+	width: 17%;
+	}
+
+div.fivecolumns div.column.double {
+	width: 37%;
+	}
+
+div.fivecolumns div.column.triple {
+	width: 57%;
+	}
+
+div.fivecolumns div.column.quadruple {
+	width: 77%;
+	}
+
+div.fivecolumns div.column.quintuple {
+	width: 97%;
+	float: none;
+	}
+
+
+/* 2.3.6 Six Columns */
+
+div.sixcolumns div.column {
+	margin: 0px 1% 0px 1%;
+	width: 14.6666667%;
+	}
+
+div.sixcolumns div.column.double {
+	margin: 0px 1% 0px 1%;
+	width: 31.333333%;
+	}
+
+div.sixcolumns div.column.double div.column {
+	margin: 0px 0px 0px 1%;
+	width: 49%;
+	}
+
+div.sixcolumns div.column.double div.column:first-of-type {
+	margin: 0px 1% 0px 0px;
+	width: 49%;
+	}
+
+
+div.sixcolumns div.column.triple {
+	margin: 0px 1% 0px 1%;
+	width: 46%;
+	}
+
+div.sixcolumns div.column.quadruple {
+	margin: 0px 1% 0px 1%;
+	width: 61.6666667%;
+	}
+
+/* 2.3.7 Wide & Narrow Columns */
+
+div.onecolumn div.column.narrow,
+div.twocolumns div.column.wide,
+div.threecolumns div.column.wide,
+div.fourcolumns div.column.wide, 
+div.fivecolumns div.column.wide, 
+div.sixcolumns div.column.wide {
+	margin: 0px 10% 0px 10%;
+	width: 80%;
+	}
+
+div.twocolumns div.column.full,
+div.threecolumns div.column.full,
+div.fourcolumns div.column.full, 
+div.fivecolumns div.column.full, 
+div.sixcolumns div.column.full {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 97%;
+	}
+
+@media all and (max-width: 770px) {
+div.onecolumn div.column.narrow,
+div.twocolumns div.column.wide,
+div.threecolumns div.column.wide,
+div.fourcolumns div.column.wide, 
+div.fivecolumns div.column.wide, 
+div.sixcolumns div.column.wide {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 97%;
+	}
+
+div.fourcolumns div.column,
+div.fourcolumns div.column.triple {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 47%;
+	}
+
+div.fivecolumns div.column,
+div.fivecolumns div.column.double,
+div.fivecolumns div.column.triple,
+div.fivecolumns div.column.quadruple {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 97%;
+	}
+
+div.sixcolumns div.column {
+	width: 30.3333334%;
+	}
+	}
+
+
+@media all and (max-width: 650px) {
+div.twocolumns div.column,
+div.twocolumns div.column.narrow,
+div.twocolumns div.column.narrow-left,
+div.twocolumns div.column.narrow-right {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 97%;
+	float: none;
+	}
+
+
+div.threecolumns div.column,
+div.threecolumns div.column.double,
+div.fourcolumns div.column,
+div.fourcolumns div.column.double,
+div.fourcolumns div.column.triple,
+div.sixcolumns div.column,
+div.sixcolumns div.column.double,
+div.sixcolumns div.column.triple,
+div.sixcolumns div.column.quadruple {
+	margin: 0px 1.5% 0px 1.5%;
+	width: 97%;
+	}
+
+div.twocolumns div.threecolumns div.column {
+	width: 30.3333%;
+	float: left;
+	}
+	}
+
+
+/* 2.5 Indents */
+
+@media all and (min-width: 771px) {
+div.indent {
+	padding: 0px 0px 0px 110px;
+	clear: left;
+	}
+
+div.indent.loose {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	}
+	
+	
+div.indent.small {
+	padding: 0px 0px 0px 60px;
+	clear: left;
+	}
+
+div.indent.tool {
+	padding: 0px 0px 0px 55px;
+	clear: left;
+	}
+
+div.indent.logo {
+	padding: 0px 0px 0px 180px;
+	}
+
+div.indent.border-top {
+	padding-top: 15px;
+	padding-bottom: 10px;
+	border-top: 1px dashed #ccc;
+	}
+
+div.indent.border-top:first-of-type {
+	border-top: none;
+	}
+
+div.indent span.icon {
+	margin: -25px 0px 0px -110px;
+	float: left;
+	}
+
+div.indent img {
+	margin: 0px 0px 0px -110px;
+	float: left;
+	}
+
+div.indent span.icon.tight-top {
+	margin: -145px 0px 0px -110px;
+	}
+
+div.indent.small span.icon {
+	margin: -5px 0px 0px -60px;
+	float: left;
+	}
+
+div.indent.tool span.icon {
+	margin: 0px 0px 0px -55px;
+	float: left;
+	}
+
+div.indent.logo img.logo {
+	margin: 0px 0px 15px -180px;
+	padding-top: 5px;
+	float: left;
+	}
+	}
+
+
+
+
+/* 2.10 Home Page Layouts */
+
+div#home-map-animated h1 {
+	margin: 20px auto 10px auto;
+	}
+	
+div#home-map-animated h5 {
+	margin: 0px auto 40px auto;
+	}
+	
+
+
+
+
+/* 2.11 Miscellaneous Page Layouts */
+
+div.placeholder {
+	margin: 10px auto 30px auto;
+	padding: 175px 0px 175px 0px;
+	border: 1px dashed #ccc;
+	border-radius: 10px;
+	background: #f7f7f7;
+	text-align: center;
+	}
+	
+div.placeholder.short {
+	padding: 75px 0px 75px 0px;
+	}
+	
+div.panel#use-cases {
+	height: 620px;
+	overflow-y: hidden;
+	}
+	
+@media all and (max-width: 1050px) {
+div.panel#use-cases {
+	height: 660px;
+	}
+	}
+	
+@media all and (max-width: 650px) {
+div.panel#use-cases {
+	height: 730px;
+	}
+	}
+	
+
+/* 2.12 Miscellaneous Responsive */
+
+@media all and (max-width: 650px) {
+.no-mobile,
+span.icon.no-mobile,
+span.illus.no-mobile,
+img.no-mobile {
+	display: none !important;
+	}
+	}
+
+@media all and (min-width: 651px) and (max-width: 770px) {
+.no-tablet,
+span.icon.no-tablet,
+span.illus.no-tablet,
+img.no-tablet {
+	display: none !important;
+	}
+	}
+
+@media all and (min-width: 771px) {
+.no-desktop,
+span.icon.no-desktop,
+span.illus.no-desktop,
+img.no-desktop {
+	display: none !important;
+	}
+	}
+
+

@@ -1,0 +1,185 @@
+{
+  "data": [{
+    "name": "us-east-aviatrix-agent-do-not-stop",
+    "region_name": "US East (N. Virginia)",
+    "id": "i-0374d84b889c2bfef",
+    "dns_name": "ec2-34-205-20-24.compute-1.amazonaws.com",
+    "public_ip": "34.205.20.24",
+    "cloud_info": {
+      "region": "us-east-1",
+      "availability_zone": "us-east-1b"
+    },
+    "url": "http://34.205.20.24/",
+    "lat": 38.13,
+    "lng": -78.45
+  }, {
+    "name": "us-west-n-california-aviatrix-agent-do-not-stop",
+    "region_name": "US West (N. California)",
+    "id": "i-0133c4f0168ed5dc5",
+    "dns_name": "ec2-54-193-21-66.us-west-1.compute.amazonaws.com",
+    "public_ip": "54.193.21.66",
+    "cloud_info": {
+      "region": "us-west-1",
+      "availability_zone": "us-west-1b"
+    },
+    "url": "http://54.193.21.66/",
+    "lat": 40.0,
+    "lng": -120.0
+  }, {
+    "name": "us-west-oregon-aviatrix-agent-do-not-stop",
+    "region_name": "US West (Oregon)",
+    "id": " i-0f3085457d11b2d13 ",
+    "dns_name": "ec2-35-164-38-119.us-west-2.compute.amazonaws.com",
+    "public_ip": "35.164.38.119",
+    "cloud_info": {
+      "region": "us-west-2",
+      "availability_zone": "us-west-2c"
+    },
+    "url": "http://35.164.38.119/",
+    "lat": 46.15,
+    "lng": -123.88
+  }, {
+    "name": "eu-ireland-aviatrix-agent-do-not-stop",
+    "region_name": "EU (Ireland)",
+    "id": "i-0e44a170bac6b0098",
+    "dns_name": "ec2-52-209-29-251.eu-west-1.compute.amazonaws.com",
+    "public_ip": "52.209.29.251",
+    "cloud_info": {
+      "region": "eu-west-1",
+      "availability_zone": "eu-west-1c"
+    },
+    "url": "http://52.209.29.251/",
+    "lat": 53.34778,
+    "lng": -6.25972
+  }, {
+    "name": "asia pasific-singapore-aviatrix-agent-do-not-stop",
+    "region_name": "Asia Pacific (Singapore)",
+    "id": "i-00a3c45724a715277",
+    "dns_name": "ec2-52-221-243-212.ap-southeast-1.compute.amazonaws.com",
+    "public_ip": "52.221.243.212",
+    "cloud_info": {
+      "region": "ap-southeast-1",
+      "availability_zone": "ap-southheast-1b"
+    },
+    "url": "http://52.221.243.212/",
+    "lat": 1.3000,
+    "lng": 103.8000
+  }, {
+    "name": "asia pasific-tokyo-aviatrix-agent-do-not-stop",
+    "region_name": "Asia Pacific (Tokyo)",
+    "id": " i-08109b54ed0ea631d ",
+    "dns_name": "ec2-54-178-212-50.ap-northeast-1.compute.amazonaws.com",
+    "public_ip": "54.178.212.50",
+    "cloud_info": {
+      "region": "ap-northeast-1",
+      "availability_zone": "ap-northeast-1a"
+    },
+    "url": "http://54.178.212.50/",
+    "lat": 35.41,
+    "lng": 139.42
+  }, {
+    "name": "south america-sao Paulo-aviatrix-agent-do-not-stop",
+    "region_name": "Asia Pacific (Seoul)",
+    "id": "i-0e710c789a89825b0",
+    "dns_name": "ec2-52-67-97-132.sa-east-1.compute.amazonaws.com",
+    "public_ip": "52.67.97.132",
+    "cloud_info": {
+      "region": "ap-northeast-2",
+      "availability_zone": "sa-east-1c"
+    },
+    "url": "http://52.67.97.132/",
+    "lat": 37.532600,
+    "lng": 127.024612
+  }, {
+    "name": "us-east-ohio-aviatrix-agent-do-not-stop",
+    "region_name": "US East (Ohio)",
+    "id": "i-0552d0571ed5df251",
+    "dns_name": "ec2-52-15-101-182.us-east-2.compute.amazonaws.com",
+    "public_ip": "52.15.101.182",
+    "cloud_info": {
+      "region": "us-east-2",
+      "availability_zone": "us-east-2b"
+    },
+    "url": "http://52.15.101.182/",
+    "lat": 40.367474,
+    "lng": -82.996216
+  }, {
+    "name": "canada-central-aviatrix-agent-do-not-stop",
+    "region_name": "Canada (Central)",
+    "id": "i-057e2b9549a4a738d",
+    "dns_name": "ec2-52-60-198-166.ca-central-1.compute.amazonaws.com",
+    "public_ip": "52.60.198.166",
+    "cloud_info": {
+      "region": "ca-central-1",
+      "availability_zone": "ca-central-1a"
+    },
+    "url": "http://52.60.198.166/",
+    "lat": 55.5333312,
+    "lng": -106.583331
+  }, {
+    "name": "eu-frankfurt-aviatrix-agent-do-not-stop",
+    "region_name": "EU (Frankfurt)",
+    "id": "i-06aa49b2f32700f05",
+    "dns_name": "ec2-52-58-32-22.eu-central-1.compute.amazonaws.com",
+    "public_ip": "52.58.32.22",
+    "cloud_info": {
+      "region": "eu-central-1",
+      "availability_zone": "eu-central-1b"
+    },
+    "url": "http://52.58.32.22/",
+    "lat": 50.110924,
+    "lng": 8.682127
+  }, {
+    "name": "eu-london-aviatrix-agent-do-not-stop",
+    "region_name": "EU (London)",
+    "id": "i-0610fe7a8c5e679bb",
+    "dns_name": "ec2-52-56-167-116.eu-west-2.compute.amazonaws.com",
+    "public_ip": "52.56.167.116",
+    "cloud_info": {
+      "region": "eu-west-2",
+      "availability_zone": "eu-west-2a"
+    },
+    "url": "http://52.56.167.116/",
+    "lat": 51.509865,
+    "lng": -0.118092
+  }, {
+    "name": "asia pasific-sydney-aviatrix-agent-do-not-stop",
+    "region_name": "Asia Pacific (Sydney)",
+    "id": "i-07efe45fc09bb0999",
+    "dns_name": "ec2-54-206-72-142.ap-southeast-2.compute.amazonaws.com",
+    "public_ip": "54.206.72.142",
+    "cloud_info": {
+      "region": "ap-southeast-2",
+      "availability_zone": "ap-southeast-2b"
+    },
+    "url": "http://54.206.72.142/",
+    "lat": -33.865143,
+    "lng": 151.209900
+  }, {
+    "name": "asia pasific-mumbai-aviatrix-agent-do-not-stop",
+    "region_name": "Asia Pacific (Mumbai)",
+    "id": "i-0363b5251c578d682",
+    "dns_name": "ec2-52-66-184-152.ap-south-1.compute.amazonaws.com",
+    "public_ip": "52.66.184.152",
+    "cloud_info": {
+      "region": "ap-south-1",
+      "availability_zone": "ap-south-1b"
+    },
+    "url": "http://52.66.184.152/",
+    "lat": 19.228825,
+    "lng": 72.854118
+  }, {
+    "name": "south america-sao Paulo-aviatrix-agent-do-not-stop",
+    "region_name": "South America (São Paulo)",
+    "id": "i-0e710c789a89825b0",
+    "dns_name": "ec2-52-67-97-132.sa-east-1.compute.amazonaws.com",
+    "public_ip": "52.67.97.132",
+    "cloud_info": {
+      "region": "sa-east-1c",
+      "availability_zone": "ap-south-1b"
+    },
+    "url": "http://52.67.97.132/",
+    "lat": -23.533773,
+    "lng": -46.625290
+  }]
+}
