@@ -50,8 +50,10 @@ export class ApiService {
           .catch((errorObj: any) => this.handleError(errorObj));
 
       case APIMethod.POST:
+      // this.headers['Access-Control-Allow-Origin'] = "*";
       console.log('API: ', apiRequest);
-      console.log('header: ',APIMethod['POST']);
+      console.log('header: ',this.headers);
+
         return this.apiExecuter.post(apiRequest.endpoint, apiRequest.getBody
           (), { headers: this.headers })
           .map(res => this.handleResponse(res))
