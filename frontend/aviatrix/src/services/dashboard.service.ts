@@ -51,30 +51,51 @@ export class DashboardService {
     console.log('api: ', apiRequest);
     // return this._apiService.executeAPI(apiRequest);
     return {
-    "data": [
-              {
-                "latency": 387.135,
-                "source_region": "europe-west1-c",
-                "throughput": 11.4844712722,
-                "destination_region": "Australia-East",
-                "time": "1970-01-01T00:24:58.969212128Z"
-              },
-              {
-                "latency": 458.551,
-                "source_region": "europe-west1-c",
-                "throughput": 5.92724133445,
-                "destination_region": "Canada-East",
-                "time": "1970-01-01T00:24:58.969212128Z"
-              },
-              {
-                "latency": 369.689,
-                "source_region": "europe-west1-c",
-                "throughput": 7.11692358168,
-                "destination_region": "Australia-Southeast",
-                "time": "1970-01-01T00:24:58.969212128Z"
-              }
-    ]
+  "data": [
+    {
+      "latency": 473.136,
+      "source_region": "us-east-1",
+      "throughput": 10.88436558842513,
+      "destination_region": "eu-west-1",
+      "time": "2017-07-04T05:10:22.268Z"
+    },
+    {
+      "latency": 611.7629999999999,
+      "source_region": "us-east-1",
+      "throughput": 8.237669958576877,
+      "destination_region": "us-west-1",
+      "time": "2017-07-04T05:10:22.268Z"
+    },
+    {
+      "latency": 424.236,
+      "source_region": "us-east-1",
+      "throughput": 8.946036167929623,
+      "destination_region": "eu-west-1",
+      "time": "2017-07-04T05:13:41.057Z"
+    },
+    {
+      "latency": 612.1320000000001,
+      "source_region": "us-east-1",
+      "throughput": 6.9080214217744285,
+      "destination_region": "us-west-1",
+      "time": "2017-07-04T05:13:41.057Z"
+    },
+    {
+      "latency": 412.029,
+      "source_region": "us-east-1",
+      "throughput": 9.560800717060054,
+      "destination_region": "eu-west-1",
+      "time": "2017-07-04T05:16:26.994Z"
+    },
+    {
+      "latency": 515.959,
+      "source_region": "us-east-1",
+      "throughput": 8.105645744373872,
+      "destination_region": "us-west-1",
+      "time": "2017-07-04T05:16:26.994Z"
     }
+  ]
+}
   }
 
 }

@@ -15,6 +15,10 @@ print influx_db_client
 
 @app.route('/api/speedtest', methods=['POST'])
 def get_speedtest():
+    """
+    This function defines that, get the latency and throughput for specific destination cloud regions
+    :return: List of regions with latency and throughput
+    """
     data = json.loads(request.data)
     cloud_id = data.get('cloud_id', None)
     source_region = data.get('source_region', None)
@@ -33,6 +37,10 @@ def get_speedtest():
 
 @app.route('/api/speedtest', methods=['PUT'])
 def save_speedtest():
+    """
+    This function defines that it save the latency and throughput in influxdb
+    :return:
+    """
     data = json.loads(request.data)
     latency_throughput = data.get('latency_throughput', [])
     if not (latency_throughput):

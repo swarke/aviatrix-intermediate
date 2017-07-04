@@ -50,10 +50,10 @@
                     
                     <div class="row">
                         <div class="col-md-9" style="padding-right: 0px;">
-                        <h6 class="card-title card-title-margin" style="font-size: 12px !important;">{{properties.RIGHT_PANEL_HEADER}} <span>&nbsp;  <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.RIGHT_PANEL_TOOLTIP}}"></i></span></h6>                 
+                        <h6 class="card-title card-title-margin">{{properties.RIGHT_PANEL_HEADER}} <span>&nbsp;  <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.RIGHT_PANEL_TOOLTIP}}"></i></span></h6>                 
                         </div>
                         <div class="col-md-3" style="text-align: right;">
-                            <select class="form-control" style="margin-left: -40px; width: 130px; border: none; font-size: 13px;" [(ngModel)]="speedtestModel.timestamp">
+                            <select class="form-control" style="margin-left: -40px; width: 130px; border: none; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp">
                                 <option *ngFor="let range of dashboardModel.timeRanges" [value]="range.value"> {{ range.label }}</option>
                             </select>
                         </div>

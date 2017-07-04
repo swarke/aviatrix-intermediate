@@ -4,20 +4,21 @@ import json
 from datetime import datetime
 
 
-def get_letency_throughput(cloud_id, source_region, destination_regions, timestamp, client):
+def get_letency_throughput(cloud_id, source_region, destination_regions, timestamp, influx_db_client):
     """
-
-    :param cloud_id:
-    :param source_region:
-    :param destination_regions:
-    :param timestamp:
-    :param client:
+    This functions defines that it get the latency and throughput from influxdb for specific timeseries and
+    destination cloud regions
+    :param cloud_id: cloud id
+    :param source_region: name of source region
+    :param destination_regions: list of destination cloud regions
+    :param timestamp: timestamp renge
+    :param influx_db_client:
     :return:
     """
     measurement = Cloud(int(cloud_id)).name
     # url = GET_INFLUX_URL + "select * from %s where source_region='%s' AND" % (measurement, source_region)
-    query = "select * from test_table where source_region='%s' AND" % source_region
-    # query = "select * from %s where source_region='%s' AND" % (measurement, source_region)
+    # query = "select * from test_table where source_region='%s' AND" % source_region
+    query = "select * from %s where source_region='%s' AND" % (measurement, source_region)
     if destination_regions:
         for index, destination_region in enumerate(destination_regions):
             if index == 0:
@@ -30,7 +31,7 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
     #     return result
     if timestamp:
         query += ' AND time > now() - %s' % timestamp
-    responce = client.query(query)
+    responce = influx_db_client.query(query)
     print type(responce)
     if responce.error:
         raise Exception('Internal server error')

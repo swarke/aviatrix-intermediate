@@ -9,11 +9,13 @@ bandwidth_img = 'clouds-01.jpeg'
 downloadSize = 2621440
 server_address = 'http://127.0.0.1:5000'
 
+# Enum for clouds
 class Cloud(Enum):
     aws=1
     azure=2
     gce=3
 
+# Dictionary for cloud inventory path
 cloud_inventory = [
     {
         "cloud_provider": "aws",
@@ -54,6 +56,7 @@ def speedtest(locations, source_region, cloud_id):
     This function defines that calculate latency and through put agains other regions from destination
     :param locations: list of regions with instance detail
     :param source_region: name of source region
+    :param cloud_id: cloud id
     :return: dict of latenct and throughout for each region
     """
     latency_throughput = []
@@ -61,6 +64,7 @@ def speedtest(locations, source_region, cloud_id):
     for cloud in locations:
         regions = locations[cloud]
         for destination_location in regions:
+            # continue if destnation region is equal to source region
             if cloud == cloud_id and destination_location['cloud_info']['region'] == source_region:
                 continue
             latency = get_latency(destination_location)
@@ -72,8 +76,8 @@ def speedtest(locations, source_region, cloud_id):
                     "source_region": source_region
                 },
                 "fields": {
-                    "latency": float(latency),
-                    "throughput": float(throughput)
+                    "latency": float('%.2f' % float(latency)),
+                    "throughput": float('%.2f' % float(throughput))
                 }
             }
             latency_throughput.append(region_stat)
@@ -113,6 +117,11 @@ def get_throughput(destination):
 
 
 def upload_speedtest_data(data):
+    """
+    Upload data point on server
+    :param data: Data to be upload
+    :return: None
+    """
     url = server_address + '/api/speedtest'
     requests.put(url, data=json.dumps(data))
 

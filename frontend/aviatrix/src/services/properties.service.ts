@@ -26,7 +26,7 @@ export class PropertiesService {
   public LEFT_PANEL_GCE_REGION: string  = 'GCE REGIONS';
 
   // Dashboard
-  public RIGHT_PANEL_HEADER: string = 'Cloud To Cloud Network Connectivity to Cloud';
+  public RIGHT_PANEL_HEADER: string = 'Cloud To Cloud Network Connectivity';
   public RIGHT_PANEL_REGION_COLUMN_HEADER = 'Region';
   public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency(msec)';
   public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput(mbps)';
