@@ -58,7 +58,7 @@
                             </select>
                         </div>
                     </div>
-                    <md-tab-group [selectedIndex]="selectedTabIndex" (selectChange)="changeMDTab($event)">
+                    <md-tab-group [selectedIndex]="selectedTabIndex" (selectChange)="changeMDTab($event, currentTabIndex)">
                         <md-tab label="Source"></md-tab>
                         <md-tab label="Destination"></md-tab>
                         <md-tab label="Test"></md-tab>
@@ -93,26 +93,40 @@
                             </div>
                         </div>
                         <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'azure'">
-                            <div class="col-md-6" *ngFor="let option of dashboardModel.azureRegions">
+                            <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.azureRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
                                     {{option.label}}
                                 </label>
                                 <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
+                            </div> -->
+
+                            <div class="col-md-12" *ngFor="let option of dashboardModel.azureRegions">
+                                <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    {{option.label}}
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'aws'">
-                            <div class="col-md-6" *ngFor="let option of dashboardModel.awsRegions">
+                            <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.awsRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
                                     {{option.label}}</label>
                                 <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
+                            </div> -->
+                            <div class="col-md-12" *ngFor="let option of dashboardModel.awsRegions">
+                                <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    {{option.label}}</label>
                             </div>
                         </div>
                         <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'gce'">
-                            <div class="col-md-6" *ngFor="let option of dashboardModel.gceRegions">
+                            <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.gceRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
@@ -120,6 +134,14 @@
                                         {{option.label}}
                                 </label>
                                 <label *ngIf="speedtestModel.sourceCloudProvider == destinationCloudProvider && option.cloud_info.region == speedtestModel.sourceCloudRegion" style="padding-top: 10px; font-weight: 500;">Source Cloud Region</label>
+                            </div> -->
+                            <div class="col-md-12" *ngFor="let option of dashboardModel.gceRegions">
+                                <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
+                                <label *ngIf="speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion" style="padding-top: 10px">
+                                    
+                                        {{option.label}}
+                                </label>
                             </div>
                         </div>
                     </div>

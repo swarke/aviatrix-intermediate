@@ -1,6 +1,7 @@
 import json
 import service
 from flask import Flask, request, Response
+from flask_cors import CORS, cross_origin
 from influxdb import InfluxDBClient
 import constants
 # from config.Config import (INFLUX_DB_HOST, INFLUX_DB_PORT, INFLUX_DB_USERNAME, INFLUX_DB_PASSWORD, INFLUX_DB_DBNAME)
@@ -8,12 +9,13 @@ import constants
 
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 # client = InfluxDBClient(host=constants.INFLUX_DB_HOST, port=constants.INFLUX_DB_PORT, database=constants.INFLUX_DB_NAME)
 influx_db_client = InfluxDBClient(host=constants.INFLUX_DB_HOST, port=constants.INFLUX_DB_PORT,
                                   username=None, password=None, database=constants.INFLUX_DB_NAME)
-print influx_db_client
 
 @app.route('/api/speedtest', methods=['POST'])
+@cross_origin()
 def get_speedtest():
     """
     This function defines that, get the latency and throughput for specific destination cloud regions
