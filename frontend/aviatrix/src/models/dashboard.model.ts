@@ -17,6 +17,7 @@ export class DashboardModel {
 	gceRegions: any[];
 	locations: any;
 	inventoryPath: any;
+	timeRanges: any;
 
 	constructor() {
 		this.clearModel();
@@ -25,6 +26,32 @@ export class DashboardModel {
 	      "azure": AZURE_INVENTORY_PATH,
 	      "gce": GCE_INVENTORY_PATH
     	}
+    	this.timeRanges = [
+	    	{
+	    		"label": "Last 12 Hours",
+	    		"value": "12h"
+	    	},
+	    	{
+	    		"label": "Last 24 Hours",
+	    		"value": "1d"
+	    	},
+	    	{
+	    		"label": "Last Week",
+	    		"value": "7d"
+	    	},
+	    	{
+	    		"label": "Last 15 Days",
+	    		"value": "15d"
+	    	},
+	    	{
+	    		"label": "Last Month",
+	    		"value": "30d"
+	    	},
+	    	{
+	    		"label": "Last Year",
+	    		"value": "365d"
+	    	}
+    	]
 	}
 
 	clearLocations() {
@@ -66,6 +93,7 @@ export class SpeedtestModel {
 	sourceCloudRegion: any;
 	destinationCloudRegions: any;
 	destinationRegions: any[]
+	timestamp: any;
 
 	constructor() {
 		this.clearModel();
@@ -83,6 +111,7 @@ export class SpeedtestModel {
 		this.sourceCloudProvider = "";
 		this.sourceCloudRegion = "";
 		this.destinationRegions = [];
+		this.timestamp = ""
 		this.clearDestinationCloudRegions();
 	}
 

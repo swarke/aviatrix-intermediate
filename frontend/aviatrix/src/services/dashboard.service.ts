@@ -47,6 +47,8 @@ export class DashboardService {
     apiRequest.addProperty('cloud_id', Cloud[speedTest.sourceCloudProvider]);
     apiRequest.addProperty('source_region', speedTest.sourceCloudRegion);
     apiRequest.addProperty('destination_regions', destRegionList);
+    apiRequest.addProperty('timestamp', speedTest.timestamp);
+    console.log('api: ', apiRequest);
     // return this._apiService.executeAPI(apiRequest);
     return {
     "data": [

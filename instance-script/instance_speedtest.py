@@ -72,8 +72,8 @@ def speedtest(locations, source_region, cloud_id):
                     "source_region": source_region
                 },
                 "fields": {
-                    "latency": str(latency),
-                    "throughput": str(throughput)
+                    "latency": float(latency),
+                    "throughput": float(throughput)
                 }
             }
             latency_throughput.append(region_stat)

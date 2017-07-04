@@ -165,6 +165,7 @@ export class DashboardComponent implements OnInit, AfterViewInit  {
      this.sourceCloudRegion = "";
      this.sourceCloudProvider = "";
      this.destinationCloudProvider = "azure";
+     this.speedtestModel.timestamp = this.dashboardModel.timeRanges[0].value;
   }
 
   setDestinationCloudProvider(cloud: any) {

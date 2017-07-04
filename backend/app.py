@@ -20,7 +20,7 @@ def get_speedtest():
     source_region = data.get('source_region', None)
     destination_regions = data.get('destination_regions', [])
     timestamp = data.get('timestamp', None)
-    if not (cloud_id and source_region):
+    if not (cloud_id and source_region and destination_regions and timestamp):
         return Response("Bad Request", status=500)
     latency_throughput = service.get_letency_throughput(cloud_id, source_region, destination_regions, timestamp,
                                                         influx_db_client)
