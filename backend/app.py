@@ -9,14 +9,11 @@ import constants
 
 
 app = Flask(__name__)
-# CORS(app, support_credentials=True)
-cors = CORS(app, allow_headers='Content-Type', CORS_SEND_WILDCARD=True)
-# client = InfluxDBClient(host=constants.INFLUX_DB_HOST, port=constants.INFLUX_DB_PORT, database=constants.INFLUX_DB_NAME)
+CORS(app, allow_headers='Content-Type', CORS_SEND_WILDCARD=True)
 influx_db_client = InfluxDBClient(host=constants.INFLUX_DB_HOST, port=constants.INFLUX_DB_PORT,
                                   username=None, password=None, database=constants.INFLUX_DB_NAME)
 
 @app.route('/api/speedtest', methods=['POST'])
-# @cross_origin()
 @cross_origin(origins='*', send_wildcard=True)
 def get_speedtest():
     """
