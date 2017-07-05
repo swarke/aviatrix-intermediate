@@ -136,6 +136,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     locations = download_cloud_inventory()
     data = speedtest(locations, args.source_region, args.cloud_id)
-    print data
     upload_speedtest_data(data)
 

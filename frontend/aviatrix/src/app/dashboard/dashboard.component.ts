@@ -516,7 +516,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.disabledStart = false;
       this.slimLoadingBarService.complete();
     }, (error: any) =>{
-        console.log(error);
+        console.log('errrrrrrrrr', error);
     });
    
   }

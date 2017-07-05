@@ -50,52 +50,6 @@ export class DashboardService {
     apiRequest.addProperty('timestamp', speedTest.timestamp);
     console.log('api: ', apiRequest);
     return this._apiService.executeAPI(apiRequest);
-//     return {
-//   "data": [
-//     {
-//       "latency": 473.136,
-//       "source_region": "us-east-1",
-//       "throughput": 10.88436558842513,
-//       "destination_region": "eu-west-1",
-//       "time": "2017-07-04T05:10:22.268Z"
-//     },
-//     {
-//       "latency": 611.7629999999999,
-//       "source_region": "us-east-1",
-//       "throughput": 8.237669958576877,
-//       "destination_region": "us-west-1",
-//       "time": "2017-07-04T05:10:22.268Z"
-//     },
-//     {
-//       "latency": 424.236,
-//       "source_region": "us-east-1",
-//       "throughput": 8.946036167929623,
-//       "destination_region": "eu-west-1",
-//       "time": "2017-07-04T05:13:41.057Z"
-//     },
-//     {
-//       "latency": 612.1320000000001,
-//       "source_region": "us-east-1",
-//       "throughput": 6.9080214217744285,
-//       "destination_region": "us-west-1",
-//       "time": "2017-07-04T05:13:41.057Z"
-//     },
-//     {
-//       "latency": 412.029,
-//       "source_region": "us-east-1",
-//       "throughput": 9.560800717060054,
-//       "destination_region": "eu-west-1",
-//       "time": "2017-07-04T05:16:26.994Z"
-//     },
-//     {
-//       "latency": 515.959,
-//       "source_region": "us-east-1",
-//       "throughput": 8.105645744373872,
-//       "destination_region": "us-west-1",
-//       "time": "2017-07-04T05:16:26.994Z"
-//     }
-//   ]
-// }
   }
 
 }
