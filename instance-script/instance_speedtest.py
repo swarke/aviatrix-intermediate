@@ -7,7 +7,7 @@ from enum import Enum
 
 bandwidth_img = 'clouds-01.jpeg'
 downloadSize = 2621440
-server_address = 'http://127.0.0.1:5000'
+server_address = 'http://34.212.249.62:5000'
 
 # Enum for clouds
 class Cloud(Enum):
@@ -136,6 +136,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     locations = download_cloud_inventory()
     data = speedtest(locations, args.source_region, args.cloud_id)
-    print data
     upload_speedtest_data(data)
 
