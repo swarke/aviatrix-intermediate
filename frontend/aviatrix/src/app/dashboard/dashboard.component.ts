@@ -406,11 +406,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // return this.http.get("https://freegeoip.net/json/");
   };
 
-  getSeriesData(chartType: any, name: any, data: any) {
+  getSeriesData(chartType: any, name: any, data: any, color: any) {
     return {
       type: chartType,
       name: name,
       data: data,
+      color: color,
       dataLabels: {
         enabled: false
       },
@@ -441,6 +442,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         tickInterval: 5000,
         dateTimeLabelFormats: {
           second: '%H:%M:%S'
+        },
+        title: {
+          text: 'Time'
         },
         startOnTick: true
       },
@@ -506,9 +510,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.log('chart: ', chartData);
       this.chartModel.chartData = chartData['data'];
       for (let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
-        latencySeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region, 'latency')));
-        badwidthSeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region, 'throughput')));
+        latencySeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region, 'latency'), this.speedtestModel.destinationRegions[index].color));
+        badwidthSeries.push(this.getSeriesData('spline', this.speedtestModel.destinationRegions[index].cloud_info.region, this.getChartData(this.speedtestModel.destinationRegions[index].cloud_info.region, 'throughput'), this.speedtestModel.destinationRegions[index].color));
       }
+      latencySeries
       this.updateLatencyAndBandwidthForDestinationCloud();
       this.latencyOptions = this.getChartConfig('', this.properties.MILISECONDS, latencySeries, 'spline');
       this.bandwidthOptions = this.getChartConfig('', this.properties.MBPS, badwidthSeries, 'spline');
