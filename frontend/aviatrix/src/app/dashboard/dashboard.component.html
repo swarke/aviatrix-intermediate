@@ -49,10 +49,10 @@
                     
                     <div class="row">
                         <div class="col-md-9" style="padding-right: 0px;">
-                        <h6 class="card-title card-title-margin">{{properties.RIGHT_PANEL_HEADER}} <span>&nbsp;  <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.RIGHT_PANEL_TOOLTIP}}"></i></span></h6>                 
+                            <h6 class="card-title card-title-margin">{{properties.RIGHT_PANEL_HEADER}} <span>&nbsp;  <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.RIGHT_PANEL_TOOLTIP}}"></i></span></h6>                 
                         </div>
-                        <div class="col-md-3" style="text-align: right;">
-                            <select class="form-control" style="margin-left: -40px; width: 130px; border: none; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp">
+                        <div class="col-md-3" style="text-align: right; margin-top: -4px;">
+                            <select class="form-control" style="margin-left: -40px; width: 130px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp">
                                 <option *ngFor="let range of dashboardModel.timeRanges" [value]="range.value"> {{ range.label }}</option>
                             </select>
                         </div>
@@ -88,7 +88,7 @@
                         </select>
                     </div>
                     <div class="row" *ngIf="destinationTab" style="height: 203px; margin-top: 10px">
-                        <div class="col-md-3" style="padding-left: 15px;">
+                        <div class="col-md-3" style="padding-left: 29px;">
                             <div class="row">
                                 <button class="pull-left" style="padding: 10px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'azure'">| Azure</button>
                                 <button class="pull-left" style="padding: 10px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('azure')" *ngIf="destinationCloudProvider != 'azure'">Azure</button> 
@@ -102,7 +102,7 @@
                                 <button class="pull-left" style="padding: 0px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('gce')" *ngIf="destinationCloudProvider != 'gce'">GCE</button> 
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'azure'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto; margin-left: 15px;" *ngIf="destinationCloudProvider == 'azure'">
                             <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.azureRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
@@ -120,7 +120,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'aws'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto; margin-left: 15px;" *ngIf="destinationCloudProvider == 'aws'">
                             <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.awsRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
@@ -135,7 +135,7 @@
                                     {{option.label}}</label>
                             </div>
                         </div>
-                        <div class="col-md-9 form-group row" style="overflow-y: auto;" *ngIf="destinationCloudProvider == 'gce'">
+                        <div class="col-md-9 form-group row" style="overflow-y: auto; margin-left: 15px;" *ngIf="destinationCloudProvider == 'gce'">
                             <!-- <div class="col-md-6" *ngFor="let option of dashboardModel.gceRegions">
                                 <img src="/assets/ic_check_box_filled@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">
                                 <img src="/assets/ic_check_box_outline@2x.png" alt="Smiley face" width="22" height="22" style="margin-right: 5px;" (click)="updateCheckbox(option);" *ngIf="!option.isSelected && (speedtestModel.sourceCloudProvider != destinationCloudProvider || option.cloud_info.region != speedtestModel.sourceCloudRegion)">

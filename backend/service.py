@@ -22,7 +22,9 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
     if destination_regions:
         for index, destination_region in enumerate(destination_regions):
             if index == 0:
-                query += " destination_region='%s'" % destination_region
+                query += " (destination_region='%s'" % destination_region
+            elif index == len(destination_regions) - 1:
+                query += "OR destination_region='%s')" % destination_region
             else:
                 query += " OR destination_region='%s'" % destination_region
     # responce = requests.get(url)
