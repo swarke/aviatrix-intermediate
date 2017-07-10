@@ -19,6 +19,9 @@ export class DashboardModel {
 	inventoryPath: any;
 	timeRanges: any;
 
+	/*
+	 * Construcotr Dashboard Model
+	 */
 	constructor() {
 		this.clearModel();
 		this.inventoryPath = {
@@ -54,6 +57,9 @@ export class DashboardModel {
     	]
 	}
 
+	/*
+	 * Clear location object
+	 */
 	clearLocations() {
 		this.locations = {
 			"aws": [],
@@ -62,6 +68,9 @@ export class DashboardModel {
 		}
 	}
 
+	/*
+	 * Clear all the attributes of dashboard model
+	 */
 	clearModel() {
 		this.bandwidth = [];
 		this.latency = [];
@@ -75,6 +84,9 @@ export class DashboardModel {
 		this.clearLocations();
 	}
 
+	/*
+	 * Get the cloud regions as per the source cloud provider
+	 */
 	getRegions(cloud: any, sourceCloudRegion: any) {
 		let regions = this.locations[cloud];
 		for (let index = 0; index < regions.length; index++) {
@@ -87,6 +99,9 @@ export class DashboardModel {
 	}
 }
 
+/*
+ * Model for speedtest 
+ */
 export class SpeedtestModel {
 
 	sourceCloudProvider: any;
@@ -95,10 +110,16 @@ export class SpeedtestModel {
 	destinationRegions: any[]
 	timestamp: any;
 
+	/*
+	 * Construcotr Speedtest Model
+	 */
 	constructor() {
 		this.clearModel();
 	}
 
+	/*
+	 * Clear destination cloud regions object
+	 */
 	clearDestinationCloudRegions() {
 		this.destinationCloudRegions = {
 			"aws": [],
@@ -107,6 +128,9 @@ export class SpeedtestModel {
 		}
 	}
 
+	/*
+	 * Clear dashboard model object
+	 */
 	clearModel() {
 		this.sourceCloudProvider = "";
 		this.sourceCloudRegion = "";
@@ -115,25 +139,40 @@ export class SpeedtestModel {
 		this.clearDestinationCloudRegions();
 	}
 
+	/*
+	 * set destination cloud regions
+	 */
 	setDestinationCloudRegions(key: any, data: any[]) {
 		this.destinationRegions = this.destinationRegions.concat(data);
 		this.destinationCloudRegions[key] = data;
 	}
 }
 
+/*
+ * Model chartModel
+ */
 export class ChartModel {
 
 	chartData: any[];
 	
+	/*
+	 * Construcotr chart Model
+	 */
 	constructor() {
 		this.clearModel();
 	}
 
+	/*
+	 * Clear chart Model object
+	 */
 	clearModel() {
 		this.chartData = [];
 	}
 }
 
+/*
+ * Enum cloud provider
+ */
 export enum Cloud {
     aws =1 ,
     azure = 2,

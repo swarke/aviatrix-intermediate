@@ -21,22 +21,20 @@ export class DashboardService {
 
   constructor(private _apiService: ApiService,
               private properties: PropertiesService) {
-    //this.createAWS();
   }
 
+  /*
+   * Get inventory from s3 
+   */
   getInventory(inventoryPath: any) {
     //'data/inventory.json'
     const apiRequest: APIRequest = new APIRequest(inventoryPath, APIMethod.GET);
     return this._apiService.executeAPI(apiRequest);
   }
-
-
-  getGeolocation() { 
-   const apiRequest: APIRequest = new APIRequest('https://www.googleapis.com/geolocation/v1/geolocate?key=' + this.properties.GOOGLE_API_KEY, APIMethod.POST);
-    return this._apiService.executeAPI(apiRequest);
-   // return this.http.post(, {});
-  };
-
+ 
+  /*
+   * Get latency and bandwith as per timestamp, destination cloud and source cloud from web server 
+   */
   getLatencyAndBandwidth(speedTest: SpeedtestModel) {
     let url = SERVER_URL + GET_LATENCY_BANDWIDTH_API;
     let destRegionList = [];

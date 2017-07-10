@@ -7,10 +7,6 @@ import { DashboardService, PropertiesService } from '../../services';
 import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
-declare var jQuery: any;
-
-declare const L: any;
-
 declare const google: any;
 
 declare const AmCharts: any;
@@ -23,68 +19,24 @@ declare const AmCharts: any;
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-  clouds: any;
-  @Input() tool: string;
-  progressFactor: number = 0;
-
   sourceTab: boolean;
   destinationTab: boolean;
   testTab: boolean;
-
-  options: any;
   latencyOptions: any;
   isTestCompleted: boolean;
-  responseTimeOptions: any;
   bandwidthOptions: any;
-  packetLossOptions: any;
-  throughputOptions: any;
-  lat: number;
-  lng: number;
-  geoLocation: any;
-  errorMessage: any;
-
   locations: any;
   currentTabIndex: any;
   sourceCloudRegion: any;
   sourceCloudRegions: any[];
   destinationRegions: any[];
-  awsRegions: any[];
-  azureRegions: any[];
-  gceRegions: any[];
-  selectedDestinationCloudRegions: any;
-
-  inventory: any;
   selectedTabIndex: any;
-
-  dashboardModel: DashboardModel;
-  speedtestModel: SpeedtestModel;
-  chartModel: ChartModel;
   currentSourceRegion: any;
-  pingStartTime: any = null;
-
-  TEST_MINUTES: number = 35;
-  TEST_INTERVAL: number = 5000;
-
-  latency: any;
-  bandwidth: any;
-  responseTime: any;
-  throughput: any;
-
   latencyChart: any;
-
   disabledStart: any;
-
-  responseTimeChart: any;
   bandwidthChart: any;
-  selectedRegions: any;
   sourceCloudProvider: any;
   destinationCloudProvider: any;
-  bestRegion: any;
-  worstRegion: any;
-
-  bestLatencyRegion: any;
-  bestBandwidthRegion: any;
-
   mapStyles: any;
   isDesc: boolean;
   sortableColumn: any;
@@ -92,7 +44,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   inventoryPath: any;
   cloudPinPath: any;
   chartColors: any;
-  userLocation: any;
+
+  dashboardModel: DashboardModel;
+  speedtestModel: SpeedtestModel;
+  chartModel: ChartModel;
 
   public zoom = 15;
   public opacity = 1.0;
@@ -100,8 +55,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   text = '';
   hoveredObject = null;
 
-
-
+  /**
+  * Contructor for dashboard component
+  **/
   constructor(private http: Http,
     private dashboardService: DashboardService,
     public properties: PropertiesService,
@@ -122,41 +78,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       '#F7ED77', '#A5270A', '#C372D6', '#87AA77', '#FFDD00', '#D1B1AA',
       '#9D25BA', '#59824A', '#E5C31C', '#8E7A76', '#810687', '#212121'];
 
-    this.userLocation = {};
-    this.latency = properties.NA_TEXT;
-    this.bandwidth = properties.NA_TEXT;
-    this.responseTime = properties.NA_TEXT;
-    this.throughput = properties.NA_TEXT;
-
-    this.lat = properties.NA_LATITUDE;
-    this.lng = properties.NA_LONGITUDE;
-
     this.disabledStart = false;
     this.isDesc = false;
     this.sortableColumn = "";
     this.latencyOptions = null;
-    this.responseTimeOptions = null;
     this.bandwidthOptions = null;
     this.latencyChart = null;
-    this.responseTimeChart = null;
     this.bandwidthChart = null;
     this.dashboardModel = new DashboardModel();
     this.speedtestModel = new SpeedtestModel();
     this.chartModel = new ChartModel();
-    this.clouds = [
-      { value: '0', viewValue: 'All Cloud' },
-      { value: '1', viewValue: 'Google Cloud' },
-      { value: '2', viewValue: 'Azure' }
-    ];
-    this.options = [];
-
-    this.inventory = {};
-    this.errorMessage = "";
     this.locations = [];
-    this.selectedRegions = [];
-    this.bestRegion = null;
-    this.worstRegion = null;
-    this.bestLatencyRegion = null;
     this.isTestCompleted = false;
     this.sourceTab = true;
     this.destinationTab = false;
@@ -170,10 +102,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.generateAmMap();
   }
 
+  /**
+  * set destination cloud provider for destination tab to show regions
+  **/
   setDestinationCloudProvider(cloud: any) {
     this.destinationCloudProvider = cloud;
   }
 
+  /**
+  * Change tab on click
+  **/
   changeTab(tabIndex: any) {
     if (tabIndex == 0) {
       this.sourceTab = true;
@@ -195,6 +133,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.disabledStart = false;
   }
 
+  /**
+  * Validate source tab and destination validation
+  **/
   validate() {
     if (this.currentTabIndex == 0) {
       return this.validationSourceTab();
@@ -205,6 +146,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+  * if source cloud provider and region not selected then return false
+  **/
   validationSourceTab() {
     if (this.speedtestModel.sourceCloudProvider && this.speedtestModel.sourceCloudRegion) {
       return true;
@@ -212,6 +156,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  /**
+  * if no destination cloud region then return false
+  **/
   validationDestnationTab() {
     if (this.speedtestModel.destinationRegions.length) {
       return true;
@@ -220,6 +167,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  /**
+  * Back on previous tab on click
+  **/
   backTab() {
     if (this.destinationTab) {
       this.changeTab(0);
@@ -228,6 +178,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /*
+   * Next tab on click
+   */
+  nextTab() {
+      if (this.sourceTab) {
+      this.changeTab(1);
+      } else if (this.destinationTab) {
+        this.changeTab(2);
+      }
+  }
+
+  /*
+   * Change tab on click
+   */
   changeMenuTab(tabIndex: any) {
     if(tabIndex < this.currentTabIndex) {
       this.changeTab(tabIndex);
@@ -238,42 +202,26 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  nextTab() {
-      if (this.sourceTab) {
-      this.changeTab(1);
-      } else if (this.destinationTab) {
-        this.changeTab(2);
-      }
-  }
-
-  openDialog() {
-    // set progress bar as complete 
-    this.slimLoadingBarService.complete();
-    this.slimLoadingBarService.reset();
-    this.slimLoadingBarService.progress = 0;
-    let config = new MdDialogConfig();
-    let dialogRef: MdDialogRef<ModalComponent> = this.dialog.open(ModalComponent, config);
-    dialogRef.componentInstance.bestLatencyRegion = this.bestLatencyRegion;
-    dialogRef.componentInstance.bestBandwidthRegion = this.bestBandwidthRegion;
-  }
-
+  /*
+   * Latency chart Instance
+   */
   latencyInstance(chartInstance) {
     this.latencyChart = chartInstance;
   }
 
-  responseTimeInstance(chartInstance) {
-    this.responseTimeChart = chartInstance;
-  }
-
+  /*
+   * throughput chart Instance
+   */
   bandwidthInstance(chartInstance) {
     this.bandwidthChart = chartInstance;
   }
 
   ngOnInit() {
-
-
   }
 
+  /**
+  * After initialized view then get the inventory and set aws, azure and gce regions
+  **/
   ngAfterViewInit() {
     let self = this;
     self.getInvetory();
@@ -282,10 +230,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     self.dashboardModel.gceRegions = self.dashboardModel.locations.gce;
   }
 
+  /**
+  * Change source colud provider
+  **/
   changeSourceCloudProvider() {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
   }
 
+  /**
+  * Update checkbox is selected or deselected and remove region from destination regions
+  **/
   updateCheckbox(region: any) {
     region.isSelected = !region.isSelected;
     if (!this.isRegionsSelected(region)) {
@@ -296,15 +250,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.generateAmMap();
   }
 
+  /**
+  * Change source region then remove all destination region list
+  **/
   changeSourceRegion() {
-    // console.log('provider: ', this.sourceCloudProvider);
-    console.log('regions: ', this.speedtestModel.sourceCloudRegion);
     this.chartModel.clearModel();
     this.getCurrentSourceRegion();
     this.clearGraphAndChart();
     this.generateAmMap();
   }
 
+  /**
+  * clear destination region list and clear map
+  **/
   clearGraphAndChart() {
     this.speedtestModel.clearDestinationCloudRegions();
     this.speedtestModel.destinationRegions = [];
@@ -320,6 +278,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
+  /**
+  * return true if region is selected else false
+  **/
   isRegionsSelected(region: any) {
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].length; index++) {
       if (region.cloud_info.region === this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider][index]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider][index]['public_ip']) {
@@ -337,6 +298,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return false
   }
 
+  /**
+  * remove region from destination region list
+  **/
   removeRegionFromDestination(region: any, cloudProvider: any) {
     // "dashboardModel.azureRegions"
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[cloudProvider].length; index++) {
@@ -377,6 +341,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+  * Change region state if it select or deselect
+  **/
   changeRegionState(region: any) {
 
     if (!this.isRegionsSelected(region)) {
@@ -389,7 +356,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     console.log('regions: ', region);
   }
 
-
+  /**
+  * Get current source regions list as per source cloud provider
+  **/
   getCurrentSourceRegion() {
     for (let index = 0; index < this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider].length; index++) {
       if (this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider][index]['cloud_info']['region'] == this.speedtestModel.sourceCloudRegion) {
@@ -401,11 +370,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-  getGeolocation() {
-    return this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=' + this.properties.GOOGLE_API_KEY, {});
-    // return this.http.get("https://freegeoip.net/json/");
-  };
-
+  /**
+  * get series data as (latency and throughput)
+  **/
   getSeriesData(chartType: any, name: any, data: any, color: any) {
     return {
       type: chartType,
@@ -424,6 +391,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     };
   }
 
+  /**
+  * Get chart config with all details for hogh chart as color, series data
+  **/
   getChartConfig(title: any, unit: any, series: any, chartType: any) {
     const options = {
       chart: {
@@ -463,6 +433,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
   /**
+   * Get the all data for specific destination cloud region
    * [getChartData description]
    * @param {[type]} chartData [description]
    */
@@ -525,8 +496,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    
   }
 
-  updateLatencyAndBandwidthForDestinationCloud() {
 
+  /**
+   * Update latency and throughput for right panel statitics
+   */
+  updateLatencyAndBandwidthForDestinationCloud() {
     for (let key in this.speedtestModel.destinationCloudRegions) {
       for (let index = 0; index < this.speedtestModel.destinationCloudRegions[key].length; index++) {
         let data = this.getAvarageLatencyAndBandwidth(this.speedtestModel.destinationCloudRegions[key][index]);
@@ -541,44 +515,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-  setDataPoint(data, obj) {
-    for (var index = 0; index < 6; index++) {
-      if (index == 0) {
-        data.push({ 'time': new Date(), 'value': null });
-      } else {
-        let date = new Date()
-        date.setSeconds(obj.pingStartTime.getSeconds() + (index * 5));
-        data.push({ 'time': date, 'value': null });
-      }
-    }
-  }
-
   /**
-   * [getTimeDiff description]
+   * Get the inventory from s3
    */
-  getTimeDiff() {
-    let endTime: any = new Date();
-    let diff: any = endTime - this.pingStartTime;
-
-    var diffMins = Math.round(((diff % 86400000) % 3600000) / 60000);
-    return diffMins;
-  }
-
-
-  /**
-   * [getTimeDiffInSeconds description]
-   */
-  getTimeDiffInSeconds(pingStartTime, index) {
-    let endTime: any = new Date();
-    let diff: any = endTime.getTime() - pingStartTime.getTime();
-
-    var diffSec = diff / 1000;
-    return diffSec;
-  }
-
-
   getInvetory() {
-
     for (let key in this.dashboardModel.inventoryPath) {
       let path = this.dashboardModel.inventoryPath[key]
       this.locations[key] = [];
@@ -593,22 +533,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           obj.isSelected = false;
           this.dashboardModel.locations[key].push(obj);
         }
-        // let totalRegions = this.locations.length * 12;
-        // this.progressFactor = 100/totalRegions;
-        // this.generateAmMap();
       },
         (error: any) => this.handleError(error)
       );
-
     }
-    console.log('data: ', this.locations);
-
   }
 
   handleError(error: any) {
 
   }
 
+  /**
+   * Get cloud pin path
+   */
   getCloudPinPath(key: any) {
     if (key == "aws") {
       return this.properties.AWS_CLOUD_PIN_PATH;
@@ -619,6 +556,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Stop test
+   */
   stopTest() {
     // set progress bar as complete 
     this.slimLoadingBarService.progress = 0;
@@ -627,6 +567,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.isTestCompleted = true;
   }
 
+  /**
+   * Get the average latency and throughput for right panel statitics
+   */
   getAvarageLatencyAndBandwidth(object: any) {
     let data = {
       "latency": 0.0,
@@ -650,6 +593,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return data;
   }
 
+  /**
+   * Update marker on region pin
+   */
   updateMarkerLabel(marker) {
     let data = this.getAvarageLatencyAndBandwidth(marker);
 
@@ -671,32 +617,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return content;
   }
 
+
   /**
-   * [readLatestLatency description]
-   * @param {[type]} obj [description]
+   * Sorting list
    */
-  readLatestLatency(obj) {
-    if (obj.latencyCompleted && obj.latency) {
-      return obj.latency;
-    } else if (obj.dashboardModel && obj.dashboardModel.latency
-      && obj.dashboardModel.latency.length > 0 && obj.currentLatencyIndex > 0) {
-      return obj.dashboardModel.latency[obj.currentLatencyIndex - 1].value;
-    }
-
-    return this.properties.CALCULATING_TEXT;
-  }
-
-  readLatestThroughput(obj) {
-    if (obj.bandwidthCompleted && obj.bandwidth) {
-      return obj.bandwidth;
-    } else if (obj.dashboardModel && obj.dashboardModel.bandwidth
-      && obj.dashboardModel.bandwidth.length > 0 && obj.currentBandwidthIndex > 0) {
-      return obj.dashboardModel.bandwidth[obj.currentBandwidthIndex - 1].value;
-    }
-
-    return this.properties.CALCULATING_TEXT;
-  }
-
   sortBy(property) {
     this.sortableColumn = property;
     this.isDesc = !this.isDesc; //change the direction    
@@ -725,6 +649,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Update chart on marker region pin
+   */
   updateChartOnMarker(marker: any, hide: boolean) {
     if (this.latencyChart && this.latencyChart.series) {
       for (let index = 0; index < this.latencyChart.series.length; index++) {
@@ -769,6 +696,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Generate amMap for source region, destination regions and link between 
+   * source region to destination regions
+   */
   generateAmMap() {
     let self = this;
 
@@ -829,18 +760,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
 
       images.push(regionImg);
-
-      // images.push({
-      //   "imageURL": 'assets/E24725.svg',
-      //   "positionOnLine": 0,
-      //   "color": "#585869",
-      //   "animateAlongLine": true,
-      //   "lineId": "line" + index,
-      //   // "flipDirection": true,
-      //   "loop": true,
-      //   "scale": 0.03,
-      //   "positionScale": 1.8
-      // });
     }
 
 
@@ -908,6 +827,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Get the image for region
+   */
   getRegionForImage(regionId) {
     for (let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
       let location = this.speedtestModel.destinationRegions[index];
