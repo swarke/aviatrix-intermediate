@@ -248,3 +248,69 @@ a:focus, a:hover {
 
 }
 
+.cart-header-right-panel {
+	margin-bottom: 25px; 
+	padding: 0.75rem 0.0rem;
+}
+
+.menu-tab-header {
+	border-bottom: 1px solid #e0e0e0; 
+	margin-left: 0px; 
+	margin-right: 0px; 
+	margin-top: 12px;
+}
+
+.source-cloud-drop-down {
+    margin-top: 45px; 
+    margin-bottom: 10px; 
+    font-weight: 500;
+}
+
+.selected-azure-menu {
+	padding: 10px 0px 10px 0px; 
+	border: none; 
+	background: none; 
+	color: #c65030; 
+	font-size: 14px; 
+	font-weight: 600;
+}
+
+.azure-menu {
+	padding: 10px 0px 10px 7px; 
+	border: none; 
+	background: none; 
+	font-size: 14px;
+}
+
+.selected-aws-menu {
+	padding: 0px 0px 10px 0px; 
+	border: none; 
+	background: none; 
+	color: #c65030; 
+	font-size: 14px; 
+	font-weight: 600;
+}
+
+.aws-menu {
+	padding: 0px 0px 10px 7px; 
+	border: none; 
+	background: none; 
+	font-size: 14px;
+}
+.selected-gce-menu {
+	padding: 0px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;
+}
+
+.active-back-button {
+	padding: 0; 
+	border: none; 
+	background: none; 
+	color: #2196F3;
+}
+
+.back-button {
+	padding: 0; 
+	border: none; 
+	background: none;
+}
+

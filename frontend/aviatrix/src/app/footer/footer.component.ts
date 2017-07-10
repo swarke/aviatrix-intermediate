@@ -25,15 +25,4 @@ export class FooterComponent implements OnInit {
   initToolName() {
     this.titleService.setTitle('Cloud Network Tools (powered by Aviatrix)');
   }
-
-  download(){
-    if(this.properties.getCurerntToolName() == this.properties.AWS) {
-      return this.properties.AWS_DOWNLOAD_URL;
-    } else if(this.properties.getCurerntToolName() == this.properties.AZURE) {
-      return this.properties.AZURE_DOWNLOAD_URL;
-    } else {
-      return this.properties.DOWNLOAD_URL;
-    }
-  }
-
 }
