@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
 import { ChartModule } from 'angular2-highcharts';
 import { DashboardModel, SpeedtestModel, ChartModel } from '../../models';
 import { Response, Http } from '@angular/http';

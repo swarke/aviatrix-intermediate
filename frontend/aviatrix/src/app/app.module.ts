@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ModalComponent } from './modal/modal.component';
 
 import { ApiService } from '../services/api.service';
 import { PropertiesService } from '../services/properties.service';
@@ -39,7 +38,6 @@ export function highchartsFactory() {
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +51,6 @@ export function highchartsFactory() {
     ShareButtonsModule.forRoot(),
     SlimLoadingBarModule.forRoot()
   ],
-  entryComponents: [ModalComponent],
   providers: [
     ApiService,
     PropertiesService,

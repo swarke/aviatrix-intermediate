@@ -30,7 +30,7 @@
     <!-- Right panel -->
     <div class="col-md-5">
         <div class="card card-radious-none">
-            <div class="card-header" style="margin-bottom: 25px; padding: 0.75rem 0.0rem;">
+            <div class="card-header cart-header-right-panel">
                 <!-- Right Panel tooltip and timestamp -->
                 <div class="row">
                     <div class="col-md-9" style="padding-right: 0px;">
@@ -44,7 +44,7 @@
                 </div>
                 <!-- End Right Panel tooltip and timestamp -->
                 <!-- Source, Destination, Test Tabs -->
-                <div class="row" style="border-bottom: 1px solid #e0e0e0; margin-left: 0px; margin-right: 0px; margin-top: 12px;">
+                <div class="row menu-tab-header">
                     <div class="col-md-4" [ngClass]="{'selected-menu-tab': sourceTab, 'menu-tab': !sourceTab}" align="center" (click)="changeMenuTab(0)">
                         Source
                     </div>
@@ -58,7 +58,7 @@
                 <!-- End Source, Destination, Test Tabs -->
                 <!-- Source Tab Content-->
                 <div align="center" *ngIf="sourceTab" style="overflow-y: auto; height: 213px">
-                    <div style="margin-top: 45px; margin-bottom: 10px; font-weight: 500;">Select a source cloud</div>
+                    <div class="source-cloud-drop-down">Select a source cloud</div>
                     <select class="form-control" placeholder="Source Cloud" [(ngModel)]="speedtestModel.sourceCloudProvider" (ngModelChange)="changeSourceCloudProvider()" style="margin-bottom: 15px; width: 185px;">
                         <option value="" disabled selected>Source Cloud</option>
                         <option value="azure">Azure</option>
@@ -77,16 +77,16 @@
                     <!-- List of cloud providers -->
                     <div class="col-md-3" style="padding-left: 29px;">
                         <div class="row">
-                            <button class="pull-left" style="padding: 10px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'azure'">| Azure</button>
-                            <button class="pull-left" style="padding: 10px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('azure')" *ngIf="destinationCloudProvider != 'azure'">Azure</button> 
+                            <button class="pull-left selected-azure-menu" *ngIf="destinationCloudProvider == 'azure'">| Azure</button>
+                            <button class="pull-left azure-menu" (click)="setDestinationCloudProvider('azure')" *ngIf="destinationCloudProvider != 'azure'">Azure</button> 
                         </div>
                         <div class="row">
-                            <button class="pull-left" style="padding: 0px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'aws'">| AWS</button>
-                            <button class="pull-left" style="padding: 0px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('aws')" *ngIf="destinationCloudProvider != 'aws'">AWS</button> 
+                            <button class="pull-left selected-aws-menu" *ngIf="destinationCloudProvider == 'aws'">| AWS</button>
+                            <button class="pull-left aws-menu" (click)="setDestinationCloudProvider('aws')" *ngIf="destinationCloudProvider != 'aws'">AWS</button> 
                         </div>
                         <div class="row">
-                            <button class="pull-left" style="padding: 0px 0px 10px 0px; border: none; background: none; color: #c65030; font-size: 14px; font-weight: 600;" *ngIf="destinationCloudProvider == 'gce'">| GCE</button>
-                            <button class="pull-left" style="padding: 0px 0px 10px 7px; border: none; background: none; font-size: 14px;" (click)="setDestinationCloudProvider('gce')" *ngIf="destinationCloudProvider != 'gce'">GCE</button> 
+                            <button class="pull-left selected-aws-menu" *ngIf="destinationCloudProvider == 'gce'">| GCE</button>
+                            <button class="pull-left aws-menu" (click)="setDestinationCloudProvider('gce')" *ngIf="destinationCloudProvider != 'gce'">GCE</button> 
                         </div>
                     </div>
                     <!-- End List of cloud providers -->
@@ -195,8 +195,8 @@
             </div>
             <!-- Next and Back buttons -->
             <div>
-                <button class="pull-left" style="padding: 0; border: none; background: none; color: #2196F3;" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
-                <button class="pull-left" style="padding: 0; border: none; background: none;" [disabled]="sourceTab" *ngIf="sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
+                <button class="pull-left active-back-button" (click)="backTab();" *ngIf="!sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+                <button class="pull-left back-button" [disabled]="sourceTab" *ngIf="sourceTab"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
                 <button class="{{validate() ? 'next_btn pull-right':'next_btn_disabled pull-right'}}"  (click)="nextTab();" [disabled]="!validate()" *ngIf="!testTab">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button> 
                 <button class="pull-right btn btn-start" (click)="startTest();" [disabled]="speedtestModel.destinationRegions.length < 1" *ngIf="!isTestCompleted && !disabledStart && testTab">Begin Test&nbsp;&nbsp;<i class="fa fa-play" aria-hidden="true"></i></button>
                 <button class="btn btn-stop" (click)="stopTest();" [disabled]="speedtestModel.destinationRegions.length < 1" *ngIf="disabledStart && testTab">Stop Test&nbsp;&nbsp;<i class="fa fa-stop" aria-hidden="true"></i></button>
