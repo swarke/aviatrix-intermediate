@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   inventoryPath: any;
   cloudPinPath: any;
   chartColors: any;
+  chartLoaded: any;
 
   dashboardModel: DashboardModel;
   speedtestModel: SpeedtestModel;
@@ -97,6 +98,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.sourceCloudRegion = "";
     this.sourceCloudProvider = "";
     this.destinationCloudProvider = "azure";
+    this.chartLoaded = false;
     this.speedtestModel.timestamp = this.dashboardModel.timeRanges[0].value;
     this.generateAmMap();
   }
@@ -258,6 +260,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.getCurrentSourceRegion();
     this.clearGraphAndChart();
     this.generateAmMap();
+  }
+
+  ChangeTimestamp() {
+    if(this.isTestCompleted) {
+      this.startTest();
+    }
   }
 
   /**
@@ -489,6 +497,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.bandwidthOptions = this.getChartConfig('', this.properties.MBPS, badwidthSeries, 'spline');
       this.isTestCompleted = true;
       this.disabledStart = false;
+      this.chartLoaded = true;
       this.slimLoadingBarService.complete();
     }, (error: any) =>{
         console.log('errrrrrrrrr', error);
