@@ -192,9 +192,9 @@
                                     <td style="width: 35%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}</td>
                                     <td style="width: 35%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}</td>
                                 </tr>
-                                <tr *ngIf="speedtestModel.destinationRegions.length < 1" style="background-color: transparent;">
-                                    Go Back And Select Destination Region To Start Test
-                                </tr>
+                                <div *ngIf="speedtestModel.destinationRegions.length < 1" style="background-color: transparent; margin-top: 10px; text-align: center; font-weight: 300; text-transform: none; font-size: 16px;">
+                                    Click On Back To Select Destination Region To Start Test
+                                </div>
                             </tbody>
                         </table>
                     </div>
