@@ -262,6 +262,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.generateAmMap();
   }
 
+
+  /**
+  * Start test again on changing timestamp
+  **/
   ChangeTimestamp() {
     if(this.isTestCompleted) {
       this.startTest();
@@ -296,6 +300,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         for (let step = 0; step < this.speedtestModel.destinationRegions.length; step++) {
           if (region.cloud_info.region === this.speedtestModel.destinationRegions[step]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationRegions[step]['public_ip']) {
             this.speedtestModel.destinationRegions.splice(step, 1);
+            break;
+          }
+        }
+        for (let i = 0; this.chartLoaded && i < this.latencyChart.series.length ; i++) {
+          if(this.latencyChart.series.length == 1) {
+            this.latencyChart.destroy();
+            this.bandwidthChart.destroy();
+            this.chartLoaded = false;
+            break;
+          } 
+          if(this.latencyChart.series[i].name == region.cloud_info.region) {
+            this.latencyChart.series[i].remove()
+            this.bandwidthChart.series[i].remove();
             break;
           }
         }
@@ -349,6 +366,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           if(this.latencyChart.series.length == 1) {
             this.latencyChart.destroy();
             this.bandwidthChart.destroy();
+            this.chartLoaded = false;
             break;
           } 
           if(this.latencyChart.series[i].name == region.cloud_info.region) {
