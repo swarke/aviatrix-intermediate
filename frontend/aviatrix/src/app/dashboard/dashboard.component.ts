@@ -571,7 +571,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           let obj = data.data[index];
           obj.label = obj.region_name;
           obj.isOpen = false;
-          obj.iconUrl = this.getCloudPinPath(key);
+          obj.iconUrl = this.getDestinationCloudPinPath(key);
           obj.color = this.chartColors[index];
           obj.isSelected = false;
           this.dashboardModel.locations[key].push(obj);
@@ -587,15 +587,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Get cloud pin path
+   * Get destination cloud pin path
    */
-  getCloudPinPath(key: any) {
+  getDestinationCloudPinPath(key: any) {
     if (key == "aws") {
-      return this.properties.AWS_CLOUD_PIN_PATH;
+      return this.properties.AWS_DESTINATION_CLOUD_PIN_PATH;
     } else if (key == "azure") {
-      return this.properties.AZURE_CLOUD_PIN_PATH;
+      return this.properties.AZURE_DESTINATION_CLOUD_PIN_PATH;
     } else if (key == "gce") {
-      return this.properties.GCE_CLOUD_PIN_PATH;
+      return this.properties.GCE_DESTINATION_CLOUD_PIN_PATH;
+    }
+  }
+
+  /**
+   * Get Source cloud pin path
+   */
+  getSourceCloudPinPath() {
+    if (this.speedtestModel.sourceCloudProvider == "aws") {
+      return this.properties.AWS_SOURCE_CLOUD_PIN_PATH;
+    } else if (this.speedtestModel.sourceCloudProvider == "azure") {
+      return this.properties.AZURE_SOURCE_CLOUD_PIN_PATH;
+    } else if (this.speedtestModel.sourceCloudProvider == "gce") {
+      return this.properties.GCE_SOURCE_CLOUD_PIN_PATH;
     }
   }
 
@@ -752,8 +765,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (self.currentSourceRegion && self.currentSourceRegion.lat && self.currentSourceRegion.lng) {
       var userImg = {
         "id": "source_location",
-        "imageURL": self.currentSourceRegion.iconUrl,
-        "width": 22,
+        "imageURL": self.getSourceCloudPinPath(),
+        "width": 24,
         "height": 39,
         "title": function() {
           return self.currentSourceRegion.lat ? '<b>Source Cloud Region</b><br>' + self.currentSourceRegion.label : "NA";
