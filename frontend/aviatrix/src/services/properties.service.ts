@@ -34,9 +34,12 @@ export class PropertiesService {
   public NA_LATITUDE: number = 46.0730555556;
   public NA_LONGITUDE: number = -100.546666667;
 
-  public AWS_CLOUD_PIN_PATH = '/assets/aws_pin.png';
-  public GCE_CLOUD_PIN_PATH = '/assets/google_pin.png';
-  public AZURE_CLOUD_PIN_PATH = '/assets/azure_pin.svg';
+  public AWS_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-aws@2x.png';
+  public GCE_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-gce@2x.png';
+  public AZURE_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-azure@2x.png';
+  public AWS_SOURCE_CLOUD_PIN_PATH = '/assets/source-aws.png';
+  public GCE_SOURCE_CLOUD_PIN_PATH = '/assets/source-gce.png';
+  public AZURE_SOURCE_CLOUD_PIN_PATH = '/assets/source-azure.png';
 
   public RIGHT_PANEL_TOOLTIP: string = "Aviatrix tool measures network connectivity data from your browser to cloud regions. Use this data to confidently plan cloud deployments. To measure network performance from your data center to the cloud, open the browser in the data center.";
   public LATENCY_CHART_TOOLTIP: string = "Measures latency from the browser to cloud regions. Use latency to determine deployment of latency sensitive applications. To measure network performance from your data center to the cloud, open the browser in the data center.";
@@ -47,6 +50,7 @@ export class PropertiesService {
   public GOOGLE_API_KEY: string = 'AIzaSyAAPCDwjWqAyGu01LSKytb4tQIjQSrKw30';  // For development
   // public GOOGLE_API_KEY: string = 'AIzaSyD9N5DDr-Lzla4dTHE2ZpysyxkMtZFBpUo'; // For Production key
 
+  public isLoading: boolean = false;
   currentTool: string = null;
   currentToolName: string = null;
   constructor() {

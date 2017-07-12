@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   inventoryPath: any;
   cloudPinPath: any;
   chartColors: any;
+  chartLoaded: any;
 
   dashboardModel: DashboardModel;
   speedtestModel: SpeedtestModel;
@@ -97,6 +98,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.sourceCloudRegion = "";
     this.sourceCloudProvider = "";
     this.destinationCloudProvider = "azure";
+    this.chartLoaded = false;
     this.speedtestModel.timestamp = this.dashboardModel.timeRanges[0].value;
     this.generateAmMap();
   }
@@ -234,6 +236,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   **/
   changeSourceCloudProvider() {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
+    this.speedtestModel.sourceCloudRegion = "";
   }
 
   /**
@@ -257,6 +260,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.getCurrentSourceRegion();
     this.clearGraphAndChart();
     this.generateAmMap();
+  }
+
+
+  /**
+  * Start test again on changing timestamp
+  **/
+  ChangeTimestamp() {
+    if(this.isTestCompleted) {
+      this.startTest();
+    }
   }
 
   /**
@@ -290,6 +303,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             break;
           }
         }
+        for (let i = 0; this.chartLoaded && i < this.latencyChart.series.length ; i++) {
+          if(this.latencyChart.series.length == 1) {
+            this.latencyChart.destroy();
+            this.bandwidthChart.destroy();
+            this.chartLoaded = false;
+            break;
+          } 
+          if(this.latencyChart.series[i].name == region.cloud_info.region) {
+            this.latencyChart.series[i].remove()
+            this.bandwidthChart.series[i].remove();
+            break;
+          }
+        }
         region.isSelected = false;
         return true;
       }
@@ -304,6 +330,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // "dashboardModel.azureRegions"
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[cloudProvider].length; index++) {
       if (region.cloud_info.region === this.speedtestModel.destinationCloudRegions[cloudProvider][index]['cloud_info']['region'] && region.public_ip == this.speedtestModel.destinationCloudRegions[cloudProvider][index]['public_ip']) {
+        this.speedtestModel.destinationCloudRegions[cloudProvider][index].latency = "";
+        this.speedtestModel.destinationCloudRegions[cloudProvider][index].bandwidth = "";
         this.speedtestModel.destinationCloudRegions[cloudProvider].splice(index, 1);
         for (let step = 0; step < this.speedtestModel.destinationRegions.length; step++) {
           if (region.cloud_info.region === this.speedtestModel.destinationRegions[step]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationRegions[step]['public_ip']) {
@@ -333,11 +361,26 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             }
           }
         }
+        
+        for (let i = 0; this.isTestCompleted && i < this.latencyChart.series.length ; i++) {
+          if(this.latencyChart.series.length == 1) {
+            this.latencyChart.destroy();
+            this.bandwidthChart.destroy();
+            this.chartLoaded = false;
+            break;
+          } 
+          if(this.latencyChart.series[i].name == region.cloud_info.region) {
+            this.latencyChart.series[i].remove()
+            this.bandwidthChart.series[i].remove();
+            break;
+          }
+        }
         this.generateAmMap();
         break;
-
       }
     }
+
+
   }
 
   /**
@@ -470,7 +513,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    */
 
   startTest() {
-    this.slimLoadingBarService.start();
+    // Start Loader
+    this.properties.isLoading = true;
     this.isTestCompleted = false;
     this.disabledStart = true;
     let latencySeries = [];
@@ -488,9 +532,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.bandwidthOptions = this.getChartConfig('', this.properties.MBPS, badwidthSeries, 'spline');
       this.isTestCompleted = true;
       this.disabledStart = false;
-      this.slimLoadingBarService.complete();
+      this.chartLoaded = true;
+      // Stop Loader
+      this.properties.isLoading = false;
     }, (error: any) =>{
-        console.log('errrrrrrrrr', error);
+      // Stop Loader
+        this.properties.isLoading = false;
     });
    
   }
@@ -527,7 +574,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           let obj = data.data[index];
           obj.label = obj.region_name;
           obj.isOpen = false;
-          obj.iconUrl = this.getCloudPinPath(key);
+          obj.iconUrl = this.getDestinationCloudPinPath(key);
           obj.color = this.chartColors[index];
           obj.isSelected = false;
           this.dashboardModel.locations[key].push(obj);
@@ -543,27 +590,29 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Get cloud pin path
+   * Get destination cloud pin path
    */
-  getCloudPinPath(key: any) {
+  getDestinationCloudPinPath(key: any) {
     if (key == "aws") {
-      return this.properties.AWS_CLOUD_PIN_PATH;
+      return this.properties.AWS_DESTINATION_CLOUD_PIN_PATH;
     } else if (key == "azure") {
-      return this.properties.AZURE_CLOUD_PIN_PATH;
+      return this.properties.AZURE_DESTINATION_CLOUD_PIN_PATH;
     } else if (key == "gce") {
-      return this.properties.GCE_CLOUD_PIN_PATH;
+      return this.properties.GCE_DESTINATION_CLOUD_PIN_PATH;
     }
   }
 
   /**
-   * Stop test
+   * Get Source cloud pin path
    */
-  stopTest() {
-    // set progress bar as complete 
-    this.slimLoadingBarService.progress = 0;
-    this.slimLoadingBarService.complete();
-    this.disabledStart = false;
-    this.isTestCompleted = true;
+  getSourceCloudPinPath() {
+    if (this.speedtestModel.sourceCloudProvider == "aws") {
+      return this.properties.AWS_SOURCE_CLOUD_PIN_PATH;
+    } else if (this.speedtestModel.sourceCloudProvider == "azure") {
+      return this.properties.AZURE_SOURCE_CLOUD_PIN_PATH;
+    } else if (this.speedtestModel.sourceCloudProvider == "gce") {
+      return this.properties.GCE_SOURCE_CLOUD_PIN_PATH;
+    }
   }
 
   /**
@@ -708,8 +757,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (self.currentSourceRegion && self.currentSourceRegion.lat && self.currentSourceRegion.lng) {
       var userImg = {
         "id": "source_location",
-        "imageURL": self.currentSourceRegion.iconUrl,
-        "width": 22,
+        "imageURL": self.getSourceCloudPinPath(),
+        "width": 24,
         "height": 39,
         "title": function() {
           return self.currentSourceRegion.lat ? '<b>Source Cloud Region</b><br>' + self.currentSourceRegion.label : "NA";
