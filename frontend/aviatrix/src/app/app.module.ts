@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoaderComponent } from './loader/loader.component';
 
 import { ApiService } from '../services/api.service';
 import { PropertiesService } from '../services/properties.service';
@@ -38,6 +39,7 @@ export function highchartsFactory() {
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

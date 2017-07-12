@@ -50,6 +50,7 @@ export class PropertiesService {
   public GOOGLE_API_KEY: string = 'AIzaSyAAPCDwjWqAyGu01LSKytb4tQIjQSrKw30';  // For development
   // public GOOGLE_API_KEY: string = 'AIzaSyD9N5DDr-Lzla4dTHE2ZpysyxkMtZFBpUo'; // For Production key
 
+  public isLoading: boolean = false;
   currentTool: string = null;
   currentToolName: string = null;
   constructor() {

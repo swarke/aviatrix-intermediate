@@ -513,6 +513,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    */
 
   startTest() {
+    // Start Loader
+    this.properties.isLoading = true;
     this.slimLoadingBarService.start();
     this.isTestCompleted = false;
     this.disabledStart = true;
@@ -533,8 +535,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.disabledStart = false;
       this.chartLoaded = true;
       this.slimLoadingBarService.complete();
+      // Stop Loader
+      this.properties.isLoading = false;
     }, (error: any) =>{
-        console.log('errrrrrrrrr', error);
+      // Stop Loader
+        this.properties.isLoading = false;
     });
    
   }
