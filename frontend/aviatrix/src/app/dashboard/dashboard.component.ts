@@ -515,7 +515,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   startTest() {
     // Start Loader
     this.properties.isLoading = true;
-    this.slimLoadingBarService.start();
     this.isTestCompleted = false;
     this.disabledStart = true;
     let latencySeries = [];
@@ -534,7 +533,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.isTestCompleted = true;
       this.disabledStart = false;
       this.chartLoaded = true;
-      this.slimLoadingBarService.complete();
       // Stop Loader
       this.properties.isLoading = false;
     }, (error: any) =>{
@@ -615,17 +613,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     } else if (this.speedtestModel.sourceCloudProvider == "gce") {
       return this.properties.GCE_SOURCE_CLOUD_PIN_PATH;
     }
-  }
-
-  /**
-   * Stop test
-   */
-  stopTest() {
-    // set progress bar as complete 
-    this.slimLoadingBarService.progress = 0;
-    this.slimLoadingBarService.complete();
-    this.disabledStart = false;
-    this.isTestCompleted = true;
   }
 
   /**
