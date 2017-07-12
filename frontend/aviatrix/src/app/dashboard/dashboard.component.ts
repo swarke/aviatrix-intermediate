@@ -1,3 +1,4 @@
+// Import components
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input } from '@angular/core';
 import { ChartModule } from 'angular2-highcharts';
 import { DashboardModel, SpeedtestModel, ChartModel } from '../../models';
@@ -17,6 +18,8 @@ declare const AmCharts: any;
   viewProviders: [DashboardService],
   encapsulation: ViewEncapsulation.None
 })
+
+// Dashboard component
 export class DashboardComponent implements OnInit, AfterViewInit {
   sourceTab: boolean;
   destinationTab: boolean;
@@ -56,8 +59,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   hoveredObject = null;
 
   /**
-  * Contructor for dashboard component
-  **/
+   * Contructor for dashboard component
+   */
   constructor(private http: Http,
     private dashboardService: DashboardService,
     public properties: PropertiesService,
@@ -104,15 +107,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * set destination cloud provider for destination tab to show regions
-  **/
+   * set destination cloud provider for destination tab to show regions
+   * [setDestinationCloudProvider description]
+   * @param {[any]} cloud [cloud provider]
+   */
   setDestinationCloudProvider(cloud: any) {
     this.destinationCloudProvider = cloud;
   }
 
   /**
-  * Change tab on click
-  **/
+   * Change tab on click
+   * [changeTab description]
+   * 
+   * @param {[any]} tabIndex [tab index]
+   */
   changeTab(tabIndex: any) {
     if (tabIndex == 0) {
       this.sourceTab = true;
@@ -135,8 +143,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Validate source tab and destination validation
-  **/
+   * Validate source tab and destination validation
+   */
   validate() {
     if (this.currentTabIndex == 0) {
       return this.validationSourceTab();
@@ -148,8 +156,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * if source cloud provider and region not selected then return false
-  **/
+   * if source cloud provider and region not selected then return false
+   */
   validationSourceTab() {
     if (this.speedtestModel.sourceCloudProvider && this.speedtestModel.sourceCloudRegion) {
       return true;
@@ -158,8 +166,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * if no destination cloud region then return false
-  **/
+   * if no destination cloud region then return false
+   */
   validationDestnationTab() {
     if (this.speedtestModel.destinationRegions.length) {
       return true;
@@ -169,8 +177,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Back on previous tab on click
-  **/
+   * Back on previous tab on click
+   */
   backTab() {
     if (this.destinationTab) {
       this.changeTab(0);
@@ -179,7 +187,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /*
+  /**
    * Next tab on click
    */
   nextTab() {
@@ -190,8 +198,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
   }
 
-  /*
+  /**
    * Change tab on click
+   * [changeMenuTab description] 
+   * @param {[any]} tabIndex [Tab index]
    */
   changeMenuTab(tabIndex: any) {
     if(tabIndex < this.currentTabIndex) {
@@ -203,15 +213,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /*
+  /**
    * Latency chart Instance
+   * [latencyInstance description] 
+   * @param {[type]} chartInstance [instance of Latency Highchart]
    */
   latencyInstance(chartInstance) {
     this.latencyChart = chartInstance;
   }
 
-  /*
+  
+  /**
    * throughput chart Instance
+   * [bandwidthInstance description] 
+   * @param {[type]} chartInstance [instance of throughput Highchart]
    */
   bandwidthInstance(chartInstance) {
     this.bandwidthChart = chartInstance;
@@ -221,8 +236,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * After initialized view then get the inventory and set aws, azure and gce regions
-  **/
+   * After initialized view then get the inventory and set aws, azure and gce regions
+   */
   ngAfterViewInit() {
     let self = this;
     self.getInvetory();
@@ -232,16 +247,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Change source colud provider
-  **/
+   * Change source colud provider
+   */
   changeSourceCloudProvider() {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
     this.speedtestModel.sourceCloudRegion = "";
   }
-
+  
   /**
-  * Update checkbox is selected or deselected and remove region from destination regions
-  **/
+   * Update checkbox is selected or deselected and remove region from destination regions
+   * [updateCheckbox description]
+   * @param {[any]} region [Cloud region object]
+   */
   updateCheckbox(region: any) {
     region.isSelected = !region.isSelected;
     if (!this.isRegionsSelected(region)) {
@@ -253,8 +270,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Change source region then remove all destination region list
-  **/
+   * Change source region then remove all destination region list
+   */
   changeSourceRegion() {
     this.chartModel.clearModel();
     this.getCurrentSourceRegion();
@@ -262,10 +279,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.generateAmMap();
   }
 
-
   /**
-  * Start test again on changing timestamp
-  **/
+   * Start test again on changing timestamp
+   */
   ChangeTimestamp() {
     if(this.isTestCompleted) {
       this.startTest();
@@ -273,8 +289,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * clear destination region list and clear map
-  **/
+   * clear destination region list and clear map
+   */
   clearGraphAndChart() {
     this.speedtestModel.clearDestinationCloudRegions();
     this.speedtestModel.destinationRegions = [];
@@ -291,8 +307,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * return true if region is selected else false
-  **/
+   * return true if region is selected else false
+   * [isRegionsSelected description]
+   * @param {[any]} region [Cloud provider region object]
+   */
   isRegionsSelected(region: any) {
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].length; index++) {
       if (region.cloud_info.region === this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider][index]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider][index]['public_ip']) {
@@ -324,8 +342,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * remove region from destination region list
-  **/
+   * remove region from destination region list
+   * [removeRegionFromDestination description]
+   * @param {[any]} region [cloud provider region object]
+   * @param {[any]} cloudProvider [cloud provider]
+   */
   removeRegionFromDestination(region: any, cloudProvider: any) {
     // "dashboardModel.azureRegions"
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[cloudProvider].length; index++) {
@@ -384,8 +405,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Change region state if it select or deselect
-  **/
+   * Change region state if it select or deselect
+   * [changeRegionState description]
+   * @param {[any]} region [Cloud provider region]
+   */
   changeRegionState(region: any) {
 
     if (!this.isRegionsSelected(region)) {
@@ -399,8 +422,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Get current source regions list as per source cloud provider
-  **/
+   * Get current source regions list as per source cloud provider
+   */
   getCurrentSourceRegion() {
     for (let index = 0; index < this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider].length; index++) {
       if (this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider][index]['cloud_info']['region'] == this.speedtestModel.sourceCloudRegion) {
@@ -413,8 +436,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * get series data as (latency and throughput)
-  **/
+   * get series data as (latency and throughput)
+   * [getSeriesData description]
+   * @param {[any]} chartType [Type of chart]
+   * @param {[any]} name [name of series]
+   * @param {[any]} data [List of data(latency and throughput)]
+   * @param {[any]} color [set the color for series]
+   */
   getSeriesData(chartType: any, name: any, data: any, color: any) {
     return {
       type: chartType,
@@ -434,8 +462,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Get chart config with all details for hogh chart as color, series data
-  **/
+   * Get chart config with all details for hogh chart as color, series data
+   * [getSeriesData description]
+   * @param {[any]} title [title for chart]
+   * @param {[any]} unit [unit for chart]
+   * @param {[any]} series [series for chart]
+   * @param {[any]} chartType [type of chart]
+   */
   getChartConfig(title: any, unit: any, series: any, chartType: any) {
     const options = {
       chart: {
@@ -473,11 +506,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return options;
   }
 
-
   /**
    * Get the all data for specific destination cloud region
    * [getChartData description]
-   * @param {[type]} chartData [description]
+   * @param {[any]} cloud_region [name cloud region]
+   * @param {[any]} valueKay [value key]
    */
   getChartData(cloud_region: any, valueKay: any) {
     const metricData: any = [];
@@ -499,9 +532,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * get the tool tip data on chart hover
    * [getChartPoint description]
-   * @param {[type]} date  [description]
-   * @param {[type]} value [description]
+   * @param {[type]} date  [date on chart point]
+   * @param {[type]} value [value on chart]
    */
   getChartPoint(date, value) {
     return [Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
@@ -511,7 +545,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   /**
    * Starts test for calculating the statistics.
    */
-
   startTest() {
     // Start Loader
     this.properties.isLoading = true;
@@ -541,7 +574,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
    
   }
-
 
   /**
    * Update latency and throughput for right panel statitics
@@ -591,6 +623,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   /**
    * Get destination cloud pin path
+   * [getDestinationCloudPinPath description]
+   * @param {[any]} key [cloud provider]
    */
   getDestinationCloudPinPath(key: any) {
     if (key == "aws") {
@@ -617,6 +651,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   /**
    * Get the average latency and throughput for right panel statitics
+   * [getAvarageLatencyAndBandwidth description]
+   * @param {[any]} object [cloud provider object]
    */
   getAvarageLatencyAndBandwidth(object: any) {
     let data = {
@@ -643,6 +679,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   /**
    * Update marker on region pin
+   * [updateMarkerLabel description]
+   * @param {[[type]]} marker [event on chart and object]
    */
   updateMarkerLabel(marker) {
     let data = this.getAvarageLatencyAndBandwidth(marker);
@@ -665,9 +703,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return content;
   }
 
-
   /**
    * Sorting list
+   * [sortBy description]
+   * @param {[type]} property [type of property]
    */
   sortBy(property) {
     this.sortableColumn = property;
@@ -699,6 +738,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   /**
    * Update chart on marker region pin
+   * [updateChartOnMarker description]
+   * @param {[any]} marker [event on chart]
+   * @param {[boolean]} hide [value for hide]
    */
   updateChartOnMarker(marker: any, hide: boolean) {
     if (this.latencyChart && this.latencyChart.series) {
@@ -877,6 +919,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   /**
    * Get the image for region
+   * [getRegionForImage description]
+   * @param {[type]} regionId [region name]
    */
   getRegionForImage(regionId) {
     for (let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {

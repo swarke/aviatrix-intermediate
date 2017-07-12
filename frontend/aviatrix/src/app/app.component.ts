@@ -7,9 +7,9 @@ import { PropertiesService } from '../services';
   styleUrls: ['./app.component.scss'],
   viewProviders: [PropertiesService]
 })
+
 export class AppComponent {
  
  constructor() {
- 	
  }
 }

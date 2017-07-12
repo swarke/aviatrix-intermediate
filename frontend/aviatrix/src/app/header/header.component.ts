@@ -1,3 +1,4 @@
+// Import components
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -10,8 +11,13 @@ import { CLOUD_TOOL} from '../app-config';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
+// Header component
 export class HeaderComponent implements OnInit {
   
+  /**
+   * Contructor for Header component
+   */
   constructor(public properties: PropertiesService,
   			  private titleService: Title,
           private router: Router,
@@ -22,6 +28,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Set the title name
+   */
   initToolName() {
     this.titleService.setTitle('Cloud Network Tools (powered by Aviatrix)');
   }
