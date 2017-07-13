@@ -501,7 +501,37 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           text: unit
         }
       },
-      series: series
+      series: series,
+      responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    layout: 'horizontal'
+                },
+                yAxis: {
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                        y: -5
+                    },
+                    title: {
+                        text: null
+                    }
+                },
+                subtitle: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                }
+            }
+        }]
+    }
     };
     return options;
   }
@@ -713,27 +743,29 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.isDesc = !this.isDesc; //change the direction    
     let direction = this.isDesc ? 1 : -1;
 
-    this.locations.sort(function(a, b) {
-      let aProp = null;
-      let bProp = null;
-      if (property != 'region_name') {
-        aProp = parseFloat(a[property]);
-        bProp = parseFloat(b[property]);
-      } else {
-        aProp = a[property];
-        bProp = b[property];
-      }
+    for(let provider in this.speedtestModel.destinationCloudRegions) {
+      this.speedtestModel.destinationCloudRegions[provider].sort(function(a, b) {
+        let aProp = null;
+        let bProp = null;
+        if (property != 'region_name') {
+          aProp = parseFloat(a[property]);
+          bProp = parseFloat(b[property]);
+        } else {
+          aProp = a[property];
+          bProp = b[property];
+        }
 
-      if (aProp < bProp) {
-        return -1 * direction;
-      }
-      else if (aProp > bProp) {
-        return 1 * direction;
-      }
-      else {
-        return 0;
-      }
-    });
+        if (aProp < bProp) {
+          return -1 * direction;
+        }
+        else if (aProp > bProp) {
+          return 1 * direction;
+        }
+        else {
+          return 0;
+        }
+      });
+    }
   }
 
   /**

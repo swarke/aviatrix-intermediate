@@ -234,7 +234,7 @@
             </div>
             <div class="card-block" #latencyCard>
                 <chart [options]="latencyOptions" (load)="latencyInstance($event.context)"  *ngIf="latencyOptions !== null" class="chart-height"></chart>
-                <h6 *ngIf="!chartLoaded" style="margin-top: 0px; margin-bottom: 0px; font-weight: 300; text-transform: none;">Click on Begin Speed Test on the top of the page.</h6>
+                <h6 *ngIf="!chartLoaded" style="margin-top: 0px; margin-bottom: 0px; font-weight: 300; text-transform: none;">Select source and destination(s) to begin test.</h6>
             </div>
         </div>
     </div>
@@ -255,7 +255,7 @@
             </div>
             <div class="card-block">
                 <chart [options]="bandwidthOptions" (load)="bandwidthInstance($event.context)" *ngIf="bandwidthOptions !== null" class="chart-height"></chart>
-                 <h6 *ngIf="!chartLoaded" style="margin-top: 0px; margin-bottom: 0px; font-weight: 300; text-transform: none;">Click on Begin Speed Test on the top of the page.</h6>
+                 <h6 *ngIf="!chartLoaded" style="margin-top: 0px; margin-bottom: 0px; font-weight: 300; text-transform: none;">Select source and destination(s) to begin test.</h6>
             </div>
         </div>
     </div>
