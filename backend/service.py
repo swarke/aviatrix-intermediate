@@ -14,21 +14,31 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
     :return: return resultset
     """
     measurement = Cloud(int(cloud_id)).name
-    query = "select * from %s where source_region='%s' AND" % (measurement, source_region)
-    if destination_regions:
-        for index, destination_region in enumerate(destination_regions):
-            if index == 0:
-                query += " (destination_region='%s'" % destination_region
-            else:
-                query += " OR destination_region='%s'" % destination_region
-    query += ')'
-    if timestamp:
-        query += ' AND time > now() - %s' % timestamp
-    responce = influx_db_client.query(query)
-    print type(responce)
-    if responce.error:
-        raise Exception('Internal server error')
-    result = convert_to_speedtest_format(responce.raw)
+    if timestamp in ['12h', '1d']:
+        query = "select * from %s where source_region='%s' AND" % (measurement, source_region)
+        if destination_regions:
+            for index, destination_region in enumerate(destination_regions):
+                if index == 0:
+                    query += " (destination_region='%s'" % destination_region
+                else:
+                    query += " OR destination_region='%s'" % destination_region
+        query += ')'
+        if timestamp:
+            query += ' AND time > now() - %s' % timestamp
+
+        responce = influx_db_client.query(query)
+        print type(responce)
+        if responce.error:
+            raise Exception('Internal server error')
+        result = convert_to_speedtest_format(responce.raw)
+    elif timestamp in ['7d', '15d', '30d']:
+        result = {'data': []}
+        for destination_region in destination_regions:
+            query = "select mean(latency), mean(throughput) from %s where source_region='%s' AND destination_region='%s' and time > now() - %s group by time(1d)" % (measurement, source_region, destination_region, timestamp)
+            responce = influx_db_client.query(query)
+            formatted_data = convert_to_speedtest_for_day_format(responce.raw, source_region, destination_region)
+            if formatted_data:
+                result['data'] += formatted_data
     return result
 
 
@@ -53,6 +63,30 @@ def set_timestamp_in_data(points, current_datetime_millis):
     """
     for point in points:
         point['time'] = current_datetime_millis
+
+
+def convert_to_speedtest_for_day_format(responce, source_region, destination_region):
+    """
+
+    :param responce:
+    :param source_region:
+    :param destination_region:
+    :return:
+    """
+    data = responce['series'][0]
+    result = []
+    for value in data['values']:
+        if not value[1] or not value[2]:
+            continue
+        region = {}
+        region['source_region'] = source_region
+        region['destination_region'] = destination_region
+        region['latency'] = value[1]
+        region['throughput'] = value[2]
+        region['time'] = value[0]
+        result.append(region)
+
+    return result
 
 
 def convert_to_speedtest_format(responce):
