@@ -1,6 +1,4 @@
 from constants import Cloud, SAVE_INFLUX_URL, GET_INFLUX_URL
-import requests
-import json
 from datetime import datetime
 
 
@@ -13,11 +11,9 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
     :param destination_regions: list of destination cloud regions
     :param timestamp: timestamp renge
     :param influx_db_client:
-    :return:
+    :return: return resultset
     """
     measurement = Cloud(int(cloud_id)).name
-    # url = GET_INFLUX_URL + "select * from %s where source_region='%s' AND" % (measurement, source_region)
-    # query = "select * from test_table where source_region='%s' AND" % source_region
     query = "select * from %s where source_region='%s' AND" % (measurement, source_region)
     if destination_regions:
         for index, destination_region in enumerate(destination_regions):
@@ -25,10 +21,6 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
                 query += " (destination_region='%s'" % destination_region
             else:
                 query += " OR destination_region='%s'" % destination_region
-    # responce = requests.get(url)
-    # if responce.status_code < 300:
-    #     result = convert_to_speedtest_format(json.loads(responce.content)['results'][0])
-    #     return result
     query += ')'
     if timestamp:
         query += ' AND time > now() - %s' % timestamp
@@ -42,33 +34,32 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
 
 def save_letency_throughput(data, influx_db_client):
     """
-
-    :param cloud_id:
-    :param source_region:
-    :return:
+    This function defines that store the data into influxDB
+    :param cloud_id: cloud id
+    :param source_region: name of source region
+    :return: None
     """
     current_datetime_millis = long((datetime.utcnow() - datetime.utcnow().utcfromtimestamp(0)).total_seconds() * 1000.0)
-    # for obj in data:
-    #     data_string = obj['measurement'] + ',source_region=' + obj['tags']['source_region'] + ',destination_region=' + \
-    #                   obj['tags']['destination_region'] + ' latency=' + obj['fields']['latency'] + ',throughput=' + \
-    #                   obj['fields']['throughput'] + ' ' + str(current_datetime_millis)
-    #     print data_string
-    #     print SAVE_INFLUX_URL
-    #     requests.post(SAVE_INFLUX_URL, data=data_string)
     set_timestamp_in_data(data, current_datetime_millis)
     influx_db_client.write_points(data, time_precision='ms')
 
 
 def set_timestamp_in_data(points, current_datetime_millis):
+    """
+    This function defines that set timestamp in data
+    :param points: list of data
+    :param current_datetime_millis: timestamp in miliseconds
+    :return: None
+    """
     for point in points:
         point['time'] = current_datetime_millis
 
 
 def convert_to_speedtest_format(responce):
     """
-
-    :param responce:
-    :return:
+    This function defines that format the responce into latency and throughput format
+    :param responce: resultset of influxDB
+    :return: formatted result
     """
     data = responce['series'][0]
     columns = data['columns']

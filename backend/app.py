@@ -4,8 +4,6 @@ from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 from influxdb import InfluxDBClient
 import constants
-# from config.Config import (INFLUX_DB_HOST, INFLUX_DB_PORT, INFLUX_DB_USERNAME, INFLUX_DB_PASSWORD, INFLUX_DB_DBNAME)
-# import config
 
 
 app = Flask(__name__)

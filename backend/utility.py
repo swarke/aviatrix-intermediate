@@ -5,9 +5,9 @@ import json
 
 def get_cloud_inventory(cloud_id):
     """
-
-    :param cloud_id:
-    :return:
+    This function defines that get the inventory from s3
+    :param cloud_id: cloud id
+    :return: cloud region inventory
     """
     if constants.Cloud.aws.value == cloud_id:
         if constants.AWS_INVENTORY_DATA:
