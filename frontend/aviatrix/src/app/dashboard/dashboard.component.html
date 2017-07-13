@@ -37,7 +37,7 @@
                         <h6 class="card-title card-title-margin">{{properties.RIGHT_PANEL_HEADER}} <span>&nbsp;  <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.RIGHT_PANEL_TOOLTIP}}"></i></span></h6>                 
                     </div>
                     <div class="col-md-3" style="text-align: right; margin-top: -4px;">
-                        <select class="form-control" style="margin-left: -40px; width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="ChangeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
+                        <select class="form-control" style="margin-left: -40px; width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="changeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
                             <option *ngFor="let range of dashboardModel.timeRanges" [value]="range.value"> {{ range.label }}</option>
                         </select>
                     </div>
@@ -226,7 +226,7 @@
                 <div class="row">
                     <div class="col-md-9"><h6 class="card-title card-title-margin">{{properties.LATENCY_CHART_HEADER}} <span>&nbsp; <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.LATENCY_CHART_TOOLTIP}}" mdTooltipPosition="right"></i></span></h6></div>
                     <div class="col-md-3" *ngIf="chartLoaded">
-                        <select class="form-control" style="width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="ChangeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
+                        <select class="form-control" style="width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="changeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
                             <option *ngFor="let range of dashboardModel.timeRanges" [value]="range.value"> {{ range.label }}</option>
                         </select>    
                     </div>
@@ -246,7 +246,7 @@
                 <div class="row">
                     <div class="col-md-9"><h6 class="card-title card-title-margin">{{properties.THROUGHPUT_CHART_HEADER}}  <span>&nbsp; <i class="fa fa-info-circle fa-lg info-color cursor-pointer" aria-hidden="true" mdTooltip="{{properties.THROUGHPUT_PANEL_TOOLTIP}}" mdTooltipPosition="right"></i></span></h6></div>
                     <div class="col-md-3" *ngIf="chartLoaded">
-                        <select class="form-control" style="width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="ChangeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
+                        <select class="form-control" style="width: 135px; font-size: 14px;" [(ngModel)]="speedtestModel.timestamp" (ngModelChange)="changeTimestamp()" [disabled]="speedtestModel.destinationRegions.length < 1 || disabledStart">
                             <option *ngFor="let range of dashboardModel.timeRanges" [value]="range.value"> {{ range.label }}</option>
                         </select>    
                     </div>

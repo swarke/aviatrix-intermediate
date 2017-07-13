@@ -282,8 +282,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   /**
    * Start test again on changing timestamp
    */
-  ChangeTimestamp() {
+  changeTimestamp() {
     if(this.isTestCompleted) {
+      console.log('time in change: ', this.speedtestModel.timestamp);
       this.startTest();
     }
   }
@@ -470,6 +471,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    * @param {[any]} chartType [type of chart]
    */
   getChartConfig(title: any, unit: any, series: any, chartType: any) {
+    let self = this;
     const options = {
       chart: {
         type: chartType, zoomType: 'xy',
@@ -484,10 +486,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       xAxis: {
         type: 'datetime',
-        tickInterval: 5000,
-        dateTimeLabelFormats: {
-          second: '%H:%M:%S'
-        },
         title: {
           text: 'Time'
         },
@@ -533,7 +531,47 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }]
     }
     };
+
+     if (this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d'
+                   || this.speedtestModel.timestamp == '30d') {
+       options.xAxis['labels'] = this.getLabelFormatter();
+       options.xAxis['title']['text'] = 'Day';
+     } else {
+       options.xAxis['dateTimeLabelFormats'] = this.getLabelFormatter();
+       options.xAxis['title']['text'] = 'Time';
+     }
+
     return options;
+  }
+
+  /**
+   * Get the label formatter for x axis on date
+   * [getLabelFormatter description]
+   */
+  getLabelFormatter() {
+    let label = null;
+    let self = this;
+    if (this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d'
+                   || this.speedtestModel.timestamp == '30d') {
+      label = {
+            formatter: function() {
+                if(self.speedtestModel.timestamp == '7d' || self.speedtestModel.timestamp == '15d'
+                   || self.speedtestModel.timestamp == '30d') {
+                  var date = new Date(this.value);
+                  var month = date.toDateString().substring(4,7);
+                  var day = date.getDate();
+                  return  day + '. ' + month;
+                } else {
+                  var date = new Date(this.value);
+                  return  date.getUTCHours()+ ':' + date.getUTCSeconds();
+                }
+            }
+      } 
+    } else {
+      label = {
+         second: '%H:%M:%S'
+    }
+   }
   }
 
   /**
@@ -551,7 +589,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
       // if (jsonObj.value !== null) {
       const date: Date = new Date(jsonObj.time);
-      let yVal = jsonObj[valueKay];
+      let yVal = parseFloat((jsonObj[valueKay]).toFixed(2));
 
       metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
         date.getHours(), date.getMinutes(), date.getSeconds()), yVal]);
