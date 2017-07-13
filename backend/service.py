@@ -34,7 +34,9 @@ def get_letency_throughput(cloud_id, source_region, destination_regions, timesta
     elif timestamp in ['7d', '15d', '30d']:
         result = {'data': []}
         for destination_region in destination_regions:
-            query = "select mean(latency), mean(throughput) from %s where source_region='%s' AND destination_region='%s' and time > now() - %s group by time(1d)" % (measurement, source_region, destination_region, timestamp)
+            query = "select mean(latency), mean(throughput) from %s where source_region='%s' AND " \
+                    "destination_region='%s' and time > now() - %s group by time(1d)" % \
+                    (measurement, source_region, destination_region, timestamp)
             responce = influx_db_client.query(query)
             formatted_data = convert_to_speedtest_for_day_format(responce.raw, source_region, destination_region)
             if formatted_data:
@@ -67,11 +69,11 @@ def set_timestamp_in_data(points, current_datetime_millis):
 
 def convert_to_speedtest_for_day_format(responce, source_region, destination_region):
     """
-
-    :param responce:
-    :param source_region:
-    :param destination_region:
-    :return:
+    This function defines that convert responce in latency and throughput
+    :param responce: responce data
+    :param source_region: name of source region
+    :param destination_region: name of destination region
+    :return: List of latency and throughput data
     """
     data = responce['series'][0]
     result = []
