@@ -587,13 +587,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (jsonObj['destination_region'] != cloud_region) {
         continue;
       }
-      // if (jsonObj.value !== null) {
       const date: Date = new Date(jsonObj.time);
       let yVal = parseFloat((jsonObj[valueKay]).toFixed(2));
+      if(this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d' || 
+        this.speedtestModel.timestamp == '30d') {
+        metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
+        0, 0, 0), yVal]);
 
-      metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
+      } else {
+        metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
         date.getHours(), date.getMinutes(), date.getSeconds()), yVal]);
-      // }
+      }
     }
 
     return metricData;
