@@ -49,10 +49,6 @@ export class DashboardModel {
 	    	{
 	    		"label": "Last Month",
 	    		"value": "30d"
-	    	},
-	    	{
-	    		"label": "Last Year",
-	    		"value": "365d"
 	    	}
     	]
 	}

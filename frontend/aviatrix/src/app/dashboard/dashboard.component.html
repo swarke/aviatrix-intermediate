@@ -58,15 +58,15 @@
                 <!-- End Source, Destination, Test Tabs -->
                 <!-- Source Tab Content-->
                 <div align="center" *ngIf="sourceTab" style="overflow-y: auto; height: 217px">
-                    <div class="source-cloud-drop-down">Select a source cloud</div>
-                    <select class="form-control" placeholder="Source Cloud" [(ngModel)]="speedtestModel.sourceCloudProvider" (ngModelChange)="changeSourceCloudProvider()" style="margin-bottom: 15px; width: 185px;">
+                    <div class="source-cloud-drop-down">Select cloud</div>
+                    <select class="form-control" placeholder="Select Cloud" [(ngModel)]="speedtestModel.sourceCloudProvider" (ngModelChange)="changeSourceCloudProvider()" style="margin-bottom: 15px; width: 185px;">
                         <option value="" disabled selected>Select Cloud Provider</option>
                         <option value="azure">Azure</option>
                         <option value="aws">AWS</option>
                         <option value="gce">GCE</option>
                     </select>
-                    <div align="center" style="margin-bottom: 10px; font-weight: 500;">Select a source cloud region</div>
-                    <select class="form-control" placeholder="Source Cloud Region" [(ngModel)]="speedtestModel.sourceCloudRegion" (ngModelChange)="changeSourceRegion($event)" style="width: 185px;">
+                    <div align="center" style="margin-bottom: 10px; font-weight: 500;">Select cloud region</div>
+                    <select class="form-control" placeholder="Select Cloud Region" [(ngModel)]="speedtestModel.sourceCloudRegion" (ngModelChange)="changeSourceRegion($event)" style="width: 185px;">
                         <option value="" disabled selected>Select Cloud Region</option>
                         <option *ngFor="let region of sourceCloudRegions" [value]="region.cloud_info.region">{{ region.label }}</option>
                     </select>
