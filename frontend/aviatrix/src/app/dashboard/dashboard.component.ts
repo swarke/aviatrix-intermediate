@@ -207,9 +207,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if(tabIndex < this.currentTabIndex) {
       this.changeTab(tabIndex);
     } else {
-      if(this.validate()) {
-        this.changeTab(tabIndex);
-      }
+      if((tabIndex == 1 && this.validationSourceTab()) || (tabIndex == 2 && this.validationDestnationTab())){
+          this.changeTab(tabIndex);
+      } 
     }
   }
 
@@ -486,10 +486,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       xAxis: {
         type: 'datetime',
+        tickInterval:  0,
         title: {
           text: 'Time'
         },
-        startOnTick: true
+        startOnTick: true,
       },
       yAxis: {
         labels: {
@@ -497,7 +498,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         },
         title: {
           text: unit
-        }
+        },
       },
       series: series,
       responsive: {
@@ -536,9 +537,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                    || this.speedtestModel.timestamp == '30d') {
        options.xAxis['labels'] = this.getLabelFormatter();
        options.xAxis['title']['text'] = 'Day';
+       options.xAxis['tickInterval'] = 0;
+       let d = new Date();
+       options.series['pointStart'] = d.setDate(d.getDate()- series.data.length);
+
      } else {
        options.xAxis['dateTimeLabelFormats'] = this.getLabelFormatter();
        options.xAxis['title']['text'] = 'Time';
+       options.xAxis['tickInterval'] = 3600 * 1000 *2;
      }
 
     return options;
