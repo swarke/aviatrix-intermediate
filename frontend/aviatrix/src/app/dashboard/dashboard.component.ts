@@ -911,11 +911,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.isDesc = !this.isDesc; //change the direction    
     let direction = this.isDesc ? 1 : -1;
 
-    for(let provider in this.speedtestModel.destinationCloudRegions) {
-      this.speedtestModel.destinationCloudRegions[provider].sort(function(a, b) {
+    for(let provider in this.speedtestModel.destinationRegions) {
+      this.speedtestModel.destinationRegions.sort(function(a, b) {
         let aProp = null;
         let bProp = null;
-        if (property != 'region_name') {
+        if (property != 'region_name' && property != "cloudProvider") {
           aProp = parseFloat(a[property]);
           bProp = parseFloat(b[property]);
         } else {

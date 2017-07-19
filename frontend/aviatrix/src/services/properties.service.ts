@@ -14,9 +14,9 @@ export class PropertiesService {
   // Dashboard
   public RIGHT_PANEL_HEADER: string = 'Cloud To Cloud Network Connectivity';
   public RIGHT_PANEL_REGION_COLUMN_HEADER = 'Region';
-  public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency(msec)';
-  public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput(mbps)';
-
+  public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency';
+  public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput';
+  public RIGHT_PANEL_PROVIDER_COLUMN_HEADER = 'Provider';
   public LATENCY_CHART_HEADER: string = 'LATENCY';
   public THROUGHPUT_CHART_HEADER: string = 'THROUGHPUT';
 
