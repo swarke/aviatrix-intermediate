@@ -3,7 +3,7 @@
 <div class="panel marquee short" id="network-white" style="margin-left: -15px; margin-right: -15px;">
     <div class="content threecolumns tight">
         <div class="column double" style="margin-left: -10px;">
-            <h4 class="uppercase wide semitight-top">Cloud To Cloud Network Performance&nbsp;Test</h4>
+            <h4 class="uppercase wide semitight-top">Multi Cloud Network Performance&nbsp;Test</h4>
         </div>
     </div>
 </div>
@@ -171,7 +171,7 @@
 
                                 </span></th>
 
-                                <th width="20%" style="padding-left: 2px;"><span class="column-header" (click)="sortBy('latency')">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="20%" style="padding-left: 2px;"><span class="column-header tooltip-latency" (click)="sortBy('latency')">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <span class="tooltiptext">Tooltip text</span> <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'latency', 'fa-sort-asc': (sortableColumn == 'latency' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'latency' && isDesc) }"
                                     aria-hidden="true"> </i></span></th>
                                 
