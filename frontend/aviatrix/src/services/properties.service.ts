@@ -13,9 +13,9 @@ export class PropertiesService {
 
   // Dashboard
   public RIGHT_PANEL_HEADER: string = 'Multi Cloud Network Connectivity';
-  public RIGHT_PANEL_REGION_COLUMN_HEADER = 'Region';
-  public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency(msec)';
-  public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput(mbps)';
+  public RIGHT_PANEL_REGION_COLUMN_HEADER = 'Destination Region';
+  public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency';
+  public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput';
 
   public LATENCY_CHART_HEADER: string = 'LATENCY';
   public THROUGHPUT_CHART_HEADER: string = 'THROUGHPUT';
@@ -37,6 +37,9 @@ export class PropertiesService {
   public AWS_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-aws@2x.png';
   public GCE_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-gce@2x.png';
   public AZURE_DESTINATION_CLOUD_PIN_PATH = '/assets/destination-azure@2x.png';
+  public AWS_DESTINATION_CLOUD_LOGO_PATH = '/assets/aws_logo-20.png';
+  public GCE_DESTINATION_CLOUD_LOGO_PATH = '/assets/gce_logo.png';
+  public AZURE_DESTINATION_CLOUD_LOGO_PATH = '/assets/azure_logo.png';
   public AWS_SOURCE_CLOUD_PIN_PATH = '/assets/source-aws.png';
   public GCE_SOURCE_CLOUD_PIN_PATH = '/assets/source-gce.png';
   public AZURE_SOURCE_CLOUD_PIN_PATH = '/assets/source-azure.png';

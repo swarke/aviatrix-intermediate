@@ -804,6 +804,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           obj.label = obj.region_name;
           obj.isOpen = false;
           obj.iconUrl = this.getDestinationCloudPinPath(key);
+          obj.logoUrl = this.getDestinationCloudLogoPath(key);
           obj.color = this.chartColors[index];
           obj.isSelected = false;
           obj.cloudProvider = key;
@@ -833,6 +834,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       return this.properties.GCE_DESTINATION_CLOUD_PIN_PATH;
     }
   }
+
+  getDestinationCloudLogoPath(key: any) {
+    if (key == "aws") {
+      return this.properties.AWS_DESTINATION_CLOUD_LOGO_PATH;
+    } else if (key == "azure") {
+      return this.properties.AZURE_DESTINATION_CLOUD_LOGO_PATH;
+    } else if (key == "gce") {
+      return this.properties.GCE_DESTINATION_CLOUD_LOGO_PATH;
+    }
+  }
+
+  
 
   /**
    * Get Source cloud pin path
@@ -911,8 +924,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.isDesc = !this.isDesc; //change the direction    
     let direction = this.isDesc ? 1 : -1;
 
-    for(let provider in this.speedtestModel.destinationCloudRegions) {
-      this.speedtestModel.destinationCloudRegions[provider].sort(function(a, b) {
+    for(let provider in this.speedtestModel.destinationRegions) {
+      this.speedtestModel.destinationRegions.sort(function(a, b) {
         let aProp = null;
         let bProp = null;
         if (property != 'region_name') {
