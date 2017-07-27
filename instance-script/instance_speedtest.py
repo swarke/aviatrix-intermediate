@@ -7,7 +7,7 @@ from enum import Enum
 
 bandwidth_img = 'clouds-01.jpeg'
 downloadSize = 2621440
-server_address = 'http://34.212.249.62:5000'
+server_address = 'http://34.212.249.62/multicloudapp'
 
 # Enum for clouds
 class Cloud(Enum):
