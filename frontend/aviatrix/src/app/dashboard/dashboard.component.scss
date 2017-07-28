@@ -146,6 +146,10 @@
 	margin-top: 50px;
 }
 
+.margin-top-10 {
+	margin-top: 10px;
+}
+
 .map-container {
 	height: 300px;
 }
@@ -319,6 +323,8 @@ a:focus, a:hover {
 	cursor: pointer;
     margin-top: -5px;
     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.22);
+    outline: none; 
+    width: 108px;
 }
 
 .back-button {
@@ -402,3 +408,210 @@ a:focus, a:hover {
 }
 
 .selected-menu-tab .bubble{background:#f44336 }
+
+
+.after-sselection-source-cloud {
+	border: 0; 
+	outline: 0; 
+	background: transparent; 
+	border-bottom: 1px solid #a8a8a8; 
+	margin-bottom: 15px; 
+	width: 200px;
+}
+
+.before-sselection-source-cloud {
+	border: 0; 
+	outline: 0; 
+	background: transparent; 
+	border-bottom: 1px solid #a8a8a8; 
+	margin-bottom: 15px; 
+	width: 200px;
+	color: #a8a8a8;  
+}
+
+.before-selection-source-region {
+	border: 0; 
+	outline: 0; 
+	background: transparent; 
+	border-bottom: 1px solid #a8a8a8; 
+	width: 200px;
+	color: #a8a8a8;  
+}
+
+.after-selection-source-region {
+	border: 0; 
+	outline: 0; 
+	background: transparent; 
+	border-bottom: 1px solid #a8a8a8; 
+	width: 200px;
+
+}
+
+.clock {
+	margin-top: 7px; 
+	color: #e24308;
+	transform: rotate(90deg); 
+	margin-right: 10px; 
+	width: 20px; 
+	height: 20px;
+}
+
+.timestamp {
+	width: 115px; 
+	font-size: 14px; 
+	border: 0; 
+	outline: 0; 
+	background: transparent; 
+	border-bottom: 1px solid #e24308;
+}
+
+.padding-0 {
+	padding: 0px;
+}
+
+.height-306 {
+	height: 306px;
+}
+
+.padding-right-0 {
+	padding-right: 0px;
+}
+
+.padding-right-10 {
+	padding-right: 10px;
+}
+
+.source-tab {
+	overflow-y: auto; 
+	height: 170px
+}
+
+.color-a8a8a8 {
+	color: #a8a8a8;
+}
+
+.source-cloud-region-label {
+	margin-bottom: 10px; 
+	font-weight: 500;
+}
+
+.height-170 {
+	height: 170px;
+}
+
+.height-162 {
+	height: 162px;
+}
+
+.destination-tab {
+	margin: 0px; 
+	height: 33px; 
+	font-weight: 500;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.destination-cloud-provider {
+	margin: 0px; 
+	margin-top: 15px;
+}
+
+.margin-right-5 {
+	margin-right: 5px;
+}
+
+.destination-region {
+	margin: 0px; 
+	margin-top: 10px; 
+	overflow-y: auto; 
+	height: 119px;
+}
+
+.padding-top-10 {
+	padding-top: 10px
+}
+
+.test-source {
+	margin-top: 8px; 
+	border-bottom: 1px solid #e0e0e0; 
+	margin-left: 0px; 
+	margin-right: 0px; 
+	padding-bottom: 8px;
+}
+
+.test-source-cloud-label {
+	font-weight: 500; 
+	margin-left: -5px;
+}
+
+.test-source-region-label {
+	font-weight: 500; 
+	margin-left: -40px;
+}
+
+.region-table-header {
+	margin-bottom: 0px; 
+	background-color: #F8F8F8;
+}
+
+.padding-left-2 {
+	padding-left: 2px;
+}
+
+.padding-left-10 {
+	padding-left: 10px;
+}
+
+.padding-left-0 {
+	padding-left: 0px;
+}
+
+.destination-region-table {
+	overflow-y: auto; 
+	height: 129px;
+}
+
+.margin-right-7 {
+	margin-right: 7px;
+}
+
+.width-60 {
+	width:60%;
+}
+
+.destination-region-table-column {
+	width: 20%; 
+	padding-left: 15px
+}
+
+.empty-destination-label {
+	background-color: transparent; 
+	margin-top: 10px; 
+	text-align: center; 
+	font-weight: 300; 
+	text-transform: none; 
+	font-size: 16px;
+}
+
+.flow-buttons-bottom {
+	border-top: 1px solid #e0e0e0; 
+	padding-top: 15px;
+}
+
+.next-button-common {
+	outline: none; 
+	width: 90px;
+}
+
+.outline-none {
+	outline: none
+}
+
+.chart-label {
+	margin-top: 0px; 
+	margin-bottom: 0px; 
+	font-weight: 300; 
+	text-transform: none;
+}
