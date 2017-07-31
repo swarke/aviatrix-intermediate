@@ -285,6 +285,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    */
   updateCheckbox(region: any) {
     this.isTestCompleted = false;
+    region.latency = 0.0;
+    region.bandwidth = 0.0;
     region.isSelected = !region.isSelected;
     if (!this.isRegionsSelected(region)) {
       region.isSelected = true;
@@ -292,6 +294,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
       this.getMarkSelectAllRegion();
     } else {
+      this.cleanLatencyFromChartModel(region.cloud_info.region);
       if(this.destinationCloudProvider == "aws") {
         this.selectedAllAWSRegion = false;
       } else if(this.destinationCloudProvider == "azure") {
@@ -346,7 +349,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     for(let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
       if(this.speedtestModel.destinationRegions[index].cloudProvider != cloudProvider) {
         regions.push(this.speedtestModel.destinationRegions[index]);
-      } 
+      } else {
+        this.cleanLatencyFromChartModel(this.speedtestModel.destinationRegions[index].cloud_info.region);
+      }
     }
     this.speedtestModel.destinationRegions = regions;
   }
@@ -500,6 +505,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return false
   }
 
+  cleanLatencyFromChartModel(destination_region: any) {
+    for (let index = 0; index < this.chartModel.chartData.length; index++) {
+      if (this.chartModel.chartData[index]['destination_region'] == destination_region) {
+        this.chartModel.chartData[index]['latency'] = 0.0;
+        this.chartModel.chartData[index]['throughput'] = 0.0;
+      }
+    }
+  }
   /**
    * remove region from destination region list
    * [removeRegionFromDestination description]
@@ -510,12 +523,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // "dashboardModel.azureRegions"
     for (let index = 0; index < this.speedtestModel.destinationCloudRegions[cloudProvider].length; index++) {
       if (region.cloud_info.region === this.speedtestModel.destinationCloudRegions[cloudProvider][index]['cloud_info']['region'] && region.public_ip == this.speedtestModel.destinationCloudRegions[cloudProvider][index]['public_ip']) {
-        this.speedtestModel.destinationCloudRegions[cloudProvider][index].latency = "";
-        this.speedtestModel.destinationCloudRegions[cloudProvider][index].bandwidth = "";
+        this.speedtestModel.destinationCloudRegions[cloudProvider][index].latency = 0.0;
+        this.speedtestModel.destinationCloudRegions[cloudProvider][index].bandwidth = 0.0;
         this.speedtestModel.destinationCloudRegions[cloudProvider].splice(index, 1);
         for (let step = 0; step < this.speedtestModel.destinationRegions.length; step++) {
           if (region.cloud_info.region === this.speedtestModel.destinationRegions[step]['cloud_info']['region'] && region.public_ip === this.speedtestModel.destinationRegions[step]['public_ip']) {
             this.speedtestModel.destinationRegions.splice(step, 1);
+            this.cleanLatencyFromChartModel(region.cloud_info.region);
             break;
           }
         }
