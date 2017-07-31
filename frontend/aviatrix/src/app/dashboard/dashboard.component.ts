@@ -215,7 +215,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.changeTab(tabIndex);
     } else {
       if((tabIndex == 1 && this.validationSourceTab()) || (tabIndex == 2 && this.validationSourceTab() && this.validationDestnationTab())){
-          this.changeTab(tabIndex);
+          if(this.currentTabIndex != tabIndex) {
+            this.changeTab(tabIndex);
+          }
       } 
     }
   }
@@ -260,9 +262,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
     this.speedtestModel.sourceCloudRegion = "";
     this.speedtestModel.sourceCloudRegion
-    this.selectedAllAWSRegion = false;
-    this.selectedAllAzureRegion = false;
-    this.selectedAllGCERegion = false;
+    // this.selectedAllAWSRegion = false;
+    // this.selectedAllAzureRegion = false;
+    // this.selectedAllGCERegion = false;
     this.isTestCompleted = false;
     // if(this.chartLoaded) {
     //   this.latencyChart.destroy();
@@ -288,6 +290,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       region.isSelected = true;
       this.speedtestModel.destinationRegions.push(region);
       this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
+      this.getMarkSelectAllRegion();
     } else {
       if(this.destinationCloudProvider == "aws") {
         this.selectedAllAWSRegion = false;
@@ -297,7 +300,45 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.selectedAllGCERegion = false;
       }
     }
+    
     this.generateAmMap();
+  }
+
+  getMarkSelectAllRegion() {
+    if(this.destinationCloudProvider == 'azure') {
+      let selectAll = true;
+      for(let index = 0; index < this.dashboardModel.azureRegions.length; index++) {
+        if(!this.dashboardModel.azureRegions[index].isSelected && this.dashboardModel.azureRegions[index].cloud_info.region != this.speedtestModel.sourceCloudRegion) {
+          selectAll = false;
+          break;
+        }
+      }
+      if(selectAll) {
+        this.selectedAllAzureRegion = true;
+      }
+    }else if(this.destinationCloudProvider == 'aws') {
+      let selectAll = true;
+      for(let index = 0; index < this.dashboardModel.awsRegions.length; index++) {
+        if(!this.dashboardModel.awsRegions[index].isSelected && this.dashboardModel.awsRegions[index].cloud_info.region != this.speedtestModel.sourceCloudRegion) {
+          selectAll = false;
+          break;
+        }
+      }
+      if(selectAll) {
+        this.selectedAllAWSRegion = true;
+      }
+    } else if(this.destinationCloudProvider == 'gce') {
+      let selectAll = true;
+      for(let index = 0; index < this.dashboardModel.gceRegions.length; index++) {
+        if(!this.dashboardModel.gceRegions[index].isSelected && this.dashboardModel.gceRegions[index].cloud_info.region != this.speedtestModel.sourceCloudRegion) {
+          selectAll = false;
+          break;
+        }
+      }
+      if(selectAll) {
+        this.selectedAllGCERegion = true;
+      }
+    }
   }
 
   removeAllCloudRegions(cloudProvider: any, isSelected: boolean) {
@@ -381,9 +422,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    * Change source region then remove all destination region list
    */
   changeSourceRegion() {
-    this.selectedAllAWSRegion = false;
-    this.selectedAllAzureRegion = false;
-    this.selectedAllGCERegion = false;
+    // this.selectedAllAWSRegion = false;
+    // this.selectedAllAzureRegion = false;
+    // this.selectedAllGCERegion = false;
     this.isTestCompleted = false;
         // if(this.chartLoaded) {
     //   this.latencyChart.destroy();
