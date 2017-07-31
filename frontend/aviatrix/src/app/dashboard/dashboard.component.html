@@ -166,17 +166,18 @@
                     <table class="table table-striped region-table-header">
                         <thead>
                             <tr>
-                                <th width="60%"><span class="column-header" (click)="sortBy('region_name')">{{properties.RIGHT_PANEL_REGION_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="8%"></th>
+                                <th width="37%"><span class="column-header" (click)="sortBy('region_name')">{{properties.RIGHT_PANEL_REGION_COLUMN_HEADER}} <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'region_name', 'fa-sort-asc': (sortableColumn == 'region_name' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'region_name' && isDesc) }"
                                     aria-hidden="true"> </i>
 
                                 </span></th>
 
-                                <th width="20%" style="padding-left: 2px;"><span class="column-header" (click)="sortBy('latency')" title="msec">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="25%" style="padding-left: 2px;"><span class="column-header" (click)="sortBy('latency')" title="msec">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'latency', 'fa-sort-asc': (sortableColumn == 'latency' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'latency' && isDesc) }"
                                     aria-hidden="true"> </i></span></th>
                                 
-                                <th width="20%" style="padding-left: 0px;"><span class="column-header" (click)="sortBy('bandwidth')" title="mbps">{{properties.RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="30%" style="padding-left: 0px;"><span class="column-header" (click)="sortBy('bandwidth')" title="mbps">{{properties.RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER}} <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'bandwidth', 'fa-sort-asc': (sortableColumn == 'bandwidth' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'bandwidth' && isDesc) }"
                                     aria-hidden="true"> </i></span></th>
                             </tr>
@@ -189,12 +190,12 @@
                         <table class="table table-striped margin-top-10">
                             <tbody>
                                 <tr *ngFor="let region of speedtestModel.destinationRegions">
-                                    <td style="width:60%"><img src="{{region.logoUrl}}" alt="Smiley face" width="17" height="17" style="margin-right: 7px;">{{region.region_name}}</td>
-                                    
-                                    <td style="width: 20%; padding-left: 15px" *ngIf="!region.latency">{{properties.NA_TEXT}}</td>
-                                    <td style="width: 20%; padding-left: 15px" *ngIf="region.latency">{{region.latency}}</td>
-                                    <td style="width: 20%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}<img src="/assets/ic_remove.png" class="pull-right" alt="Smiley face" width="17" height="17" style="cursor: pointer;" (click)="removeRegionFromDestination(region, region.cloudProvider);"></td>
-                                    <td style="width: 20%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}<img src="/assets/ic_remove.png" class="pull-right" alt="Smiley face" width="17" height="17" style="cursor: pointer;" (click)="removeRegionFromDestination(region, region.cloudProvider);"></td>
+                                    <td style="width:8%"><img src="{{region.logoUrl}}" alt="Smiley face" width="17" height="17" style="margin-right: 7px;"></td>
+                                    <td style="width:37%">{{region.region_name}}</td>
+                                    <td style="width: 25%; padding-left: 15px" *ngIf="!region.latency">{{properties.NA_TEXT}}</td>
+                                    <td style="width: 25%; padding-left: 15px" *ngIf="region.latency">{{region.latency}}</td>
+                                    <td style="width: 30%; padding-left: 15px" *ngIf="!region.bandwidth">{{properties.NA_TEXT}}<img src="/assets/ic_remove.png" class="pull-right" alt="Smiley face" width="17" height="17" style="cursor: pointer;" (click)="removeRegionFromDestination(region, region.cloudProvider);"></td>
+                                    <td style="width: 30%; padding-left: 15px" *ngIf="region.bandwidth">{{region.bandwidth}}<img src="/assets/ic_remove.png" class="pull-right" alt="Smiley face" width="17" height="17" style="cursor: pointer;" (click)="removeRegionFromDestination(region, region.cloudProvider);"></td>
                                 </tr>
                                 <div class="empty-destination-label" *ngIf="speedtestModel.destinationRegions.length < 1">
                                     Click on back to select destination(s) region to start test
