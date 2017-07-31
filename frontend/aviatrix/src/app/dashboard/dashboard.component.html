@@ -172,11 +172,11 @@
 
                                 </span></th>
 
-                                <th width="20%" style="padding-left: 2px;"><span class="column-header" (click)="sortBy('latency')">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="20%" style="padding-left: 2px;"><span class="column-header" (click)="sortBy('latency')" title="msec">{{properties.RIGHT_PANEL_LATENCY_COLUMN_HEADER}} <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'latency', 'fa-sort-asc': (sortableColumn == 'latency' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'latency' && isDesc) }"
                                     aria-hidden="true"> </i></span></th>
                                 
-                                <th width="20%" style="padding-left: 0px;"><span class="column-header" (click)="sortBy('bandwidth')">{{properties.RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER}} <i class="fa sort-style" 
+                                <th width="20%" style="padding-left: 0px;"><span class="column-header" (click)="sortBy('bandwidth')" title="mbps">{{properties.RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER}} <i class="fa sort-style" 
                                     [ngClass]="{'fa-sort': sortableColumn != 'bandwidth', 'fa-sort-asc': (sortableColumn == 'bandwidth' && !isDesc),                                        'fa-sort-desc': (sortableColumn == 'bandwidth' && isDesc) }"
                                     aria-hidden="true"> </i></span></th>
                             </tr>
