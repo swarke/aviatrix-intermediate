@@ -439,6 +439,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // this.chartModel.clearModel();
     this.getCurrentSourceRegion();
     this.removeRegionFromDestination(this.currentSourceRegion, this.speedtestModel.sourceCloudProvider);
+    // getMarkSelectAllRegion();
     // this.clearGraphAndChart();
     this.generateAmMap();
   }
