@@ -61,7 +61,7 @@
                 <!-- Source Tab Content-->
                 <div align="center" *ngIf="sourceTab" class="source-tab">
                     <div class="source-cloud-drop-down">Select cloud</div>
-                    <select placeholder="Select Cloud" [ngClass]="{'after-sselection-source-cloud': speedtestModel.sourceCloudProvider != '', 'before-sselection-source-cloud': speedtestModel.sourceCloudProvider == ''}" [(ngModel)]="speedtestModel.sourceCloudProvider" (ngModelChange)="changeSourceCloudProvider()">
+                    <select placeholder="Select Cloud" [ngClass]="{'after-sselection-source-cloud': speedtestModel.sourceCloudProvider != '', 'before-sselection-source-cloud': speedtestModel.sourceCloudProvider == ''}" [(ngModel)]="speedtestModel.sourceCloudProvider" (change)="changeSourceCloudProvider()">
                         <option value="" disabled selected class="color-a8a8a8">Select Cloud Provider</option>
                         <option value="azure">Azure</option>
                         <option value="aws">AWS</option>
