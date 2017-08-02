@@ -51,8 +51,8 @@ export class ApiService {
 
       case APIMethod.POST:
       // this.headers['Access-Control-Allow-Origin'] = "*";
-      console.log('API: ', apiRequest);
-      console.log('header: ',this.headers);
+      // console.log('API: ', apiRequest);
+      // console.log('header: ',this.headers);
 
         return this.apiExecuter.post(apiRequest.endpoint, apiRequest.getBody
           (), { headers: this.headers })

@@ -12,7 +12,7 @@ export class PropertiesService {
   public READY_TO_IMPLEMENT: string ='Ready to implement hybrid cloud?';
 
   // Dashboard
-  public RIGHT_PANEL_HEADER: string = 'Multi Cloud Network Connectivity';
+  public RIGHT_PANEL_HEADER: string = 'Multi-Cloud Network Connectivity';
   public RIGHT_PANEL_REGION_COLUMN_HEADER = 'Destination Region';
   public RIGHT_PANEL_LATENCY_COLUMN_HEADER = 'Latency(msec)';
   public RIGHT_PANEL_THROUGHPUT_COLUMN_HEADER = 'Throughput(mbps)';
