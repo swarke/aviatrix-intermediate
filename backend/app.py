@@ -24,7 +24,11 @@ def get_speedtest():
     destination_regions = data.get('destination_regions', [])
     timestamp = data.get('timestamp', None)
     if not (cloud_id and source_region and destination_regions and timestamp):
-        return Response("Bad Request", status=500)
+        return Response("Bad Request", status=400)
+    if source_region in destination_regions:
+	return Response("Source region and destination region can not be same.", status=400)
+    if timestamp not in ['12h', '1d', '7d', '15d', '30d']:
+	return Response("Invalid time period.", status=400)
     latency_throughput = service.get_letency_throughput(cloud_id, source_region, destination_regions, timestamp,
                                                         influx_db_client)
     if latency_throughput:
@@ -50,4 +54,5 @@ def save_speedtest():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    from werkzeug.serving import run_simple
+    run_simple('0.0.0.0', 5000, app, use_reloader=True, threaded=True)
