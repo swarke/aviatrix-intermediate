@@ -13,8 +13,8 @@ declare const AmCharts: any;
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html?v=${new Date().getTime()}',
-  styleUrls: ['./dashboard.component.scss?v=${new Date().getTime()}'],
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
   viewProviders: [DashboardService],
   encapsulation: ViewEncapsulation.None
 })
@@ -47,6 +47,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   cloudPinPath: any;
   chartColors: any;
   chartLoaded: any;
+  selectedAllAWSRegion: boolean;
+  selectedAllAzureRegion: boolean;
+  selectedAllGCERegion: boolean;
 
   dashboardModel: DashboardModel;
   speedtestModel: SpeedtestModel;
@@ -103,6 +106,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.destinationCloudProvider = "azure";
     this.chartLoaded = false;
     this.speedtestModel.timestamp = this.dashboardModel.timeRanges[0].value;
+    this.selectedAllAWSRegion = false;
+    this.selectedAllAzureRegion = false;
+    this.selectedAllGCERegion = false;
     this.generateAmMap();
   }
 
@@ -207,9 +213,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if(tabIndex < this.currentTabIndex) {
       this.changeTab(tabIndex);
     } else {
-      if(this.validate()) {
-        this.changeTab(tabIndex);
-      }
+      if((tabIndex == 1 && this.validationSourceTab()) || (tabIndex == 2 && this.validationSourceTab() && this.validationDestnationTab())){
+          this.changeTab(tabIndex);
+      } 
     }
   }
 
@@ -252,6 +258,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   changeSourceCloudProvider() {
     this.sourceCloudRegions = this.dashboardModel.locations[this.speedtestModel.sourceCloudProvider]
     this.speedtestModel.sourceCloudRegion = "";
+    this.speedtestModel.sourceCloudRegion
+    this.selectedAllAWSRegion = false;
+    this.selectedAllAzureRegion = false;
+    this.selectedAllGCERegion = false;
+    if(this.chartLoaded) {
+      this.latencyChart.destroy();
+    this.bandwidthChart.destroy();
+    this.chartLoaded = false;
+    }
+    this.chartModel.clearModel();
+    // this.getCurrentSourceRegion();
+    this.currentSourceRegion = null;
+    this.clearGraphAndChart();
+    this.generateAmMap();
   }
   
   /**
@@ -265,6 +285,90 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       region.isSelected = true;
       this.speedtestModel.destinationRegions.push(region);
       this.speedtestModel.destinationCloudRegions[this.destinationCloudProvider].push(region);
+    } else {
+      if(this.destinationCloudProvider == "aws") {
+        this.selectedAllAWSRegion = false;
+      } else if(this.destinationCloudProvider == "azure") {
+        this.selectedAllAzureRegion = false;
+      } else if(this.destinationCloudProvider == "gce") {
+        this.selectedAllGCERegion = false;
+      }
+    }
+    this.generateAmMap();
+  }
+
+  removeAllCloudRegions(cloudProvider: any, isSelected: boolean) {
+    let regions = [];
+    for(let index = 0; index < this.speedtestModel.destinationRegions.length; index++) {
+      if(this.speedtestModel.destinationRegions[index].cloudProvider != cloudProvider) {
+        regions.push(this.speedtestModel.destinationRegions[index]);
+      } 
+    }
+    this.speedtestModel.destinationRegions = regions;
+  }
+
+  selectAndDeselectAllCloudRegions(cloudProvider: any) {
+    let cloud = "";
+    let cloudProviderKey = "";
+    let isSelected = false;
+    if(cloudProvider == 'azure') {
+      cloudProviderKey = "azureRegions";
+      this.selectedAllAzureRegion = !this.selectedAllAzureRegion;
+      isSelected = this.selectedAllAzureRegion;
+    } else if(cloudProvider == 'aws') {
+      cloudProviderKey = "awsRegions";
+      this.selectedAllAWSRegion = !this.selectedAllAWSRegion;
+      isSelected = this.selectedAllAWSRegion;
+    } else if(cloudProvider == 'gce') {
+      cloudProviderKey = "gceRegions";
+      this.selectedAllGCERegion = !this.selectedAllGCERegion;
+      isSelected = this.selectedAllGCERegion;
+    }
+    this.speedtestModel.destinationCloudRegions[cloudProvider] = [];
+    this.removeAllCloudRegions(cloudProvider, isSelected);
+    if(isSelected) {
+      for(let index = 0; index < this.dashboardModel[cloudProviderKey].length; index++) {
+        if(this.speedtestModel.sourceCloudProvider == cloudProvider && 
+          this.dashboardModel[cloudProviderKey][index].cloud_info.region == this.speedtestModel.sourceCloudRegion) {
+           continue;
+        }
+        this.speedtestModel.destinationRegions.push(this.dashboardModel[cloudProviderKey][index])
+          this.speedtestModel.destinationCloudRegions[cloudProvider].push(this.dashboardModel[cloudProviderKey][index])
+          this.dashboardModel[cloudProviderKey][index].isSelected = true;
+        
+      }
+    } else {
+      for(let index = 0; index < this.dashboardModel[cloudProviderKey].length; index++) {
+        this.dashboardModel[cloudProviderKey][index].isSelected = false;
+      }
+    }
+    this.generateAmMap();
+    if(!isSelected && this.latencyChart.series.length > 0) {
+      this.startTest();
+    }
+  }
+
+
+
+  deselectAllCloudRegions(cloudProvider: any) {
+    let cloud = "";
+    if(cloudProvider == 'azure') {
+      cloud = "azureRegions";
+      this.speedtestModel.destinationRegions = [];
+      this.speedtestModel.clearDestinationCloudRegions();
+    } else if(cloudProvider == 'aws') {
+      cloud = "awsRegions";
+      this.speedtestModel.destinationRegions = [];
+      this.speedtestModel.clearDestinationCloudRegions();
+    } else if(cloudProvider == 'gce') {
+      cloud = "gceRegions";
+      this.speedtestModel.destinationRegions = [];
+      this.speedtestModel.clearDestinationCloudRegions();
+    }
+    for(let index = 0; index < this.dashboardModel[cloud].length; index++) {
+      this.speedtestModel.destinationRegions.push(this.dashboardModel[cloud][index])
+      this.speedtestModel.destinationCloudRegions[cloudProvider].push(this.dashboardModel[this.destinationCloudProvider][index])
+      this.dashboardModel[cloud][index].isSelected = true;
     }
     this.generateAmMap();
   }
@@ -273,6 +377,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    * Change source region then remove all destination region list
    */
   changeSourceRegion() {
+    this.selectedAllAWSRegion = false;
+    this.selectedAllAzureRegion = false;
+    this.selectedAllGCERegion = false;
+    if(this.chartLoaded) {
+      this.latencyChart.destroy();
+    this.bandwidthChart.destroy();
+    this.chartLoaded = false;
+    }
     this.chartModel.clearModel();
     this.getCurrentSourceRegion();
     this.clearGraphAndChart();
@@ -282,8 +394,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   /**
    * Start test again on changing timestamp
    */
-  ChangeTimestamp() {
+  changeTimestamp() {
     if(this.isTestCompleted) {
+      console.log('time in change: ', this.speedtestModel.timestamp);
       this.startTest();
     }
   }
@@ -364,6 +477,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < this.dashboardModel.awsRegions.length; i++) {
             if (region.cloud_info.region == this.dashboardModel.awsRegions[i]['cloud_info']['region']) {
               this.dashboardModel.awsRegions[i].isSelected = false;
+              this.selectedAllAWSRegion = false;
               break;
             }
           }
@@ -371,6 +485,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < this.dashboardModel.azureRegions.length; i++) {
             if (region.cloud_info.region == this.dashboardModel.azureRegions[i]['cloud_info']['region']) {
               this.dashboardModel.azureRegions[i].isSelected = false;
+              this.selectedAllAzureRegion = false;
               break;
             }
           }
@@ -378,6 +493,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < this.dashboardModel.gceRegions.length; i++) {
             if (region.cloud_info.region == this.dashboardModel.gceRegions[i]['cloud_info']['region']) {
               this.dashboardModel.gceRegions[i].isSelected = false;
+              this.selectedAllGCERegion = false;
               break;
             }
           }
@@ -470,6 +586,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    * @param {[any]} chartType [type of chart]
    */
   getChartConfig(title: any, unit: any, series: any, chartType: any) {
+    let self = this;
     const options = {
       chart: {
         type: chartType, zoomType: 'xy',
@@ -484,14 +601,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       xAxis: {
         type: 'datetime',
-        tickInterval: 5000,
-        dateTimeLabelFormats: {
-          second: '%H:%M:%S'
-        },
+        tickInterval:  0,
         title: {
           text: 'Time'
         },
-        startOnTick: true
+        startOnTick: true,
       },
       yAxis: {
         labels: {
@@ -499,7 +613,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         },
         title: {
           text: unit
-        }
+        },
       },
       series: series,
       responsive: {
@@ -533,7 +647,50 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }]
     }
     };
+
+     if (this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d'
+                   || this.speedtestModel.timestamp == '30d') {
+       options.xAxis['labels'] = this.getLabelFormatter();
+       options.xAxis['title']['text'] = 'Day';
+       options.xAxis['tickInterval'] = 3600 * 1000 *24;
+
+     } else {
+       options.xAxis['dateTimeLabelFormats'] = this.getLabelFormatter();
+       options.xAxis['title']['text'] = 'Time';
+       options.xAxis['tickInterval'] = 3600 * 1000 *2;
+     }
+
     return options;
+  }
+
+  /**
+   * Get the label formatter for x axis on date
+   * [getLabelFormatter description]
+   */
+  getLabelFormatter() {
+    let label = null;
+    let self = this;
+    if (this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d'
+                   || this.speedtestModel.timestamp == '30d') {
+      label = {
+            formatter: function() {
+                if(self.speedtestModel.timestamp == '7d' || self.speedtestModel.timestamp == '15d'
+                   || self.speedtestModel.timestamp == '30d') {
+                  var date = new Date(this.value);
+                  var month = date.toDateString().substring(4,7);
+                  var day = date.getDate();
+                  return  day + '. ' + month;
+                } else {
+                  var date = new Date(this.value);
+                  return  date.getUTCHours()+ ':' + date.getUTCSeconds();
+                }
+            }
+      } 
+    } else {
+      label = {
+         second: '%H:%M:%S'
+    }
+   }
   }
 
   /**
@@ -549,13 +706,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (jsonObj['destination_region'] != cloud_region) {
         continue;
       }
-      // if (jsonObj.value !== null) {
       const date: Date = new Date(jsonObj.time);
-      let yVal = jsonObj[valueKay];
+      let yVal = parseFloat((jsonObj[valueKay]).toFixed(2));
+      if(this.speedtestModel.timestamp == '7d' || this.speedtestModel.timestamp == '15d' || 
+        this.speedtestModel.timestamp == '30d') {
+        metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
+        0, 0, 0), yVal]);
 
-      metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
+      } else {
+        metricData.push([Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),
         date.getHours(), date.getMinutes(), date.getSeconds()), yVal]);
-      // }
+      }
     }
 
     return metricData;
@@ -577,6 +738,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    */
   startTest() {
     // Start Loader
+    if(this.speedtestModel.destinationRegions.length < 1) {
+      this.latencyChart.destroy();
+      this.bandwidthChart.destroy();
+      this.chartLoaded = false;
+      return;
+    }
     this.properties.isLoading = true;
     this.isTestCompleted = false;
     this.disabledStart = true;
@@ -639,6 +806,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           obj.iconUrl = this.getDestinationCloudPinPath(key);
           obj.color = this.chartColors[index];
           obj.isSelected = false;
+          obj.cloudProvider = key;
           this.dashboardModel.locations[key].push(obj);
         }
       },

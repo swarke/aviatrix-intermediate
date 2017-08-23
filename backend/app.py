@@ -3,6 +3,7 @@ import service
 from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 from influxdb import InfluxDBClient
+from werkzeug.serving import run_simple
 import constants
 
 

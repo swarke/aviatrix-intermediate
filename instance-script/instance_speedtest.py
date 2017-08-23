@@ -7,7 +7,7 @@ from enum import Enum
 
 bandwidth_img = 'clouds-01.jpeg'
 downloadSize = 2621440
-server_address = 'http://34.212.249.62:5000'
+server_address = 'http://34.212.249.62/multicloudapp'
 
 # Enum for clouds
 class Cloud(Enum):
@@ -92,8 +92,10 @@ def get_latency(destination):
     """
     start = datetime.datetime.now()
     url = '%sping?nnn=%s' % (destination['url'], start)
-
-    requests.get(url)
+    try:
+        requests.get(url, timeout=30)
+    except Exception as e:
+        pass
     duration = datetime.datetime.now() - start
     return duration.total_seconds() * 1000
 
@@ -106,7 +108,10 @@ def get_throughput(destination):
     """
     start_time = datetime.datetime.now()
     url = '%s%s?nnn=%s' % (destination['url'], bandwidth_img, start_time)
-    requests.get(url)
+    try:
+        requests.get(url, timeout=60)
+    except Exception as e:
+        pass
     end_time = datetime.datetime.now()
     duration = end_time - start_time
     bits_loaded = downloadSize * 8
