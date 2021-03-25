@@ -28,7 +28,7 @@ python-apt==0.9.3.5ubuntu2
 python-dateutil==2.6.0
 python-debian==0.1.21-nmu2ubuntu2
 pytz==2017.2
-PyYAML==3.10
+PyYAML==5.4
 requests==2.18.1
 setuptools==3.3
 six==1.10.0
