@@ -36,7 +36,7 @@ ssh-import-id==3.21
 Twisted-Core==13.2.0
 Twisted-Names==13.2.0
 Twisted-Web==13.2.0
-urllib3==1.21.1
+urllib3==1.26.5
 virtualenv==1.11.4
 Werkzeug==0.12.2
 wheel==0.24.0
