@@ -19,7 +19,7 @@ Landscape-Client==14.12
 MarkupSafe==1.0
 oauth==1.0.1
 PAM==0.4.2
-pip==9.0.1
+pip==19.2
 prettytable==0.7.2
 pycurl==7.19.3
 pyOpenSSL==0.13
