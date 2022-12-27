@@ -30,7 +30,7 @@ python-debian==0.1.21-nmu2ubuntu2
 pytz==2017.2
 PyYAML==3.10
 requests==2.18.1
-setuptools==3.3
+setuptools==65.5.1
 six==1.10.0
 ssh-import-id==3.21
 Twisted-Core==13.2.0
